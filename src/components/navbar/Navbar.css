@@ -1,0 +1,63 @@
+.navbar{
+    background-color: #0058af;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    height: 50px;
+    z-index: 100;
+    box-shadow: #0058af 0px 0px 10px 0px;
+    animation: topToDown 1s;
+}
+
+.navbar .logo{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+.navbar .logo:hover{
+    cursor: pointer;
+}
+.navbar button{
+    /* position: relative; */
+    /* width: 200px; */
+    height:50px;
+    padding: 10px;
+}
+.navbar .buttonGroup{
+    display: flex;
+    gap: 10px;
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+}
+.navbar button:hover{
+    background-color: #003f7f;   
+}
+
+@media screen and (max-width: 1000px){
+    .navbar button{
+        width: 60px;
+    }
+}
+
+.navbar .active{
+    background-color: #003f7f;
+}
+
+/* TopToPosition */
+@keyframes topToDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

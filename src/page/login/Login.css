@@ -1,0 +1,53 @@
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.login .loginWrapper{
+    width: 30%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px;
+}
+.login .loginWrapper h1{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.login .loginWrapper .loginBox{
+    display: flex;
+    flex-direction: column;
+}
+
+.login .loginWrapper .loginBox input{
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #adadad;
+    border-radius: 5px;
+}
+
+.login .loginWrapper .loginBox button{
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0058af;
+    color: white;
+    cursor: pointer;
+}
+
+.login .loginWrapper .loginBox button:hover{
+    background-color: #003f7f;
+}
+
+.login .loginWrapper .loginBox span{
+    margin: 10px 0;
+    text-align: center;
+    color: #0058af;
+    cursor: pointer;
+}
