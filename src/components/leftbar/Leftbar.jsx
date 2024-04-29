@@ -10,8 +10,8 @@ const Leftbar = () => {
   const navigate = useNavigate();
   return (
     <div className='leftbar'>
-        <div onClick={()=>navigate("/profile")} className='item'>Profile</div>
-        Your new feed
+        <div onClick={()=>navigate("/blankcilUI/profile")} className='item'>Profile</div>
+        Feed
         <div className='item'><AiOutlineSearch/></div>
         <div className='item'><LuMessagesSquare/></div>
         <div className='item'><IoMdNotifications/></div>

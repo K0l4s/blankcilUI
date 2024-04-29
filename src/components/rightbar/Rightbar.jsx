@@ -3,8 +3,13 @@ import './Rightbar.css'
 const Rightbar = () => {
   return (
     <div className='rightbar'>
-        Quảng cáo
-        <button>Rights</button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+
     </div>
   )
 }

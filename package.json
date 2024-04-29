@@ -2,6 +2,7 @@
   "name": "blankcil",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://K0l4s.github.io/blankcilUI/",
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
@@ -10,6 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^11.0.8",
+    "gh-pages": "^6.1.1",
     "i18next": "^23.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

@@ -1,129 +1,115 @@
-.podcastPost{
-    margin: auto;
-    border: 1px solid #e1e1e1;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-    background-color: #fff;
-    width: 360px;
-    height: 540px;
-    margin-bottom: 25px;
+.podcast{
     position: relative;
-    transition: all 0.5s ease;
-}
-
-.podcastPost .background{
     width: 360px;
-    height: 540px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 10px;
-    filter: blur(5px);
-}
-.podcastPost:hover .background{
-    filter: blur(0px);
-    transition: all 1s ease;
-}
-.podcastPost .info{
-    top:10px;
-    left:20px;
-    position: absolute;
-    text-align: left;
-    /* line-height: 5px; */
-}
-.podcastPost .play{
-    position: absolute;
-    top:40%;
-    left:40%;
-    width: 60px;
-    height: 60px;
-    background-color: #fff;
-    border-radius: 50%;
+    height: 640px;
+    border-radius: 15px;
+    /* background-color: #2548fa; */
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    margin: 20px auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-}
-.podcastPost .play:hover{
-    background-color: #f1f1f1;
-    filter:drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-}
-.podcastPost .cd{
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 1;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.podcastPost .cd .circle{
-    width: 20px;
-    height: 20px;
-    background-color: #000;
+.podcast .header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    
+}
+
+
+.podcast .header .content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.podcast .header .info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin:auto;
+}
+.podcast .header .info h3{
+    color: white;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+.podcast .header .info p{
+    color: white;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+.podcast .header .info img{
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
-.podcastPost .progress{
-    position: absolute;
-    bottom: 35px;
-    left: 50px;
-    width: 75%;
-    height: 5px;
-    background-color: #000000;
-    border-radius: 5px;
-}
-.podcastPost .timer{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 12px;
-    color: #000;
-}
-.podcastPost .progressBar{
-    position: absolute;
-    width: 0%;
-    height: 5px;
-    background-color: #ff0000;
-    border-radius: 5px;
-}
-.podcastPost .likeAndComment{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    /* line-height: 0; */
-    display:flex;
-    flex-direction: row;
+.podcast .header .react{
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     width: 100px;
+    padding: 10px;
+    margin:auto;
 }
-
-.podcastPost:hover{
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
-    transform: scale(1.05);
-}
-
-.podcastPost .themesong{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 90%;
-    height: 40px;
+.podcast .header .react .like{
+    color: #ff0077;
+    font-size: 20px;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    z-index: 1;
 }
 
-.display-none{
-    display: none;
+.podcast .header .react .comment{
+    color: #12e269;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.podcast .description{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin: 0;
+    color: white;
+    font-size: 15px;
+}
+
+.podcast audio{
+    width: 100%;
+    height: 70px;
+    margin: auto;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.playButton{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ff0077;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    cursor: pointer;
+    margin: auto;
 }

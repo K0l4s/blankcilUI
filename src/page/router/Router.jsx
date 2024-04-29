@@ -23,9 +23,9 @@ const Router = () => {
   }
   )
   return (
-    <div>
+    <div className='router'>
       {url.includes('login') || url.includes('register') ? <div></div> : <div>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* Kiểm tra đường dẫn có chứa cụm từ profile hay không */}
       {url.includes('profile') ? <div></div> :
         <div>
@@ -35,15 +35,16 @@ const Router = () => {
         </div>}
       <div className="main">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/blankcilUI" element={<Home />} />
+          <Route path="/blankcilUI/home" element={<Home />} />
+          <Route path="/blankcilUI/profile" element={<Profile/>} />
+          <Route path="/blankcilUI/login" element={<Login/>} />
+          <Route path="/blankcilUI/register" element={<Register/>} />
           <Route path="/*" element={<div>Không tìm thấy trang</div>} />
           
         </Routes>
       </div>
+      <div className="createPost"></div>
     </div>
   )
 }
