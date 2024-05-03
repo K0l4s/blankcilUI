@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import PodcastPost from '../../components/post/podcastPost/PodcastPost'
-import PodcastDetail from '../../components/post/podcastDetail/PodcastDetail'
-import './Home.css'
+import React, { useState, useRef, useEffect } from 'react';
+import PodcastPost from '../../components/post/podcastPost/PodcastPost';
+import PodcastDetail from '../../components/post/podcastDetail/PodcastDetail';
+import './Home.css';
+
 const Home = () => {
   const podcasts = [
     {
@@ -17,19 +18,42 @@ const Home = () => {
       audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
     },
   ];
-  const [activePodcast, setActivePodcast] = useState(false);
 
-  const [isOpen, setIsOpen] = useState(false)
-  const onClose = () => setIsOpen(!isOpen)
+  const [isOpen, setIsOpen] = useState(false);
+  const [activePodcast, setActivePodcast] = useState(null);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setActivePodcast(null);
+  };
+
+  const handlePodcastClick = (podcastIndex) => {
+    setIsOpen(true);
+    setActivePodcast(podcasts[podcastIndex]);
+  };
+  
   return (
-    <div className='home'>
-      <p style={{color:'white'}}>@More about this project</p>
+    <div className="home">
+      <p style={{ color: 'white' }}>@Blankcil Team</p>
+      <div>
         {podcasts.map((podcast, index) => (
-          <PodcastPost key={index} index={index} podcast={podcast} />
+          <PodcastPost
+            key={index}
+            index={index}
+            podcast={podcast}
+            onClick={() => handlePodcastClick(index)}
+          />
         ))}
-        <PodcastDetail isOpen={isOpen} onClose={onClose}/>
+      </div>
+      {activePodcast && (
+        <PodcastDetail
+          isOpen={isOpen}
+          onClose={handleClose}
+          podcast={activePodcast}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

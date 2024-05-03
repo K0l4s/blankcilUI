@@ -20,21 +20,40 @@
 .leftbar:hover{
     width: 200px;
 }
-
-.leftbar .item {
-    width: 100%;
+.leftbar .item p{
+    display: none;
+    /* transition: all 0.5s ease-in-out; */
+}
+.leftbar:hover .item p{
+    display: block;
+    /* animation: delay 0.5s ease-in-out forwards; */
+}
+.leftbar:hover .item{
+    width: 90%;
+    border-radius: 10px;
+}
+.leftbar .item img{
+    width: 50px;
     height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    transition: all 0.5s ease-in-out;
+}
+.leftbar .item {
+    width: 70px;
+    height: 70px;
     color:black;
     background-color: white;
-    border-radius: 20px;
-    margin: auto;
+    border-radius: 50%;
+    margin: 10px auto;
     align-items: center;
     display: flex;
     justify-content: center;
     /* color: rgb(0, 0, 0); */
     border: none;
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .leftbar .item:hover {

@@ -48,10 +48,13 @@ const PodcastPost = ({ podcast, index }) => {
         <div className="description">
           <p>Chúng tôi rất tự hào về sản phẩm này!</p>
         </div>
-        <div className="audio">
+        {/* <div className="audio">
           <audio ref={audioRef} controls onPlay={handlePlay}>
             <source src={podcast.audioUrl} type="audio/mpeg" />
           </audio>
+        </div> */}
+        <div className="video">
+          <iframe width="360px" height="640px" src="https://www.youtube.com/embed/7CqJlxBYj-M"></iframe>
         </div>
       </div>
     </div>

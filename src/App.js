@@ -1,4 +1,5 @@
 
+import { ChakraProvider } from '@chakra-ui/react';
 import './App.css';
 import { AudioPlayerProvider } from './components/post/podcastPost/PodcastContext';
 import Router from './page/router/Router';
@@ -14,9 +15,11 @@ function App() {
   }
   return (
     <div className="App">
+      <ChakraProvider>
       <AudioPlayerProvider>
       <Router />
       </AudioPlayerProvider>
+      </ChakraProvider>
     </div>
   );
 }

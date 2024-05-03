@@ -8,14 +8,8 @@
     right: 0;
     margin:10px;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
     
-    /* justify-content: space-between; */
     align-items: center;
-    /*overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: #888 #ddd;*/
     animation: rightToLeft 1s;
     transition: all 0.5s ease-in-out;
 }
@@ -23,13 +17,13 @@
     width: 200px;
 }
 .rightbar button{
+    margin: 10px auto;
     background-color: #ffffff;
     width: 100%;
     height: 50px;
-    border-radius: 20PX;
+    border-radius: 50%;
     text-align: center;
     padding: 10px;
-    margin:auto;
     color: white;
     border: none;
     cursor: pointer;
@@ -37,9 +31,8 @@
     transition: all 0.5s ease-in-out;
 }
 .rightbar:hover button{
-    border-radius: 50px;
-    margin:auto;
-    width: 80%;
+    border-radius: 5px;
+    width: 90%;
 }
 .rightbar button:hover{
     background-color: #45aef4;   

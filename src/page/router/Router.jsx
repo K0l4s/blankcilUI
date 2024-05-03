@@ -9,6 +9,8 @@ import i18next from 'i18next'
 import Profile from '../profile/Profile'
 import Login from '../login/Login'
 import Register from '../register/Register'
+import { RiVideoAddLine } from "react-icons/ri";
+
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const Router = () => {
           
         </Routes>
       </div>
-      <div className="createPost"></div>
+      <div className="createPost"><RiVideoAddLine size={50}/></div>
     </div>
   )
 }
