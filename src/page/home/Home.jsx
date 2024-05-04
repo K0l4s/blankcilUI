@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PodcastPost from '../../components/post/podcastPost/PodcastPost';
-import PodcastDetail from '../../components/post/podcastDetail/PodcastDetail';
 import './Home.css';
 
 const Home = () => {
@@ -18,19 +17,6 @@ const Home = () => {
       audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
     },
   ];
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [activePodcast, setActivePodcast] = useState(null);
-
-  const handleClose = () => {
-    setIsOpen(false);
-    setActivePodcast(null);
-  };
-
-  const handlePodcastClick = (podcastIndex) => {
-    setIsOpen(true);
-    setActivePodcast(podcasts[podcastIndex]);
-  };
   
   return (
     <div className="home">
@@ -41,17 +27,9 @@ const Home = () => {
             key={index}
             index={index}
             podcast={podcast}
-            onClick={() => handlePodcastClick(index)}
           />
         ))}
       </div>
-      {activePodcast && (
-        <PodcastDetail
-          isOpen={isOpen}
-          onClose={handleClose}
-          podcast={activePodcast}
-        />
-      )}
     </div>
   );
 };

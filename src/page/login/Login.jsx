@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Login.css'
 import { apiPath } from '../../api/endpoint'
 const Login = () => {
@@ -6,6 +6,7 @@ const Login = () => {
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
     console.log(email, password)
+    //Axios
     fetch(apiPath + 'auth/authenticate', {
       method: 'POST',
       headers: {

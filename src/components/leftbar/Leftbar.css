@@ -3,7 +3,7 @@
     height: 96%;
     border-radius: 15px;
     background-color: #2548fa;
-    
+    z-index: 99999;
     color:white;
     position: fixed;
     padding: 10px;

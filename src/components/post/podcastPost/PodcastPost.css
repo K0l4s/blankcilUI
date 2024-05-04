@@ -1,16 +1,50 @@
 .podcast{
     position: relative;
-    width: 360px;
+    width: 320px;
     height: 640px;
     border-radius: 15px;
     /* background-color: #2548fa; */
-    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    background-image: linear-gradient(315deg, #000000 0%, #28313b 74%);
     margin: 20px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+    transition: all 0.5s ease-in-out;
+}
+.isCommentOpen{
+    width: 1200px;
+}
+.podcast .commentTab{
+    position: absolute;
+    /* background: white; */
+    z-index: 0;
+    right:0;
+    width: 840px;
+    /* border-radius: 0 15px 15px 0; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+    transition: all 0.5s ease-in-out;
+    /* Thanh cuộn */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+/* Chỉnh thanh cuộn nhỏ lại */
+.podcast .commentTab::-webkit-scrollbar {
+    width: 5px;
 }
 
+.podcast .commentTab::-webkit-scrollbar-thumb {
+    background-color: #ff0077;
+    border-radius: 10px;
+}
+.podcast .commentTab::-webkit-scrollbar-track {
+    background-color: #ffffff00;
+    border-radius: 10px;
+}
 .podcast .header{
     position: absolute;
     border-radius: 15px;
@@ -33,9 +67,10 @@
 }
 
 .podcast .header .info{
+    display: absolute;
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: left;
     width: 100%;
     padding: 10px;
     margin:auto;
@@ -56,9 +91,13 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    margin: 5px;
 }
 
-.podcast .header .react{
+.podcast .reaction{
+    z-index: 1;
+    position: absolute;
+    left: 360px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -67,7 +106,7 @@
     padding: 10px;
     margin:auto;
 }
-.podcast .header .react .like{
+.podcast .reaction .like{
     color: #ff0077;
     font-size: 20px;
     cursor: pointer;
@@ -75,8 +114,15 @@
     justify-content: center;
     align-items: center;
 }
-
-.podcast .header .react .comment{
+.podcast .reaction .icon{
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 5px;
+}
+.podcast .reaction .comment{
     color: #12e269;
     font-size: 20px;
     cursor: pointer;
@@ -87,7 +133,6 @@
 
 .podcast .description{
     position: absolute;
-    width: 100%;
     height: 100px;
     padding: 10px;
     margin: 0;
@@ -95,14 +140,8 @@
     font-size: 15px;
     border-radius: 15px;
     z-index: 2;
-    bottom: 0;
-    transition: all 0.5s ease-in-out;
-}
-.podcast:hover .description{
-    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-}
-.podcast:hover .header{
-    background: linear-gradient(0deg, rgba(0,0,0,0) 50%,  rgba(0,0,0,1)  100%);
+    bottom: 15px;
+    left: 0;
 }
 .podcast audio{
     width: 100%;
@@ -127,10 +166,36 @@
     margin: auto;
 }
 
-.podcast .video iframe{
+/* .podcast .video iframe{
     position: absolute;
     width: 360px;
     height: 640px;
     border-radius: 15px;
     z-index: 0;
+} */
+
+.podcast .video video{
+    position: absolute;
+    width: 360px;
+    height: 640px;
+    border-radius: 15px 0 0 15px;
+    z-index: 0;
+    background-color: black;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+}
+
+.podcast .closeComment{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ff0077;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 15;
 }
