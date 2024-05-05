@@ -1,0 +1,91 @@
+.podcast-item{
+    display: inline-block;
+    height: 400px;
+    width: 300px;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;   
+}
+
+.image{
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    margin-top: 40px;
+    margin-left: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.info{
+    flex: 1;
+}
+
+.name{
+    margin-top: -295px;
+    font-weight: bold;
+}
+
+.description{
+    width: 100%;
+    display: block;  
+    margin-top: 280px;
+    font-size: 13px;
+}
+
+.podcast-item .icons {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+.podcast-item .icons .love,
+.podcast-item .icons .comments,
+.podcast-item .icons .views {
+    display: flex;
+    align-items: center;
+}
+
+
+.podcast-item .icons .love span {
+    margin-left: 10px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
+    margin-right: 70px;
+}
+
+.podcast-item .icons .comments span{
+    margin-right: 60px;
+}
+
+.podcast-item .icons .comments svg{
+    margin-left: -20px;
+}
+
+.podcast-item .icons .love svg,
+.podcast-item .icons .comments svg,
+.podcast-item .icons .views svg {
+    width: 20px; /* Điều chỉnh kích thước icon */
+    height: 20px;
+    /* fill: #669BBC; */
+
+}
+
+.podcast-item .icons .love span,
+.podcast-item .icons .comments span,
+.podcast-item .icons .views span {
+    margin-left: 5px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
+    font-size: 15px;
+    /* font-weight: bold; */
+    /* color: #669BBC; */
+}
+
+
+/* audio{
+    width: 100%;
+    display: block;  
+    margin-top: 280px;
+} */

@@ -13,7 +13,7 @@ import { FaRegHeart } from "react-icons/fa";
 const avatarDefault = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
 
 
-const Profile = () => {
+const Profile_1 = () => {
   const user = {
     banner: 'https://www.shutterstock.com/shutterstock/videos/1075861385/thumb/1.jpg?ip=x480',
     profile: 'https://img.freepik.com/vector-premium/microfono-podcast-banner-podcast-concepto-diseno-plano-ilustracion-vectorial_476325-514.jpg',
@@ -22,13 +22,41 @@ const Profile = () => {
     username: 'johndashin'
   }
 
-const userInfo ={
-  fullname: 'John Dashin',
-  birthday: 'January 1, 1990',
-  hometown: 'New York',
-  occupation: 'Software Engineer',
-  gender: 'Male'
-};
+  // const id = window.location.href.split('/')[4];
+  const id = 2;
+  const currentLoginID = localStorage.getItem("id");
+  const[userData, setUserData] = useState(null);
+  let avatarURL = avatarDefault;
+  useEffect(() =>{
+    const requestOptions = {
+      method: 'GET',
+      headers: {'Content-Type':'application/json'}
+    };
+      axios.get('http://localhost:9090/api/v1/users/profile')
+          .then(response =>{
+            console.log(response.data.body)
+            setUserData(response.data.body)
+            // setUserData({
+            //   "id": response.data.id,
+            //   "fullname": response.data.fullname,
+            //   "email": response.data.email,
+            //   "birthday": response.data.birthday,
+            //   "address": response.data.address,
+            //   "phone": response.data.phone,
+            // });
+            console.log(userData);
+          })
+          .catch(error => {
+            console.error(error);
+          })
+  }, [id]);
+// const userInfo ={
+//   fullname: 'John Dashin',
+//   birthday: 'January 1, 1990',
+//   hometown: 'New York',
+//   occupation: 'Software Engineer',
+//   gender: 'Male'
+// };
 
   // const podcasts = [
   //   { title: 'Podcast 1', url: 'https://open.spotify.com/track/2TT6ef6PcwZ5bPxDpFCUhR?si=5d092fbdebda44d9', image: 'https://caodang.fpt.edu.vn/wp-content/uploads/98.jpg' },
@@ -58,30 +86,44 @@ const userInfo ={
               <p className="username">@{user.username}</p>
               </div>
 
+              {/* <div>Test
+                {userData.map((data) => {
+                  return (
+                    <div>{data.name}</div>
+                  )
+                })}
+              </div> */}
+
               <div className="userDetailed">
-              <div className="infoBlock">
+                <div className="infoBlock">
                 <div className="fullname">
-                  <p><strong>Full Name: </strong>{userInfo.fullname}</p>
+                <p><strong>Full Name: </strong>{userData ? userData.fullname : ''}</p>
+                    {/* <p><strong>Full name: </strong></p>
+                    {userData && userData.birthday ? (
+                      <div>{userData.fullname}</div>
+                    ) : (
+                      <div>null</div>
+                    )} */}
+              </div>
+              </div>
+              <div className="infoBlock">
+                <div className="email">
+                  <p><strong>Email: </strong>{userData ? userData.email : ''}</p>
                 </div>
               </div>
               <div className="infoBlock">
                 <div className="birthday">
-                  <p><strong>Birthday: </strong>{userInfo.birthday}</p>
+                  <p><strong>Birthday: </strong>{userData ? userData.birthday : ''}</p>
                 </div>
               </div>
               <div className="infoBlock">
-                <div className="hometown">
-                  <p><strong>Hometown: </strong>{userInfo.hometown}</p>
+                <div className="address">
+                  <p><strong>Address: </strong>{userData ? userData.address : ''}</p>
                 </div>
               </div>
               <div className="infoBlock">
-                <div className="occupation">
-                  <p><strong>Occupation: </strong>{userInfo.occupation}</p>
-                </div>
-              </div>
-              <div className="infoBlock">
-                <div className="gender">
-                  <p><strong>Gender: </strong>{userInfo.gender}</p>
+                <div className="phone">
+                  <p><strong>Phone: </strong>{userData ? userData.phone : ''}</p>
                 </div>
               </div>
             </div>
@@ -136,4 +178,4 @@ const userInfo ={
   )
 }
 
-export default Profile
+export default Profile_1
