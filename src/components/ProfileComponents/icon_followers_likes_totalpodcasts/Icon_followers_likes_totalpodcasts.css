@@ -1,0 +1,39 @@
+.icons {
+    display: flex; 
+    /* margin-top: -140px; */
+    top: 140px;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+.icons .followers,
+.icons .totalPodcasts,
+.icons .likes {
+    display: flex;
+    align-items: center;
+}
+
+.icons .followers span,
+.icons .totalPodcasts span,
+.icons .likes {
+    margin-left:15px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
+    font-size: 25px;
+    margin-right: 80px;
+    font-weight: bold;
+    color: #669BBC;
+}
+
+.icons .totalPodcasts{
+    margin-left: 40px;
+}
+
+.icons .followers svg,
+.icons .totalPodcasts svg,
+.icons .likes svg {
+    width: 50px; /* Điều chỉnh kích thước icon */
+    height: 50px;
+    fill: #669BBC;
+}

@@ -55,24 +55,6 @@
     font-size: 30px;
 }
 
-
-/* .bannerAndProfile .buttons .editProfileButton {
-    background: rgb(247, 150, 192);
-    background: radial-gradient(circle, rgba(247, 150, 192, 1) 0%, rgba(118, 174, 241, 1) 100%);
-    line-height: 42px;
-    padding: 0;
-    border: none;
-  /* position: absolute; 
-  overflow: hidden; 
-  text-transform: uppercase;
-  font-size: x-large;
-  cursor: pointer; 
-  border-radius: 5px; */
-  /* width: 300px;
-  height: 100px;
-  top: 500px;
-  right: 600px; */
-
   .bannerAndProfile .buttons .editProfileButton {
     border: none;
     background: linear-gradient(0deg, rgb(13, 74, 196) 0%, rgb(28, 141, 216) 100%);
@@ -131,12 +113,9 @@
 }
 
 
-
-
-/* VIEW PROFILE BUTTON */
-
-.bannerAndProfile .icons {
+.bannerAndProfile .profile .icons {
     display: flex; 
+    margin-top: -140px;
     align-items: center; 
     justify-content: center;
     width: 100%;
@@ -144,45 +123,38 @@
     box-sizing: border-box;
 }
 
-.bannerAndProfile .icons .followers,
-.bannerAndProfile .icons .totalPodcasts {
+.bannerAndProfile .profile .icons .followers,
+.bannerAndProfile .profile .icons .totalPodcasts,
+.bannerAndProfile .profile .icons .likes {
     display: flex;
     align-items: center;
+    margin-left: auto;
 }
 
-
-.bannerAndProfile .icons .followers span {
-    margin-left: 10px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
+.bannerAndProfile .profile .icons .followers span,
+.bannerAndProfile .profile .icons .totalPodcasts span,
+.bannerAndProfile .profile .icons .likes {
+    margin-left:15px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
     font-size: 25px;
     margin-right: 100px;
     font-weight: bold;
     color: #669BBC;
 }
 
-.bannerAndProfile .icons .followers svg {
+.bannerAndProfile .profile .icons .followers svg,
+.bannerAndProfile .profile .icons .totalPodcasts svg,
+.bannerAndProfile .profile .icons .likes svg {
     width: 50px; /* Điều chỉnh kích thước icon */
     height: 50px;
     fill: #669BBC;
 
-}
-
-.bannerAndProfile .icons .totalPodcasts span {
-    margin-left: 10px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
-    font-size: 25px;
-    font-weight: bold;
-    color: #669BBC;
-}
-
-.bannerAndProfile .icons .totalPodcasts svg {
-    width: 50px; /* Điều chỉnh kích thước icon */
-    height: 50px;
-    fill: #669BBC;
 }
 
 .bannerAndProfile .profile .userDetailed {
     display: grid;
     place-items: center; /* Căn giữa cả hai chiều ngang và dọc */
 }
+
 
 .bannerAndProfile .profile .userDetailed .infoBlock{
     position:relative;
