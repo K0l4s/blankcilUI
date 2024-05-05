@@ -6,7 +6,8 @@ import Navbar from '../../components/navbar/Navbar'
 import Leftbar from '../../components/leftbar/Leftbar'
 import Rightbar from '../../components/rightbar/Rightbar'
 import i18next from 'i18next'
-import Profile from '../profile/Profile'
+// import Profile from '../profile/Profile'
+import Profile_2 from '../profile/Profile_2'
 import Login from '../login/Login'
 import Register from '../register/Register'
 const Router = () => {
@@ -37,7 +38,8 @@ const Router = () => {
         <Routes>
           <Route path="/blankcilUI" element={<Home />} />
           <Route path="/blankcilUI/home" element={<Home />} />
-          <Route path="/blankcilUI/profile" element={<Profile/>} />
+          {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
+          <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />
           <Route path="/*" element={<div>Không tìm thấy trang</div>} />

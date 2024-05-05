@@ -12,6 +12,11 @@ function App() {
     document.body.style.backgroundColor = 'white';
     // document.body.style.color = 'black';
   }
+  // return(
+  //   <div className="Ava_name_banner">
+  //       <Ava_name_banner/>
+  //   </div>
+  // );
   return (
     <div className="App">
       <AudioPlayerProvider>
