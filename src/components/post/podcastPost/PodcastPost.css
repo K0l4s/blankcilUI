@@ -33,18 +33,7 @@
     overflow-y: auto;
 }
 /* Chỉnh thanh cuộn nhỏ lại */
-.podcast .commentTab::-webkit-scrollbar {
-    width: 5px;
-}
 
-.podcast .commentTab::-webkit-scrollbar-thumb {
-    background-color: #ff0077;
-    border-radius: 10px;
-}
-.podcast .commentTab::-webkit-scrollbar-track {
-    background-color: #ffffff00;
-    border-radius: 10px;
-}
 .podcast .header{
     position: absolute;
     border-radius: 15px;
@@ -178,7 +167,7 @@
     position: absolute;
     width: 360px;
     height: 640px;
-    border-radius: 15px 0 0 15px;
+    border-radius: 15px;
     z-index: 0;
     background-color: black;
     box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
