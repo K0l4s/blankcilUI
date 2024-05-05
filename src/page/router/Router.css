@@ -4,6 +4,11 @@
 }
 
 .createPost{
+    z-index: 1000;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color:white;
     position:fixed;
     bottom:8%;
     right:20%;
@@ -11,4 +16,9 @@
     height: 100px;
     border-radius: 50%;
     background-color: #ff0077;
+    transition: all 0.5s ease-in-out;
+}
+
+.createPost:hover{
+    transform: scale(1.25);
 }
