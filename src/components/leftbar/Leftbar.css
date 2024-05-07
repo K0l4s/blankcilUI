@@ -3,7 +3,7 @@
     height: 96%;
     border-radius: 15px;
     background-color: #2548fa;
-    z-index: 99999;
+    z-index: 999;
     color:white;
     position: fixed;
     padding: 10px;
@@ -24,14 +24,14 @@
     display: none;
     /* transition: all 0.5s ease-in-out; */
 }
-.leftbar:hover .item p{
-    display: block;
+/* .leftbar:hover .item p{
+    display: block; */
     /* animation: delay 0.5s ease-in-out forwards; */
-}
+/* }
 .leftbar:hover .item{
     width: 90%;
     border-radius: 10px;
-}
+} */
 .leftbar .item img{
     width: 50px;
     height: 50px;
