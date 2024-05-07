@@ -8,7 +8,7 @@
     right: 0;
     margin:10px;
     border-radius: 15px;
-    z-index: 99999;
+    z-index: 999;
     align-items: center;
     animation: rightToLeft 1s;
     transition: all 0.5s ease-in-out;

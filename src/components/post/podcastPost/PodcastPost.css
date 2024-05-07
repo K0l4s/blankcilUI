@@ -1,14 +1,11 @@
 .podcast{
     position: relative;
-    width: 320px;
+    width: 360px;
     height: 640px;
     border-radius: 15px;
     /* background-color: #2548fa; */
     background-image: linear-gradient(315deg, #000000 0%, #28313b 74%);
     margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
     transition: all 0.5s ease-in-out;
 }
@@ -124,7 +121,6 @@
     position: absolute;
     height: 100px;
     padding: 10px;
-    margin: 0;
     color: white;
     font-size: 15px;
     border-radius: 15px;
@@ -136,7 +132,7 @@
     width: 100%;
     height: 70px;
     margin: auto;
-    padding: 10px;
+    /* padding: 10px; */
     margin-bottom: 20px;
 }
 

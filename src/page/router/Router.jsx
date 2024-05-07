@@ -11,7 +11,7 @@ import Profile_2 from '../profile/Profile_2'
 import Login from '../login/Login'
 import Register from '../register/Register'
 import { RiVideoAddLine } from "react-icons/ri";
-
+import Search from '../search/Search'
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -44,11 +44,12 @@ const Router = () => {
           <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />
+          <Route path="/blankcilUI/search" element={<Search/>} />
           <Route path="/*" element={<div>Không tìm thấy trang</div>} />
           
         </Routes>
       </div>
-      <div className="createPost"><RiVideoAddLine size={50}/></div>
+      {/* <div className="createPost"><RiVideoAddLine size={50}/></div> */}
     </div>
   )
 }
