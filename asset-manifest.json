@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/blankcilUI/static/css/main.83410a41.css",
-    "main.js": "/blankcilUI/static/js/main.df3cbdc6.js",
+    "main.css": "/blankcilUI/static/css/main.057e4798.css",
+    "main.js": "/blankcilUI/static/js/main.33efbfb6.js",
     "static/js/453.912aeb80.chunk.js": "/blankcilUI/static/js/453.912aeb80.chunk.js",
     "static/media/favicon.ico": "/blankcilUI/static/media/favicon.a78fbf8f669ef8cca381.ico",
     "index.html": "/blankcilUI/index.html",
-    "main.83410a41.css.map": "/blankcilUI/static/css/main.83410a41.css.map",
-    "main.df3cbdc6.js.map": "/blankcilUI/static/js/main.df3cbdc6.js.map",
+    "main.057e4798.css.map": "/blankcilUI/static/css/main.057e4798.css.map",
+    "main.33efbfb6.js.map": "/blankcilUI/static/js/main.33efbfb6.js.map",
     "453.912aeb80.chunk.js.map": "/blankcilUI/static/js/453.912aeb80.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.83410a41.css",
-    "static/js/main.df3cbdc6.js"
+    "static/css/main.057e4798.css",
+    "static/js/main.33efbfb6.js"
   ]
 }
