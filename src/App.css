@@ -11,3 +11,18 @@
   background-color: white;
   color: black;
 }
+::-webkit-scrollbar{
+  width:10px;
+}
+.podcast::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff0077;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #ffffff32;
+  border-radius: 10px;
+}

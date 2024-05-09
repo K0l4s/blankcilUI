@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createElement, useEffect, useRef, useState } from 'react';
 import './PodcastPost.css';
 import { CiPlay1 } from 'react-icons/ci';
 import { FcComments, FcLike } from 'react-icons/fc';
@@ -6,6 +6,7 @@ import { act } from 'react-dom/test-utils';
 import { use } from 'i18next';
 import { useAudioPlayer } from './PodcastContext';
 import { Comment } from '../comment/Comment';
+import { delay } from 'framer-motion';
 
 const PodcastPost = ({ podcast, index }) => {
   const { audioRefs, pauseOthers } = useAudioPlayer();
@@ -17,8 +18,27 @@ const PodcastPost = ({ podcast, index }) => {
     pauseOthers(index);
     if (videoRef.current) {
       videoRef.current.play();
+      // Kiểm tra vị trí của video hiện tại, nếu vượt ngoài khung hình thì sẽ scroll đến vị trí của video
+      const rect = videoRef.current.getBoundingClientRect();
+      if (rect.top < 0 || rect.bottom > window.innerHeight) {
+        // videoRef.current.scrollIntoView();
+        // Cuộn xuống, vị trí của video sẽ nằm ở giữa màn hình
+        videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
+      }
+
     }
   };
+  useEffect(() => {
+  videoRef.current?.addEventListener('ended', () => {
+    const nextVideo = audioRefs.current[index + 1];
+    if (nextVideo && nextVideo.current) {
+      nextVideo.current.play();
+    }
+  });
+  if (!podcast.audio_url) {
+    return null;
+  }
+  }, []);
 
   const [isOpenComment, setIsOpenComment] = useState(false);
   useEffect(() => {
@@ -41,7 +61,7 @@ const PodcastPost = ({ podcast, index }) => {
   }, [isOpenComment]);
 
   return (
-    <div className="podcast" id={"podcast" + index} >
+    <div className="podcast" id={"podcast" + index}>
       <div id={"closeComment"+index} className="closeComment" onClick={() => setIsOpenComment(!isOpenComment)}>
         X
       </div>
@@ -52,23 +72,23 @@ const PodcastPost = ({ podcast, index }) => {
         <div className="info">
           <img src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" className="img" />
           <div className="titleAndName">
-            <h3>Tiêu đề: Podcast 01</h3>
-            <p>Tác giả: Huỳnh Trung Kiên</p>
+            <h3>{podcast.title}</h3>
+            <p>Tác giả: {podcast.user_podcast.fullname}</p>
           </div>
         </div>
       </div>
       <div className="reaction" id={"reaction"+index}>
         <div className="like">
           <FcLike className='icon'/>
-          <span>10K</span>
+          <span>{podcast.numberOfLikes}</span>
         </div>
         <div className="comment">
           <FcComments className='icon' onClick={() => setIsOpenComment(!isOpenComment)} />
-          <span>10K</span>
+          <span>{podcast.numberOfComments}</span>
         </div>
       </div>
       <div className="description">
-        <p>Chúng tôi rất tự hào về sản phẩm này!</p>
+        <p>{podcast.content}</p>
       </div>
       {isOpenComment? (
       <div className="commentTab">
@@ -91,7 +111,7 @@ const PodcastPost = ({ podcast, index }) => {
         </div> */}
         <div className="video">
           <video width="360px" height="640px" ref={videoRef} onPlay={handlePlay} controls>
-            <source src="https://storage.googleapis.com/download/storage/v1/b/blankcil.appspot.com/o/main%2F2-thuanngo9112@gmail.com%2F41c93001-03b7-403a-895c-8d130a656cd9.mp4?generation=1714732026459117&alt=media" type="video/mp4" />
+            <source src={podcast.audio_url} type="video/mp4" />
           </video>
         </div>
       </div>

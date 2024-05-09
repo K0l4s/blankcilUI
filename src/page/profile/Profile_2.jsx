@@ -84,65 +84,10 @@ const Profile_2 = () => {
 
     return(
     <div className="Profile">
-      <div className="bannerAndProfile">
-
-        <div className="banner">
-          <img src={user.banner} alt="banner" />
-        </div>
-
-        <div className="profile">
-
-          <img src={user.profile} alt="profile" />
-          <div className="information">
-
-            <p className='title'>{user.title}</p>
-
-            <div className="fullnameAndUsername">
-              <p className="fullname">{user.fullname}</p>
-              <p className="username">@{user.username}</p>
-            </div>
-          
-          </div>
-          <div className="button">
-                <button className="editProfileButton">View and Edit Profile</button>
-          </div>
-          
-        </div>
-
-        <div className="icons">
-            <div className="followers">
-                <FaUserPlus/>
-                <span>123K</span>
-            </div>
-
-            <div className="totalPodcasts">
-                <SiApplepodcasts/>
-                <span>52 podcasts</span>
-            </div> 
-
-            <div className="likes">
-                <AiFillLike/>
-                <span>100K Likes</span>
-            </div>
-        </div>
-
-        <div className="description">
-            <p>Update your profile to add the description</p>
-        </div>
-
-        <div className="podcasts">
-            <h1>Your Personal Podcasts</h1>
-            <List_podcast podcasts={personalPodcasts} />
-        </div>
-              
-      </div>
-     
-        {/* <Ava_name_banner/> */}
-
-        {/* <Icon_followers_likes_totalpodcasts/> */}
-
-        {/* <Self_description/> */}
-        {/* <h2 style={{ color: 'white' }}>First Podcast</h2>
+        <Ava_name_banner className='avatar'/>
+        <Icon_followers_likes_totalpodcasts/>
+        <Self_description/>
+        <h2 style={{ color: 'white' }}>First Podcast</h2>
         <Single_podcast
           image={podcast.image}
           name={podcast.name}
