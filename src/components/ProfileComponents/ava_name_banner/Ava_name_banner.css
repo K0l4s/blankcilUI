@@ -1,3 +1,4 @@
+
 .profile .bannerAndProfile{
     margin: auto;
     width: 1000px;
@@ -31,6 +32,24 @@
     flex-direction: column;
     color:black;
 }
+
+@keyframes sparkle {
+    0%{
+        opacity: 1;
+        transform: scale(1);
+    }    
+    50%{
+        opacity: 0.5;
+        /* transform: scale(1); */
+        box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.8);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
 .bannerAndProfile .information .title{
     font-size: 30px;
     font-weight: bold;
@@ -39,7 +58,11 @@
     width: 40%;
     border-radius: 30px;
     /* color: black;   */
+    padding: 10px;
+    animation: sparkle 5s infinite alternate;
+
 }
+
 .bannerAndProfile .information .fullnameAndUsername{
     display: flex;
     font-size: 50px;

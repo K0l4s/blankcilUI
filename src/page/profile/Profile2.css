@@ -1,10 +1,11 @@
-.profile .bannerAndProfile{
+
+.Profile .bannerAndProfile{
     margin: auto;
     width: 1000px;
     height: 400px;
 }
 
-.profile .bannerAndProfile .banner img{
+.Profile .bannerAndProfile .banner img{
     margin: auto;
     width: 1000px;
     height: 400px;
@@ -12,7 +13,7 @@
     border-radius: 10px;
 }
 
-.profile .bannerAndProfile .profile img{
+.Profile .bannerAndProfile .profile img{
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -31,6 +32,23 @@
     flex-direction: column;
     color:black;
 }
+
+@keyframes sparkle {
+    0%{
+        opacity: 1;
+        transform: scale(1);
+    }    
+    50%{
+        opacity: 0.5;
+        box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.8);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
 .bannerAndProfile .information .title{
     font-size: 30px;
     font-weight: bold;
@@ -38,8 +56,10 @@
     background-color: antiquewhite;
     width: 40%;
     border-radius: 30px;
-    /* color: black;   */
+    padding: 10px;
+    animation: sparkle 5s infinite alternate;
 }
+
 .bannerAndProfile .information .fullnameAndUsername{
     display: flex;
     font-size: 50px;
@@ -55,29 +75,34 @@
     font-size: 30px;
 }
 
-  .bannerAndProfile .buttons .editProfileButton {
+.bannerAndProfile .profile .button {
+    position: relative;
+}
+
+.bannerAndProfile .profile .button .editProfileButton {
     border: none;
-    background: linear-gradient(0deg, rgb(13, 74, 196) 0%, rgb(28, 141, 216) 100%);
+    background: linear-gradient(0deg, rgb(231, 52, 111) 0%, rgb(230, 175, 191) 100%);
     color: #fff;
     overflow: hidden;
     position: absolute;
-    text-transform: uppercase;
     font-size: large;
     cursor: pointer; 
     border-radius: 5px; 
     width: 200px;
-    height: 50px;
-    top: 1000px;
-    right: 500px;
+    height: 30px;
+    bottom: 170px;
+    right: 1px;
+    display: block; /* Đảm bảo nút hiển thị */
+    visibility: visible
 }
 
-.bannerAndProfile .buttons .editProfileButton:hover {
+.bannerAndProfile .profile .button .editProfileButton:hover {
     text-decoration: none;
     color: #fff;
     opacity: .7;
 }
 
-.bannerAndProfile .buttons .editProfileButton:before {
+.bannerAndProfile .profile .button .editProfileButton:before {
     position: absolute;
     content: '';
     display: inline-block;
@@ -89,7 +114,7 @@
     animation: shiny-btn1 3s ease-in-out infinite;
 }
 
-.bannerAndProfile .buttons .editProfileButton:active {
+.bannerAndProfile .profile .button .editProfileButton:active {
     box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .3), -4px -4px 6px 0 rgba(116, 125, 136, .2), inset -4px -4px 6px 0 rgba(255, 255, 255, .2), inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
 }
 
@@ -112,10 +137,10 @@
     }
 }
 
-
-.bannerAndProfile .profile .icons {
+.bannerAndProfile .icons {
     display: flex; 
     margin-top: -140px;
+    /* top: 100px; */
     align-items: center; 
     justify-content: center;
     width: 100%;
@@ -123,79 +148,58 @@
     box-sizing: border-box;
 }
 
-.bannerAndProfile .profile .icons .followers,
-.bannerAndProfile .profile .icons .totalPodcasts,
-.bannerAndProfile .profile .icons .likes {
+.bannerAndProfile .icons .followers,
+.bannerAndProfile .icons .totalPodcasts,
+.bannerAndProfile .icons .likes {
     display: flex;
     align-items: center;
-    margin-left: auto;
 }
 
-.bannerAndProfile .profile .icons .followers span,
-.bannerAndProfile .profile .icons .totalPodcasts span,
-.bannerAndProfile .profile .icons .likes {
+.bannerAndProfile .icons .followers span,
+.bannerAndProfile .icons .totalPodcasts span,
+.bannerAndProfile .icons .likes {
     margin-left:15px; /* Đảm bảo có khoảng cách giữa icon và số liệu */
-    font-size: 25px;
-    margin-right: 100px;
+    font-size: 20px;
+    margin-right: 80px;
     font-weight: bold;
     color: #669BBC;
 }
 
-.bannerAndProfile .profile .icons .followers svg,
-.bannerAndProfile .profile .icons .totalPodcasts svg,
-.bannerAndProfile .profile .icons .likes svg {
-    width: 50px; /* Điều chỉnh kích thước icon */
-    height: 50px;
+.bannerAndProfile .icons .totalPodcasts{
+    margin-left: 40px;
+}
+
+.bannerAndProfile .icons .followers svg,
+.bannerAndProfile .icons .totalPodcasts svg,
+.bannerAndProfile .icons .likes svg {
+    width: 30px; /* Điều chỉnh kích thước icon */
+    height: 30px;
     fill: #669BBC;
-
 }
 
-.bannerAndProfile .profile .userDetailed {
-    display: grid;
-    place-items: center; /* Căn giữa cả hai chiều ngang và dọc */
+.bannerAndProfile .description p{
+    margin-top: -250px;
+    font-size: 16px;
+    color:antiquewhite;
+}
+/* .bannerAndProfile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } */
+
+.bannerAndProfile .podcasts{
+    margin-top: 50px;
 }
 
-
-.bannerAndProfile .profile .userDetailed .infoBlock{
-    position:relative;
-    transform: translate(-40%, 100%);
-    display:flex;
-    flex-direction: column;
-    align-items: center; /* Căn các khối thông tin theo trục ngang */
-    justify-content: center; /* Căn các khối thông tin theo trục dọc */
-    width: 700px;
-    margin: auto; /* Đảm bảo hiển thị ở giữa màn hình */
-    padding: 20px;
-    background-color: #669BBC;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(223, 228, 230, 0.8);
-    margin-bottom: 10px;
-    transition: transform 0.4s ease, box-shadow 0.3s ease;
-    font-size: 20px;
-    transform-style: preserve-3d;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+.list-podcast {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.bannerAndProfile .profile .userDetailed .infoBlock p {
-  margin: 5px 0; 
+.single-podcast {
+  margin: 10px;
+  /* Định dạng cho mỗi podcast trong danh sách */
 }
-
-.bannerAndProfile .profile .userDetailed .infoBlock p strong {
-  font-weight: bold; 
-  
-}
-
-.bannerAndProfile .profile .userDetailed .infoBlock:hover{
-    transform: translate(-40%, 100%) scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-    background-color: #eaa7d6;
-}
-
-
-
-
-
-
-
