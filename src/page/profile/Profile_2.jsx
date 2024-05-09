@@ -93,7 +93,7 @@ const Profile_2 = () => {
           name={podcast.name}
           description={podcast.description}
           // audioUrl={podcast.audioUrl}
-        /> */}
+        /> 
     </div>
   );
 }
