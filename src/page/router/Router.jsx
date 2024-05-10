@@ -42,7 +42,7 @@ const Router = () => {
           <Route path="/blankcilUI" element={<Home />} />
           <Route path="/blankcilUI/home" element={<Home />} />
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
-          <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
+          <Route path= "/blankcilUI/profile/:id" element={<Profile_2/>}/>
           <Route path= "/blankcilUI/view_edit_profile" element={<View_profile/>}/>
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />
