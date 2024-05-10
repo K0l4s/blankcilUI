@@ -4,65 +4,69 @@ import './Home.css';
 import podcastListSample from '../../testjson/podcastListSample.json';
 import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
+
 const Home = () => {
-  // const podcasts = podcastListSample.body;
+  const [index, setIndex] = useState(-1);
+  const [loading, setLoading] = useState(false); // Thêm state để kiểm tra xem đang tải dữ liệu hay không
   const [podcasts, setPodcasts] = useState([]);
+
+  function scrollHandler() {
+    if (!loading) { // Kiểm tra xem có đang tải dữ liệu không
+      const pageHeight = document.documentElement.scrollHeight;
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+      const nearBottom = pageHeight - scrollPosition - windowHeight < 10;
+
+      if (nearBottom) {
+        setIndex(index + 1);
+        setLoading(true); // Bắt đầu tải dữ liệu
+      }
+    }
+  }
+
   useEffect(() => {
+    console.log('index:', index);
+    if (index < 0) {
+      setIndex(0);
+      return;
+    }
     const token = localStorage.getItem('access_token');
-    // fetch(apiPath + 'podcast/view/page?pageNumber=0&trending=false',
-    //   {
-    //     // mode: 'cors',
-    //     method: 'GET',
-    //     headers: {
-    //       // 'Content-Type': 'application/json',
-    //       'Access-Control-Allow-Origin': '*', // Block cors
-    //       // 'Authorization': `Bearer ${token}`
-    //     },
-    //   }
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setPodcasts(data.body);
-    //   });
-    // Gọi axios
-    // axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
-    // Nếu có token thì gọi auth còn không thì xoá token và gọi không auth
-    if(localStorage.getItem('access_token')){
-      axios.get(apiPath + 'podcast/auth/view/page?pageNumber=0&trending=true',{
+    const fetchData = () => {
+      setLoading(true);
+      const endpoint = token ? `podcast/auth/view/page?pageNumber=${index}&trending=true` : `podcast/view/page?pageNumber=${index}&trending=true`;
+      axios.get(apiPath + endpoint, {
         headers: {
           'ngrok-skip-browser-warning': 'any_value',
           'Authorization': `Bearer ${token}`
         }
-      }).then((response) => {
-        setPodcasts(response.data.body);
       }
-      ).catch((error) => {
+      
+    )
+      .then((response) => {
+        setPodcasts(prevPodcasts => [...prevPodcasts, ...response.data.body]);
+        setLoading(false); // Dừng tải dữ liệu
+      })
+      .catch((error) => {
         console.error('Error:', error);
+        setLoading(false); // Dừng tải dữ liệu nếu có lỗi
       });
-    }
-    else{
-      axios.get(apiPath + 'podcast/view/page?pageNumber=0&trending=true'
-      ,{
-        headers: {
-          'ngrok-skip-browser-warning': 'any_value'
-        }
-      }
-    ).then((response) => {
-        setPodcasts(response.data.body);
-      }
-      ).catch((error) => {
-        console.error('Error:', error);
-      });
-    }
-  }
-  , []);
-   
+    };
+
+    fetchData();
+    
+
+  }, [index]);
+
   useEffect(() => {
     document.title = 'Home - Blankcil';
-  }, []); 
+    
+  }, []);
+  window.addEventListener('scroll', scrollHandler);
+
   if (!podcasts) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="home">
       <p style={{ color: 'white' }}>@Blankcil Team</p>
