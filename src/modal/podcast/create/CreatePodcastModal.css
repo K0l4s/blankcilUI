@@ -1,0 +1,43 @@
+.createPodcastModal input,
+.createPodcastModal textarea,
+.createPodcastModal select
+{
+    width: 80%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+.createPodcastModal textarea{
+    /* Không cho phép chỉnh sửa chiều ngang */
+    resize: none;
+    /* Tự động cuộn khi nội dung vượt quá chiều cao */
+    overflow-y: auto;
+    /* Tự động cuộn khi nội dung vượt quá chiều ngang */
+    overflow-x: hidden;
+
+    height: 200px;
+}
+.createPodcastModal input:focus{
+    border: 1px solid #0000ff;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 255, 0.5);
+}
+
+.createPodcastModal button{
+    width: 80%;
+    height: 40px;
+    background-color: #0000ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.createPodcastModal button:hover{
+    background-color: #0000aa;
+}

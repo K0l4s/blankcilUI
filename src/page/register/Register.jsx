@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Register.css'
 import { apiPath } from '../../api/endpoint'
+import { useNavigate } from 'react-router-dom'
+import { useToast } from '@chakra-ui/react'
 const Register = () => {
+
+  const navigate = useNavigate();
+  useEffect(() => {
+
+
+    if (localStorage.getItem('access_token') || sessionStorage.getItem('access_token')) {
+      navigate('/blankcilUI')
+    }
+    toast({
+      title: "Lỗi truy cập",
+      description: "Vui lòng đăng xuất trước!",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    })
+  })
   const url = window.location.href.split('/').slice(0, -1).join('/')
+  const toast = useToast();
   console.log(url)
   const register = () => {
     const fullname = document.getElementById('fullname').value
@@ -12,7 +31,7 @@ const Register = () => {
     const address = document.getElementById('address').value
     const phone = document.getElementById('phone').value
     console.log(fullname, email, password, birthday)
-    fetch(apiPath+'auth/register', {
+    fetch(apiPath + 'auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,25 +51,28 @@ const Register = () => {
         code: '00000'
       })
     })
-    .then(response => response.json())
-    .then(data => {
-      // if (data.status === 'success') {
-      //   alert('Đăng ký thành công')
-      //   //window.location.href = url + '/login'
-      //   console.log(data)
-      // } else {
-      //   alert('Đăng ký thất bại')
-      // }
-      console.log(data);
-      localStorage.setItem('access_token', data.access_token)
-      localStorage.setItem('refresh_token', data.refresh_token)
-      // Set cookie với thời gian sống là 1 ngày
-      // document.cookie = `access_token=${data.access_token}; max-age=${60*60*24}`
-      // document.cookie = `access_token=${data.access_token}; max-age=${60*60*24*7}`
-      // Set session storage thời gian sống là 1 ngày
-      sessionStorage.setItem('access_token', data.access_token)
-      sessionStorage.setItem('refresh_token', data.refresh_token)
-    })
+      .then(response => response.json())
+      .then(data => {
+        navigate('/blankcilUI');
+        console.log(data);
+        localStorage.setItem('access_token', data.access_token)
+        localStorage.setItem('refresh_token', data.refresh_token)
+        // Set cookie với thời gian sống là 1 ngày
+        // document.cookie = `access_token=${data.access_token}; max-age=${60*60*24}`
+        // document.cookie = `access_token=${data.access_token}; max-age=${60*60*24*7}`
+        // Set session storage thời gian sống là 1 ngày
+        sessionStorage.setItem('access_token', data.access_token)
+        sessionStorage.setItem('refresh_token', data.refresh_token)
+      }).catch((error) => {
+        toast({
+          title: "Đăng ký thất bại",
+          description: "Nội dung lỗi: " + error + "\nVui lòng kiểm tra lại thông tin đăng ký hoặc thử lại sau!",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+        console.error('Error:', error);
+      });
   }
   return (
     <div className="registerBox">
@@ -68,16 +90,16 @@ const Register = () => {
       <input type="email" placeholder='Nhập email' id="email" name="email" required />
       <label for="password">Mật khẩu</label>
       <input type="password" placeholder='Nhập lại mật khẩu' id="password" name="password" required />
-      
+
       <label for="birthday">Ngày sinh</label>
-      <input type="date" id="birthday" name="birthday"  />
+      <input type="date" id="birthday" name="birthday" />
       <label for="address" >Nơi sống</label>
-      <input type="text" id="address" name="birthday"  />
+      <input type="text" id="address" name="birthday" />
       <label for="phone">Số điện thoại</label>
-      <input type="text" id="phone" name="phone"  />
+      <input type="text" id="phone" name="phone" />
       <button onClick={register} className="registerBtn">Đăng ký</button>
-      <a href={url+"/login"}>Đã có tài khoản?</a>
-      <a href={url+"/forgot-password"}>Quên mật khẩu?</a>
+      <a href={url + "/login"}>Đã có tài khoản?</a>
+      <a href={url + "/forgot-password"}>Quên mật khẩu?</a>
     </div>
   )
 }
