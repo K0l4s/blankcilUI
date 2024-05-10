@@ -1,4 +1,3 @@
-
 .Profile .bannerAndProfile{
     margin: auto;
     width: 1000px;
@@ -62,6 +61,7 @@
 
 .bannerAndProfile .information .fullnameAndUsername{
     display: flex;
+    align-items: center;
     font-size: 50px;
     font-weight: bold;
     gap: 20px;
@@ -98,7 +98,7 @@
 
 .bannerAndProfile .profile .button .editProfileButton:hover {
     text-decoration: none;
-    color: #fff;
+    color: black;
     opacity: .7;
 }
 
@@ -190,6 +190,11 @@
 
 .bannerAndProfile .podcasts{
     margin-top: 50px;
+}
+
+.bannerAndProfile .podcasts h1{
+    font-weight: bold;
+    font-size: large;
 }
 
 .list-podcast {

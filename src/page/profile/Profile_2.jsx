@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './Profile2.css'
+import { useNavigate } from 'react-router-dom';
+
 import Ava_name_banner from '../../components/ProfileComponents/ava_name_banner/Ava_name_banner';
 import Icon_followers_likes_totalpodcasts from '../../components/ProfileComponents/icon_followers_likes_totalpodcasts/Icon_followers_likes_totalpodcasts';
 import Self_description from '../../components/ProfileComponents/self_description/Self_description';
 import Single_podcast from '../../components/ProfileComponents/personal_podcasts/Single_podcast';
 import List_podcast from '../../components/ProfileComponents/personal_podcasts/List_podcast';
 // import AudioList from '../../components/AudioList';
-// import axios from "axios";
+import axios from "axios";
 // import { Button, Card, CircularProgress, useToast } from '@chakra-ui/react';
 import { FaUserPlus } from "react-icons/fa6";
 import { SiApplepodcasts } from "react-icons/si";
@@ -39,61 +41,165 @@ const Profile_2 = () => {
   }
 
     // Giả sử bạn có một mảng chứa thông tin các podcast cá nhân
-    const personalPodcasts = [
-      {
-        image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
-        name: "First Podcast",
-        description:"Add your description"
-      },
-      {
-        image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
-        name: "First Podcast",
-        description:"Add your description"
-      },
-      {
-        image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
-        name: "First Podcast",
-        description:"Add your description"
-      },
-      {
-        image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
-        name: "First Podcast",
-        description:"Add your description"
-      },
-      {
-        image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
-        name: "First Podcast",
-        description:"Add your description"
-      },
-      {
-        image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
-        name: "First Podcast",
-        description:"Add your description"
-      },
+  //   const personalPodcasts = [
+  //     {
+  //       image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
+  //       name: "First Podcast",
+  //       description:"Add your description"
+  //     },
+  //     {
+  //       image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
+  //       name: "First Podcast",
+  //       description:"Add your description"
+  //     },
+  //     {
+  //       image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
+  //       name: "First Podcast",
+  //       description:"Add your description"
+  //     },
+  //     {
+  //       image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
+  //       name: "First Podcast",
+  //       description:"Add your description"
+  //     },
+  //     {
+  //       image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
+  //       name: "First Podcast",
+  //       description:"Add your description"
+  //     },
+  //     {
+  //       image: "https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg",
+  //       name: "First Podcast",
+  //       description:"Add your description"
+  //     },
       
-  ];
+  // ];
 
-  const userInfo ={
-    fullname: 'John Dashin',
-    birthday: 'January 1, 1990',
-    hometown: 'New York',
-    occupation: 'Software Engineer',
-    gender: 'Male'
-  };
+  // const userInfo ={
+  //   fullname: 'John Dashin',
+  //   birthday: 'January 1, 1990',
+  //   hometown: 'New York',
+  //   occupation: 'Software Engineer',
+  //   gender: 'Male'
+  // };
+  
+  const navigate = useNavigate();
+  const userID = window.location.href.split('/')[4];
+  const currentLoginID = localStorage.getItem("userID");
+  const [userData, setUserData] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  let avatarURL = avatarDefault;
+  useEffect(() => {
+    axios.get('http://localhost:9090/api/v1/users/profile/5')
+        .then(response => {
+            if (response.data.status) {
+                setUserData(response.data.body);
+                //setIsLoading(false);
+            } else {
+                console.error("Failed to get profile:", response.data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error getting profile:", error);
+        }); 
+}, []);
 
+    // useEffect(() => {
+    //     const requestOptions = {
+    //         method: 'GET',
+    //         headers: { 'Content-Type': 'application/json' }
+    //     };
+
+    //     axios.get('http://localhost:9090/api/v1/users/profile')
+    //         .then(response => {
+    //             setUserData({
+    //                 // "id": response.data.id,
+    //                 // "name": response.data.name
+    //                 id: response.data.id,
+    //                 fullname: response.data.fullname,
+    //                 birthday: response.data.birthday,
+    //                 address: response.data.address,
+    //                 phone: response.data.phone,
+    //                 podcasts: response.data.podcasts
+    //             })
+    //         })
+    //         .catch(error => {
+    //             // Handle any errors here
+    //             console.error(error);
+    //         });
+    // }, []);
+    // if (isLoading) {
+    //   return <div>Loading...</div>; // Hiển thị một chỉ báo tải hoặc nội dung tương tự khi dữ liệu đang được tải
+    // }
+  
 
     return(
     <div className="Profile">
-        <Ava_name_banner className='avatar'/>
-        <Icon_followers_likes_totalpodcasts/>
-        <Self_description/>
-        <h2 style={{ color: 'white' }}>First Podcast</h2>
+      <div className="bannerAndProfile">
+
+        <div className="banner">
+          <img src={user.banner} alt="banner" />
+        </div>
+
+        <div className="profile">
+
+          <img src={user.profile} alt="profile" />
+
+          {userData && (
+            <div className="information">
+              <p className='title'>{user.title}</p>
+              <div className="fullnameAndUsername">
+                <p className="fullname">{userData.fullname}</p>
+                {/* <p className="username">@{user.username}</p> */}
+              </div>
+            </div>
+        )}
+          <div className="button">
+                <button className="editProfileButton" onClick={()=>navigate("/blankcilUI/view_edit_profile")}>View and Edit Profile</button>
+          </div>
+          
+        </div>
+
+        <div className="icons">
+            <div className="followers">
+                <FaUserPlus/>
+                <span>123K</span>
+            </div>
+
+            <div className="totalPodcasts">
+                <SiApplepodcasts/>
+                <span>{userData?.podcasts?.length} podcasts</span>
+            </div> 
+
+            <div className="likes">
+                <AiFillLike/>
+                <span>100K Likes</span>
+            </div>
+        </div>
+
+        <div className="description">
+            <p>Update your profile to add the description</p>
+        </div>
+
+        <div className="podcasts">
+            <h1>Your Personal Podcasts</h1>
+            <List_podcast podcasts={userData?.podcasts || []} />
+        </div>
+              
+      </div>
+     
+        {/* <Ava_name_banner/> */}
+
+        {/* <Icon_followers_likes_totalpodcasts/> */}
+
+        {/* <Self_description/> */}
+        {/* <h2 style={{ color: 'white' }}>First Podcast</h2>
         <Single_podcast
           image={podcast.image}
           name={podcast.name}
           description={podcast.description}
           // audioUrl={podcast.audioUrl}
-        /> 
+        /> */}
     </div>
   );
 }

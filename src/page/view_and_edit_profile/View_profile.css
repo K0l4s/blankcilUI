@@ -1,0 +1,113 @@
+.view-edit-profile{
+    margin: auto;
+    width: 1000px;
+    height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.view-edit-profile h1{
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.view-edit-profile .profile-photo .photo-container {
+    position: absolute; /* Position the container relative to its parent */
+    top: 100px; /* Adjust top position as needed */
+    left: 50%; /* Place it horizontally centered */
+    transform: translateX(-50%); /* Center it horizontally */
+    width: 200px;
+    height: 200px;
+    color: #cf516a;
+    font-size: 18px;
+   
+}
+
+.view-edit-profile .profile-photo .photo-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.view-edit-profile .form-group{
+    margin-top: 400px;   
+}
+
+.view-edit-profile .form-group label {
+    transition: color 0.3s ease; /* Add transition effect */
+    margin-bottom: 20px;
+}
+
+.view-edit-profile .form-group input {
+    transition: color 0.3s ease; /* Add transition effect */
+    margin-bottom: 20px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    flex: 1;
+    margin-right: 10px; 
+    height: 50px;
+}
+
+
+.view-edit-profile .form-group label:hover {
+    color: #cf516a; /* Change color on hover */
+}
+
+.view-edit-profile .form-group input:hover {
+    color:  #669BBC;; /* Change color on hover */
+}
+
+.view-edit-profile .form-group .form-group-1 label {
+    border: none
+}
+
+.view-edit-profile .form-group .form-group-1{
+    color:rgb(173, 172, 172);
+    font-weight: bold;
+    position: relative;
+    bottom: 150px;
+    left: -400px;
+    font-size: large;
+}
+
+.view-edit-profile .form-group .form-group-2,
+.view-edit-profile .form-group .form-group-3,
+.view-edit-profile .form-group .form-group-4,
+.view-edit-profile .form-group .form-group-5,
+.view-edit-profile .form-group .form-group-6{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    position: relative;
+    bottom: 120px;
+    left: -1px;
+    font-size: large;
+}
+
+.view-edit-profile .form-group label {
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    padding: 5px 10px; /* Add padding */
+    margin-right: 10px;
+    width: 200px;
+    height: 50px;
+    text-align: left ;
+}
+
+.view-edit-profile .save-button{
+    width: 200px;
+    font-size: large;
+    padding: 10px;
+    background-color: #cf516a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
