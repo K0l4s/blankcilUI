@@ -7,8 +7,8 @@ import { use } from 'i18next'
 const CreatePodcastModal = ({ isOpen, onClose }) => {
   const toast = useToast();
   const inputImageChange = (e) => {
-    // const img = document.getElementById('img');
-    // img.src = URL.createObjectURL(e.target.files[0]);
+    const img = document.getElementById('img');
+    img.src = URL.createObjectURL(e.target.files[0]);
   }
   const handleCreatePodcast = () => {
     console.log("Handle");
@@ -58,7 +58,7 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
     try {
 
 
-      const response = axios.post(apiPath+'podcast/upload', formData, {
+      const response = axios.post(apiPath + 'podcast/upload', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -66,6 +66,7 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
       }).then((response) => {
         console.log(response.data);
         sendButton.disabled = false;
+        onClose();
       })
       toast.promise(response, {
         success: { title: 'Thành công!', description: 'Đã tạo Podcast thành công, xem ở trang cá nhân' },
@@ -91,24 +92,34 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
           <ModalCloseButton />
           <ModalBody>
             <div className='createPodcastModal'>
-              <p>Tiêu đề Podcast</p>
-              {/* <img id='img' src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" /> */}
-              <input id='title' type="text" placeholder="Nhập tiêu đề" />
-              {/* <input id='content' type="text" placeholder="Nhập mô tả" /> */}
-              {/* Multiple row input không dùng texeare*/}
-              <p>Mô tả Podcast</p>
-              <textarea id='content' placeholder="Nhập mô tả" />
-              <p>Chọn loại định dạng tệp</p>
-              <select id='type'>
-                <option value="0">Hoà trộn ảnh và âm thanh</option>
-                <option value="1">Video</option>
-              </select>
-              <p>Chọn Ảnh</p>
-              <input onChange={inputImageChange} id='imageFile' accept="image/*" type="file" placeholder="Nhập link ảnh" />
-              <p>Chọn Âm Thanh</p>
-              <input id='audioFile' type="file" accept="audio/*" placeholder="Nhập link podcast" />
-
-              <Button id='sendButton' onClick={handleCreatePodcast} variant='solid'>Gửi</Button>
+              <div className="content">
+                <p>Tiêu đề Podcast</p>
+                <input id='title' type="text" placeholder="Nhập tiêu đề" />
+                {/* <input id='content' type="text" placeholder="Nhập mô tả" /> */}
+                {/* Multiple row input không dùng texeare*/}
+                <p>Mô tả Podcast</p>
+                <textarea id='content' placeholder="Nhập mô tả" />
+                <p>Chọn loại định dạng tệp</p>
+                <select id='type'>
+                  <option value="0">Hoà trộn ảnh và âm thanh</option>
+                  <option value="1">Video</option>
+                </select>
+                <p>Chọn Ảnh</p>
+                <input onChange={inputImageChange} id='imageFile' accept="image/*" type="file" placeholder="Nhập link ảnh" />
+                <p>Chọn Âm Thanh</p>
+                <input id='audioFile' type="file" accept="audio/*" placeholder="Nhập link podcast" />
+                <button id='sendButton' onClick={handleCreatePodcast} variant='solid'>Gửi</button>
+              </div>
+              <div className="test">
+                <p>Podcast của bạn sẽ được hiển thị ở đây</p>
+                <div className="imageAndAudio">
+                <img id='img' src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" />
+                {/* <audio controls>
+                  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio> */}
+                </div>
+              </div>
             </div>
           </ModalBody>
         </ModalContent>

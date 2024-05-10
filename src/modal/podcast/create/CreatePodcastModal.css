@@ -1,6 +1,11 @@
-.createPodcastModal input,
-.createPodcastModal textarea,
-.createPodcastModal select
+.createPodcastModal{
+    display: flex;
+    flex-direction: row;
+}
+.createPodcastModal .content input,
+.createPodcastModal .content textarea,
+.createPodcastModal .content select,
+.createPodcastModal .content button
 {
     width: 80%;
     height: 40px;
@@ -10,8 +15,17 @@
     border-radius: 5px;
     outline: none;
     transition: all 0.3s ease-in-out;
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
 }
-.createPodcastModal textarea{
+.createPodcastModal .content p{
+    text-align: left;
+}
+.createPodcastModal .content{
+    width: 50%;
+}
+.createPodcastModal .content textarea{
     /* Không cho phép chỉnh sửa chiều ngang */
     resize: none;
     /* Tự động cuộn khi nội dung vượt quá chiều cao */
@@ -21,23 +35,33 @@
 
     height: 200px;
 }
-.createPodcastModal input:focus{
+.createPodcastModal .content input:focus{
     border: 1px solid #0000ff;
     box-shadow: 0 0 5px 0 rgba(0, 0, 255, 0.5);
 }
 
-.createPodcastModal button{
-    width: 80%;
-    height: 40px;
+.createPodcastModal .content button{
     background-color: #0000ff;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.3s ease-in-out;
 }
 
-.createPodcastModal button:hover{
+.createPodcastModal .content button:hover{
     background-color: #0000aa;
+}
+
+.createPodcastModal .test{
+    width: 50%;
+}
+.createPodcastModal .test .imageAndAudio{
+    width: 360px;
+    height: 640px;
+    margin:auto;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #000000;
+}
+.createPodcastModal .test img{
+    border-radius: 15px;
 }
