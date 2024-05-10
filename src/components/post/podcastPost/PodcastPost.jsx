@@ -9,8 +9,12 @@ import { Comment } from '../comment/Comment';
 import { delay } from 'framer-motion';
 import { apiPath } from '../../../api/endpoint';
 import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
 
 const PodcastPost = ({ podcast, index }) => {
+  const toast = useToast();
+  const [commentIndex, setCommentIndex] = useState(0);
+
   const [comments, setComments] = useState([]);
 
   const { audioRefs, pauseOthers } = useAudioPlayer();
@@ -18,7 +22,7 @@ const PodcastPost = ({ podcast, index }) => {
   const [isLike, setIsLike] = useState(false);
   audioRefs.current[index] = videoRef;
   useEffect(() => {
-    console.log(podcast.hasLiked)
+    // console.log(podcast.hasLiked)
     if (podcast.hasLiked) {
       setIsLike(true);
     }
@@ -81,22 +85,6 @@ const PodcastPost = ({ podcast, index }) => {
     const content = document.getElementById('createComment'+podcast.id).value;
     console.log(content);
     const token = localStorage.getItem('access_token');
-    
-    // axios.post(apiPath + `users/comment/podcast`, {
-    //   content: content,
-    //   podcastId: podcast.id,
-    // }, {
-    //   headers: {
-    //     'Authorization': `Bearer ${token}`
-    //   }
-    // }).then((response) => {
-    //   console.log(response.data);
-    //   setComments([...comments, response.data.body]);
-    // }
-    // ).catch((error) => {
-    //   console.error('Error:', error);
-    // });
-    // Gửi x-www-form-urlencoded
     const formData = new URLSearchParams();
     formData.append('content', content);
     formData.append('podcastId', podcast.id);
@@ -108,6 +96,8 @@ const PodcastPost = ({ podcast, index }) => {
     }).then((response) => {
       console.log(response.data);
       setComments([...comments, response.data.body]);
+      // document.getElementById('createComment'+podcast.id).value = '';
+      podcast.numberOfComments += 1;
     }
     ).catch((error) => {
       console.error('Error:', error);
@@ -140,25 +130,38 @@ const PodcastPost = ({ podcast, index }) => {
     }
   }, [isOpenComment]);
   const getComments = async () => {
-    // const response = await fetch(apiPath + `podcast/view/${podcast.id}/comments`);
-    // const data = await response.json();
-    // setComments(data.body);
-    // Dùng axios, endpoint này không có authentication
-    axios.get(apiPath + `podcast/view/${podcast.id}/comments`
+    toast({
+      title: "Đang tải bình luận",
+      description: "Vui lòng chờ trong giây lát",
+      status: "info",
+      duration: 9000,
+      isClosable: true,
+      position: "bottom-right"
+    })
+    axios.get(apiPath + `podcast/view/${podcast.id}/comments?page=${commentIndex}`
       ,{headers: {
         'ngrok-skip-browser-warning': 'any_value'
       }
       }
     )
       .then((response) => {
-        setComments(response.data.body);
+        setComments([...comments, ...response.data.body]);
+        setCommentIndex(commentIndex + 1);
+        toast.closeAll();
+        toast({
+          title: "Tải bình luận thành công",
+          description: "Đã tải xong bình luận",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "bottom-right"
+        })
       })
-    // console.log(comments);
   }
 
   return (
     <div className="podcast" id={"podcast" + index}>
-      <div id={"closeComment" + index} className="closeComment" onClick={() => setIsOpenComment(!isOpenComment)}>
+      <div id={"closeComment" + index} className="closeComment" onClick={() => {setIsOpenComment(!isOpenComment)}}>
         X
       </div>
       {/* <div className="playButton">
@@ -179,11 +182,17 @@ const PodcastPost = ({ podcast, index }) => {
             (<FcLike onClick={handleLike} className='icon' />):
             (<FcLikePlaceholder onClick={handleLike} className='icon' />)
           }
-          <span>{podcast.numberOfLikes}</span>
+          <span>{podcast.numberOfLikes>=1000? (podcast.numberOfLikes/100).toFixed(2) + 'K':
+                podcast.numberOfLikes>=1000000?(podcast.numberOfLikes/100000).toFixed(2)+'M': 
+                podcast.numberOfLikes>=1000000000?(podcast.numberOfLikes/1000000000).toFixed(2)+'B':
+                podcast.numberOfLikes}</span>
         </div>
         <div className="comment">
           <FcComments className='icon' onClick={() => setIsOpenComment(!isOpenComment)} />
-          <span>{podcast.numberOfComments}</span>
+          <span>{podcast.numberOfComments>=1000? (podcast.numberOfComments/100).toFixed(2) + 'K':
+                podcast.numberOfComments>=1000000?(podcast.numberOfComments/100000).toFixed(2)+'M': 
+                podcast.numberOfComments>=1000000000?(podcast.numberOfComments/1000000000).toFixed(2)+'B':
+                podcast.numberOfComments}</span>
         </div>
       </div>
       {/* <div className="description">
@@ -198,6 +207,12 @@ const PodcastPost = ({ podcast, index }) => {
             {comments.map((comment, index) => (
               <Comment key={index} comment={comment} />
             ))}
+            {/* Nếu comments.length < numberOfComments thì hiển thị nút xem thêm */}
+          {comments.length < podcast.numberOfComments && (
+            <div className="viewMore">
+              <button onClick={getComments}>Xem thêm</button>
+            </div>
+          )}
           </div>
           
           
