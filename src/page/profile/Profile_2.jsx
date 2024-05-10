@@ -92,6 +92,26 @@ const Profile_2 = () => {
   // const [isLoading, setIsLoading] = useState(true);
   let avatarURL = avatarDefault;
   useEffect(() => {
+    if(userID == undefined){
+      const token = localStorage.getItem('access_token');
+      axios.get(apiPath+`users/profile`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'any_value',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+          .then(response => {
+              if (response.data.status) {
+                  setUserData(response.data.body);
+                  //setIsLoading(false);
+              } else {
+                  console.error("Failed to get profile:", response.data.message);
+              }
+          })
+          .catch(error => {
+              console.error("Error getting profile:", error);
+          });
+    }else
     axios.get(apiPath+`users/profile/${userID}`, {
       headers: {
         'ngrok-skip-browser-warning': 'any_value'
