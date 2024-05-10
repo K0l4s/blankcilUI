@@ -31,11 +31,12 @@ const Router = () => {
       {url.includes('login') || url.includes('register') ? <div></div> : <div>
       {/* <Navbar /> */}
       {/* Kiểm tra đường dẫn có chứa cụm từ profile hay không */}
-      {url.includes('profile') ? <div></div> :
+      {/* {url.includes('profile') ? <div></div> : */}
         <div>
           <Leftbar />
           <Rightbar />
-        </div>}
+        </div>
+        {/* } */}
         </div>}
       <div className="main">
         <Routes>
