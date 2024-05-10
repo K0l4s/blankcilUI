@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Profile2.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Ava_name_banner from '../../components/ProfileComponents/ava_name_banner/Ava_name_banner';
 import Icon_followers_likes_totalpodcasts from '../../components/ProfileComponents/icon_followers_likes_totalpodcasts/Icon_followers_likes_totalpodcasts';
@@ -17,6 +17,7 @@ import { FaRegClock } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { AiFillLike } from "react-icons/ai";
+import { apiPath } from '../../api/endpoint';
 
 
 const avatarDefault = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
@@ -84,13 +85,18 @@ const Profile_2 = () => {
   // };
   
   const navigate = useNavigate();
-  const userID = window.location.href.split('/')[4];
-  const currentLoginID = localStorage.getItem("userID");
+  // const userID = window.location.href.split('/')[4];
+  const userID = useParams().id;
+  console.log("id: "+userID);
   const [userData, setUserData] = useState(null);
   // const [isLoading, setIsLoading] = useState(true);
   let avatarURL = avatarDefault;
   useEffect(() => {
-    axios.get('http://localhost:9090/api/v1/users/profile/5')
+    axios.get(apiPath+`users/profile/${userID}`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'any_value'
+      }
+    })
         .then(response => {
             if (response.data.status) {
                 setUserData(response.data.body);
@@ -104,33 +110,6 @@ const Profile_2 = () => {
         }); 
 }, []);
 
-    // useEffect(() => {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' }
-    //     };
-
-    //     axios.get('http://localhost:9090/api/v1/users/profile')
-    //         .then(response => {
-    //             setUserData({
-    //                 // "id": response.data.id,
-    //                 // "name": response.data.name
-    //                 id: response.data.id,
-    //                 fullname: response.data.fullname,
-    //                 birthday: response.data.birthday,
-    //                 address: response.data.address,
-    //                 phone: response.data.phone,
-    //                 podcasts: response.data.podcasts
-    //             })
-    //         })
-    //         .catch(error => {
-    //             // Handle any errors here
-    //             console.error(error);
-    //         });
-    // }, []);
-    // if (isLoading) {
-    //   return <div>Loading...</div>; // Hiển thị một chỉ báo tải hoặc nội dung tương tự khi dữ liệu đang được tải
-    // }
   
 
     return(

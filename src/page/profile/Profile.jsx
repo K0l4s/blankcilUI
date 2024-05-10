@@ -30,14 +30,6 @@ const userInfo ={
   gender: 'Male'
 };
 
-  // const podcasts = [
-  //   { title: 'Podcast 1', url: 'https://open.spotify.com/track/2TT6ef6PcwZ5bPxDpFCUhR?si=5d092fbdebda44d9', image: 'https://caodang.fpt.edu.vn/wp-content/uploads/98.jpg' },
-  //   { title: 'Podcast 2', url: 'https://open.spotify.com/track/4egwKPow9aLm5BYYXqcieq?si=40f0e5aa1adc450c', image: 'https://caodang.fpt.edu.vn/wp-content/uploads/98.jpg' },
-  //   { title: 'Podcast 3', url: 'https://open.spotify.com/track/77Pm4sSI00ewJ4yVVXD0Dr?si=6c8861aa5dba44ef', image: 'https://caodang.fpt.edu.vn/wp-content/uploads/98.jpg' },
-  //   { title: 'Podcast 4', url: 'https://open.spotify.com/track/3Vk4MI7LczZ1pMHGOGTNfB?si=8be775da7eff4fa7', image: 'https://caodang.fpt.edu.vn/wp-content/uploads/98.jpg' }
-  //   // Thêm thêm podcasts nếu cần
-  //  ];
-
  
 
   return (
