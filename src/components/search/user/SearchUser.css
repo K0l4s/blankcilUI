@@ -1,0 +1,45 @@
+.userBox{
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin:auto;
+}
+
+.userBox .userInfor{
+    display: flex;
+    align-items: center;
+}
+
+.userBox .userInfor img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+}
+.userBox .userInfor .text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.userBox .userInfor h3{
+    margin: 0;
+    padding: 0;
+}
+
+.userBox .action button{
+
+    background-color: #ffffff;
+    color: black;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
