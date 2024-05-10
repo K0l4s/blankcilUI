@@ -12,6 +12,7 @@ import Login from '../login/Login'
 import Register from '../register/Register'
 import { RiVideoAddLine } from "react-icons/ri";
 import Search from '../search/Search'
+import View_profile from '../view_and_edit_profile/View_profile'
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const Router = () => {
           <Route path="/blankcilUI/home" element={<Home />} />
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
           <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
+          <Route path= "/blankcilUI/view_edit_profile" element={<View_profile/>}/>
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />
           <Route path="/blankcilUI/search" element={<Search/>} />
