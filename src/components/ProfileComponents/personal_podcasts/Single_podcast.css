@@ -7,6 +7,7 @@
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 10px;  
+    margin-top: 200px;
     margin-right: 10px;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;;
@@ -31,16 +32,16 @@
     flex: 1;
 }
 
-.name{
+/* .name{
     margin-top: -295px;
     font-weight: bold;
     color: black;
-}
+} */
 
 .description{
     width: 100%;
     display: block;  
-    margin-top: 280px;
+    margin-top: auto;
     font-size: 13px;
     color: black;
 }

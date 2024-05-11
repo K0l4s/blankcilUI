@@ -10,15 +10,15 @@ const Single_podcast = ({ podcast }) => {
 
   return (
     <div className="podcast-item">
-      <img src={podcast.image || imageDefault} alt="ImagePodcast" className="image" />
+      <img src={podcast.thumbnail_url || imageDefault} alt="ImagePodcast" className="image" />
       <div className="info">
-        <p className="name">{podcast.id}</p>
+        {/* <p className="name">{podcast.id}</p> */}
         <p className="description">{podcast.content}</p>
       </div>
       <div className="icons">
         <div className="love">
           <FcLike/>
-          <span>123K</span>
+          <span>{podcast.numberOfLikes}</span>
         </div>
         <div className="comments">
           <MdOutlineComment/>
