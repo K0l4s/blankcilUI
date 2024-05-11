@@ -186,19 +186,7 @@ const Profile_2 = () => {
         </div>
               
       </div>
-     
-        {/* <Ava_name_banner/> */}
-
-        {/* <Icon_followers_likes_totalpodcasts/> */}
-
-        {/* <Self_description/> */}
-        {/* <h2 style={{ color: 'white' }}>First Podcast</h2>
-        <Single_podcast
-          image={podcast.image}
-          name={podcast.name}
-          description={podcast.description}
-          // audioUrl={podcast.audioUrl}
-        /> */}
+    
     </div>
   );
 }

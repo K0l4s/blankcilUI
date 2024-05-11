@@ -1,55 +1,166 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
-// import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import { useNavigate, useParams } from 'react-router-dom';
+import { apiPath } from '../../api/endpoint';
+import qs from 'qs';
+import { toast, ToastContainer } from 'react-toastify';
+
+
 import './View_profile.css';
 
 const View_profile = () => {
-    // const history = useHistory();
-
-    // const handleEditClick = () =>{
-    //     history.push("/edit_profile");
-    // };
-
     const avatarDefault = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
-    const userID = window.location.href.split('/')[4];
-    const currentLoginID = localStorage.getItem("userID");
+    const navigate = useNavigate();
+    const { id: userID } = useParams();
+    console.log("id: " + userID);
     const [userData, setUserData] = useState(null);
-    let avatarURL = avatarDefault;
-    useEffect(() => {
-        axios.get('http://localhost:9090/api/v1/users/profile/5')
-            .then(response => {
-                if (response.data.status) {
-                    setUserData(response.data.body);
-                } else {    
-                    console.error("Failed to get profile:", response.data.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error getting profile:", error);
-            });
-    }, []);
+    const [avatarURL, setAvatarURL] = useState(avatarDefault); 
+    const [fullname, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    const [description, setDescription] = useState("");
 
-    //này chỉ set up cho description riêng, do trong databse ko có description cho user
-    const [profile, setProfile] = useState({
-        // photo: 'https://i.pinimg.com/736x/4b/c8/b1/4bc8b13f461f1f770723031142c18f4c.jpg',
-        // fullname: 'Lalisa Monoban',
-        // email: 'lisa.mono123@gmail.com',
-        description: 'Describe yourself'
-        // birthday: '2024-05-04',
-    });
+  // const userID = window.location.href.split('/')[4];
+  console.log("id: "+userID);
+  // const [isLoading, setIsLoading] = useState(true);
+  //let avatarURL = avatarDefault;
+  useEffect(() => {
+    if(userID == undefined){
+      const token = localStorage.getItem('access_token');
+      axios.get(apiPath+`users/profile`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'any_value',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+          .then(response => {
+              if (response.data.status) {
+                  setUserData(response.data.body);
 
-    //handleChange này là liên quan tới userData (gõ được thông tin vào input type)
+                  setFullName(response.data.body.fullname);
+
+                  setAddress(userData.address);
+                  setEmail(userData.email);
+                  setPhone(userData.phone);
+                  setBirthday(userData.birthday);
+                  setDescription(userData.description);
+              } else {
+                  console.error("Failed to get profile:", response.data.message);
+              }
+          })
+          .catch(error => {
+              console.error("Error getting profile:", error);
+          });
+    }else
+    axios.get(apiPath+`users/profile/${userID}`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'any_value'
+      }
+    })
+        .then(response => {
+            if (response.data.status) {
+                setUserData(response.data.body);
+            } else {
+                console.error("Failed to get profile:", response.data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error getting profile:", error);
+        }); 
+}, []);
+
+useEffect(() => {
+    if (userData) {
+        setFullName(userData.fullname);
+        setAddress(userData.address);
+        setBirthday(userData.birthday);
+        setPhone(userData.phone);
+    }
+}, [userData]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserData({ ...userData, [name]: value });
+        setUserData(prevState => ({...prevState, [name]: value }));
     };
 
-    //handleChange_1 là t chỉ set up cho thằng description thôi, do trong databse ko có description cho user (cũng là để gõ dc thông tin vào input type)
-    const handleChange_1 = (e) => {
-        const { name, value } = e.target;
-        setProfile({ ...profile, [name]: value });
+    const handleChangeDescription = (e) => {
+        setDescription(e.target.value);
+    };
+
+    const handleAvatarButtonClick = () =>{
+        document.getElementById('avatarInput').click();
+    }
+
+    const handleAvatarChange = (e) =>{
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () =>{
+            setAvatarURL(reader.result);// Lưu URL của ảnh vào state
+        };
+        reader.readAsDataURL(file);
+        //xử lý file ảnh ở đây
+    };
+
+    const updateData = async () => {
+        console.log("updateData called with userData:", userData, "and fullname:", fullname);
+        if (!userData ||!fullname) {
+            console.error("Missing required data for update.");
+            return;
+        }
+
+        const newData = {
+            "userID": userData.id,
+            "fullname": fullname,
+            "email": userData.email,
+            "birthday": birthday,
+            "address": address,
+            "phone": phone,
+            "description": description // Include description in update
+        };
+
+        try {
+            const token = localStorage.getItem('access_token');
+            const response = await axios.put(apiPath + `users/profile/edit`, qs.stringify(newData), {
+                headers: {
+                    'ngrok-skip-browser-warning': 'any_value',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+                
+            });
+            console.log(response.data);
+            toast.success("Update thành công", {
+                position: "top-right",
+                autoClose: 3000, // Tự động đóng sau 3 giây
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                style: {
+                    backgroundColor: "green" // Đặt màu nền của toast thành màu xanh lá
+                }
+            });
+            
+            // Redirect or show success message after update
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            toast.error("Update bị lỗi", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                style: {
+                    backgroundColor: "red" // Đặt màu nền của toast thành màu đỏ
+                }
+            });
+        }
     };
 
     return (
@@ -58,8 +169,9 @@ const View_profile = () => {
 
             <div className="profile-photo">
                 <div className="photo-container">
-                    <img src={avatarDefault} alt="Profile" />
-                    <button className="change-photo">Change Avatar</button>
+                    <img src={avatarURL} alt="Profile" />
+                    <input type="file" id="avatarInput" accept="image/*" style={{ display: 'none' }} onChange={handleAvatarChange} />
+                    <button className="change-photo" onClick={handleAvatarButtonClick}>Change Avatar</button>
                 </div>
             </div>
 
@@ -71,170 +183,43 @@ const View_profile = () => {
 
                     <div className="form-group-2">
                         <label>Full name</label>
-                        <input type="text" name="fullname" value={userData.fullname} onChange={handleChange} />
+                        {/* <input type="text" name="fullname" value={userData.fullname} onChange={handleChange} /> */}
+                        <input type="text" name="fullname" value={fullname} onChange={handleChange} />
+
                     </div>
 
                     <div className="form-group-3">
-                        <label>Address</label>
-                        <input type="text" name="address" value={userData.address} onChange={handleChange} />
+                        <label>Email</label>
+                        <input type="text" name="email" value={userData.email} onChange={handleChange} disabled />
                     </div>
 
                     <div className="form-group-4">
-                        <label>Phone</label>
-                        <input type="text" name="phone" value={userData.phone} onChange={handleChange} />
+                        <label>Address</label>
+                        <input type="text" name="address" value={address} onChange={handleChange} />
                     </div>
 
                     <div className="form-group-5">
-                        <label>Birthday</label>
-                        <input type="text" name="birthday" value={userData.birthday} onChange={handleChange} />
+                        <label>Phone</label>
+                        <input type="text" name="phone" value={phone} onChange={handleChange} />
                     </div>
 
                     <div className="form-group-6">
-                        <label>Description</label>
-                        <input type="text" name="description" value={profile.description} onChange={handleChange_1} />
+                        <label>Birthday</label>
+                        <input type="text" name="birthday" value={birthday} onChange={handleChange} />
                     </div>
 
+                    <div className="form-group-7">
+                        <label>Description</label>
+                        <input type="text" name="description" value={description} onChange={handleChangeDescription} />
+                    </div>
                 </div>
             )}
             <footer>
-                <button className="save-button">Lưu</button>
+                <button onClick={updateData} className="save-button">Lưu</button>
             </footer>
+            <ToastContainer />
         </div>
     );
 }
 
 export default View_profile;
-
-
-//PHẦN COMMENT DƯỚI ĐÂY LÀ T ĐANG THỬ EDIT PROFILE BẰNG CÁCH DÙNG TOKEN TRONG POSTMAN, NHƯNG CHƯA ĐƯỢC.
-// import React, { useState, useEffect } from 'react'
-// import axios from "axios";
-// import { useNavigate } from 'react-router-dom';
-
-// // import { useHistory } from "react-router-dom"
-// import './View_profile.css';
-
-// const View_profile = () => {
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setUserData({ ...userData, [name]: value });
-//     };
-
-//     const handleChange_1 = (e) => {
-//         const { name, value } = e.target;
-//         setProfile({ ...profile, [name]: value });
-//     };
-
-
-//     // const history = useHistory();
-
-//     // const handleEditClick = () =>{
-//     //     history.push("/edit_profile");
-//     // };
-
-//     const avatarDefault = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
-//     const userID = window.location.href.split('/')[4];
-//     const currentLoginID = localStorage.getItem("userID");
-//     const [userData, setUserData] = useState(null);
-//     let avatarURL = avatarDefault;
-//     useEffect(() => {
-//         const accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZ2FuLndoaXRlMTIzQGdtYWlsLmNvbSIsImlhdCI6MTcxNTM1Njc0MywiZXhwIjoxNzE1NDQzMTQzfQ.j4IESVMMqgBVyr5ish6ZQteVr7SjLLSO4e3HdBoPjy4"; // Thay thế [access token] bằng access token bạn đã nhận được từ Postman
-
-//         axios.get('http://localhost:9090/api/v1/users/profile', userData, {
-//             headers:{
-//                 Authorization: accessToken
-//             }
-//         })
-//             .then(response => {
-//                 if (response.data.status) {
-//                     setUserData(response.data.body);
-//                 } else {    
-//                     console.error("Failed to get profile:", response.data.message);
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error("Error getting profile:", error);
-//             });
-//     }, []);
-
-//     const [profile, setProfile] = useState({
-//         // photo: 'https://i.pinimg.com/736x/4b/c8/b1/4bc8b13f461f1f770723031142c18f4c.jpg',
-//         // fullname: 'Lalisa Monoban',
-//         // email: 'lisa.mono123@gmail.com',
-//         description: 'Describe yourself'
-//         // birthday: '2024-05-04',
-//     });
-
-
-//     const handleSave = () =>{
-//         const accessToken = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZ2FuLndoaXRlMTIzQGdtYWlsLmNvbSIsImlhdCI6MTcxNTM1Njc0MywiZXhwIjoxNzE1NDQzMTQzfQ.j4IESVMMqgBVyr5ish6ZQteVr7SjLLSO4e3HdBoPjy4"; // Thay thế [access token] bằng access token bạn đã nhận được từ Postman
-
-//         axios.put('http://localhost:9090/api/v1/users/profile/edit', userData, {
-//             headers:{
-//                 Authorization: accessToken
-//             }
-//         })
-//             .then(response =>{
-//                 if(response.data.status){
-//                     console.log("Profile updated successfully!");
-//                 } else{
-//                     console.error("Failed to update profile:", response.data.message);
-//                 }
-//             })
-//             .catch(error =>{
-//                 console.error("Error updating profile:", error);
-//             });
-//     };
-
-//     return (
-//         <div className="view-edit-profile">
-//             <h1>View and Edit Profile</h1>
-
-//             <div className="profile-photo">
-//                 <div className="photo-container">
-//                     <img src={avatarDefault} alt="Profile" />
-//                     <button className="change-photo">Change Avatar</button>
-//                 </div>
-//             </div>
-
-//             {userData && (
-//                 <div className="form-group">
-//                     <div className="form-group-1">
-//                         <label>Introduce yourself</label>
-//                     </div>
-
-//                     <div className="form-group-2">
-//                         <label>Full name</label>
-//                         <input type="text" name="fullname" value={userData.fullname} onChange={handleChange} />
-//                     </div>
-
-//                     <div className="form-group-3">
-//                         <label>Address</label>
-//                         <input type="text" name="address" value={userData.address} onChange={handleChange} />
-//                     </div>
-
-//                     <div className="form-group-4">
-//                         <label>Phone</label>
-//                         <input type="text" name="phone" value={userData.phone} onChange={handleChange} />
-//                     </div>
-
-//                     <div className="form-group-5">
-//                         <label>Birthday</label>
-//                         <input type="text" name="birthday" value={userData.birthday} onChange={handleChange} />
-//                     </div>
-
-//                     <div className="form-group-6">
-//                         <label>Description</label>
-//                         <input type="text" name="description" value={profile.description} onChange={handleChange_1} />
-//                     </div>
-
-//                 </div>
-//             )}
-//             <footer>
-//                 <button className="save-button" onClick={handleSave}>Lưu</button>
-//             </footer>
-//         </div>
-//     );
-// }
-
-// export default View_profile;

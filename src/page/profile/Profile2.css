@@ -178,7 +178,7 @@
 }
 
 .bannerAndProfile .description p{
-    margin-top: -250px;
+    margin-top: 30px;
     font-size: 16px;
     color:antiquewhite;
 }
@@ -201,7 +201,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .single-podcast {
