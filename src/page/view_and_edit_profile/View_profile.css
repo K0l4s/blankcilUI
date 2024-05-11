@@ -82,7 +82,8 @@
 .view-edit-profile .form-group .form-group-3,
 .view-edit-profile .form-group .form-group-4,
 .view-edit-profile .form-group .form-group-5,
-.view-edit-profile .form-group .form-group-6{
+.view-edit-profile .form-group .form-group-6,
+.view-edit-profile .form-group .form-group-7{
     display: flex;
     align-items: center;
     font-weight: bold;
