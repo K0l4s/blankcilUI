@@ -33,3 +33,79 @@
     margin-left: 20px;
 } */
 
+.commentItem .commentIcon{
+    /* position: absolute; */
+    /* left: 80%; */
+    top: 10px;
+    /* margin-right: 70px; */
+    /* width: 50px; */
+    /* height: 50px; */
+    /* border-radius: 50%; */
+    /* background-color: #ff0077; */
+    /* color: white; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+.commentItem .commentIcon .like:hover,
+.commentItem .commentIcon .reply:hover
+{
+   background: #a7a7a79a;
+}
+.commentItem .commentIcon .like,
+.commentItem .commentIcon .reply{
+    margin:5px;
+    border-radius: 15px;
+    padding: 10px;
+    width: 50%;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.commentItem .commentIcon .like{
+    color: #ff0077;
+}
+
+.commentItem .commentIcon .reply{
+    color: #0e8a42;
+}
+
+.commentItem .inputReply{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.commentItem .inputReply input{
+    background-color: rgb(183, 183, 183);
+    width: 80%;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+}
+
+.commentItem .inputReply button{
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background-color: #ff0077;
+    color: white;
+    cursor: pointer;
+}
+
+.commentItem hr{
+    border: 1px solid #ffb7d9;
+    margin: 5px;
+    border-radius: 50px;
+    width: 80%;
+    margin:auto;
+}

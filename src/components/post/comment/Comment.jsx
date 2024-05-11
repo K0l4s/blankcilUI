@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import './Comment.css'
 import { TiMediaPlayOutline } from 'react-icons/ti'
+import { FcLike } from 'react-icons/fc';
+import { BsReplyAll } from 'react-icons/bs';
 export const Comment = (comment) => {
+    const [isReplyInput, setIsReplyInput] = useState(false);
     
     
     // const time = new Date(comment.comment.timestamp).toLocaleDateString() + ' lúc ' + new Date(comment.comment.timestamp).toLocaleTimeString();
@@ -29,9 +32,22 @@ export const Comment = (comment) => {
                 <TiMediaPlayOutline />
                 <p>{time}</p>
             </div>
+            
             <div className="commentContent">
                 <p>{comment.comment.content}</p>
             </div>
+            {/* <hr></hr> */}
+            <div className="commentIcon">
+                <div className="like">
+                    <FcLike />
+                    <span>10K</span>
+                </div>
+                <div className="reply" onClick={()=>setIsReplyInput(!isReplyInput)}>
+                    <BsReplyAll />
+                    <span>Trả lời</span>
+                </div>
+            </div>
+            <hr></hr>
             {/* {comment.comment.replies && (<div className="replyButton">Trả lời</div>)} */}
             <div className="replies">
                 {comment.comment.replies && (
@@ -43,6 +59,12 @@ export const Comment = (comment) => {
                 )}
                 
             </div>
+            {isReplyInput? (
+                
+            <div className="inputReply">
+                <input type="text" placeholder="Nhập câu trả lời của bạn" />
+                <button>Trả lời</button>
+            </div>):null}
         </div>
     )
 }

@@ -65,3 +65,12 @@
 .createPodcastModal .test img{
     border-radius: 15px;
 }
+
+.createPodcastModal .test .audioInput{
+    position: absolute;
+    padding: 10px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    bottom:20px;
+    width: 360px;
+}

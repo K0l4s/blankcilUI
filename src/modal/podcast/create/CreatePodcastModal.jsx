@@ -10,6 +10,21 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
     const img = document.getElementById('img');
     img.src = URL.createObjectURL(e.target.files[0]);
   }
+  const audioChange = (e) => {
+    const audio = document.getElementById('audio');
+    audio.src = URL.createObjectURL(e.target.files[0]);
+    console.log(audio.src);
+  }
+  const audioControls = () => {
+    const audio = document.getElementById('audio');
+    if (audio.paused) {
+      audio.play();
+    }else{
+      audio.pause();
+    }
+    // audio.play();
+  }
+
   const handleCreatePodcast = () => {
     console.log("Handle");
     const title = document.getElementById('title').value;
@@ -107,17 +122,17 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
                 <p>Chọn Ảnh</p>
                 <input onChange={inputImageChange} id='imageFile' accept="image/*" type="file" placeholder="Nhập link ảnh" />
                 <p>Chọn Âm Thanh</p>
-                <input id='audioFile' type="file" accept="audio/*" placeholder="Nhập link podcast" />
+                <input onChange={audioChange} id='audioFile' type="file" accept="audio/*" placeholder="Nhập link podcast" />
                 <button id='sendButton' onClick={handleCreatePodcast} variant='solid'>Gửi</button>
               </div>
               <div className="test">
                 <p>Podcast của bạn sẽ được hiển thị ở đây</p>
-                <div className="imageAndAudio">
-                <img id='img' src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" />
-                {/* <audio controls>
-                  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio> */}
+                <div className="imageAndAudio" onClick={audioControls}>
+                  <img id='img' src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" />
+                  <audio id='audio' controls className='audioInput'>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Search.css'
 import { LiaSearchengin } from 'react-icons/lia'
 import SearchUser from '../../components/search/user/SearchUser'
@@ -8,7 +8,7 @@ const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchKey, setSearchKey] = useState('');
   const search = () => {
-    
+  
     setSearchKey(document.getElementById('searchInput').value);
     console.log(searchKey);
     axios.get(apiPath + `users/search?name=${searchKey}`, {
@@ -23,7 +23,12 @@ const Search = () => {
       .catch((error) => {
         console.error('Error:', error);
       });
+
+     
   }
+  useEffect(() => {
+    search();
+  }, []);
   return (
     <div>
       <div className="searchBox">

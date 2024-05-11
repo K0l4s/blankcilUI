@@ -4,7 +4,6 @@ import './App.css';
 import { AudioPlayerProvider } from './components/post/podcastPost/PodcastContext';
 import Router from './page/router/Router';
 import favicon from './favicon.ico';
-import { SpeedInsights } from "@vercel/speed-insights/react"
 function App() {
   const mode = localStorage.getItem('themeMode') || 'dark';
   if(mode === 'dark') {

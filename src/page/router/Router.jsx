@@ -13,6 +13,7 @@ import Register from '../register/Register'
 import { RiVideoAddLine } from "react-icons/ri";
 import Search from '../search/Search'
 import View_profile from '../view_and_edit_profile/View_profile'
+import NotFoundPage from '../404Page/NotFoundPage'
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -45,11 +46,17 @@ const Router = () => {
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
           <Route path= "/blankcilUI/profile/:id" element={<Profile_2/>}/>
           <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
-          <Route path= "/blankcilUI/view_edit_profile" element={<View_profile/>}/>
+          <Route path="/blankcilUI/podcast/:id" element={<Home />} />
+
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />
+
           <Route path="/blankcilUI/search" element={<Search/>} />
-          <Route path="/*" element={<div>Không tìm thấy trang</div>} />
+          {/* <Route path="/blankcilUI/search/:search" element={<Search/>} /> */}
+          {/* Edit route */}
+          <Route path= "/blankcilUI/edit/profile" element={<View_profile/>}/>
+          <Route path="/blankcilUI/edit/password" element={<Search/>} />
+          <Route path="/*" element={<NotFoundPage/>} />
           
         </Routes>
       </div>
