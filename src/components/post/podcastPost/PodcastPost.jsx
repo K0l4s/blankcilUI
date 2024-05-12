@@ -7,11 +7,16 @@ import { use } from 'i18next';
 import { useAudioPlayer } from './PodcastContext';
 import { Comment } from '../comment/Comment';
 import { delay } from 'framer-motion';
-import { apiPath } from '../../../api/endpoint';
+import { apiPath, domainName } from '../../../api/endpoint';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 
 const PodcastPost = ({ podcast, index }) => {
+  let userAvatar = podcast.user_podcast.avatar_url;
+  if (userAvatar === null) {
+    userAvatar = "https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611750.jpg"
+  }
+
   const toast = useToast();
   const [commentIndex, setCommentIndex] = useState(0);
 
@@ -43,15 +48,17 @@ const PodcastPost = ({ podcast, index }) => {
             setIsLike(false);
             podcast.numberOfLikes -= 1;
           }
-          //   setIsLike(!isLike);
-          // if (isLike) {
-          //   podcast.numberOfLikes -= 1;
-          // } else {
-          //   podcast.numberOfLikes += 1;
-          // }
         }
         ).catch((error) => {
           console.error('Error:', error);
+          toast({
+            title: "Lỗi",
+            description: "Thao tác quá nhanh hoặc chưa đăng nhập. Vui lòng thử lại!",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom-right"
+          });
         });
 
     }
@@ -97,11 +104,19 @@ const PodcastPost = ({ podcast, index }) => {
       }).then((response) => {
         console.log(response.data);
         setComments([...comments, response.data.body]);
-        // document.getElementById('createComment'+podcast.id).value = '';
+        document.getElementById('createComment'+podcast.id).value = '';
         podcast.numberOfComments += 1;
       }
       ).catch((error) => {
         console.error('Error:', error);
+        toast({
+          title: "Lỗi",
+          description: "Thao tác quá nhanh hoặc chưa đăng nhập. Vui lòng thử lại!",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "bottom-right"
+        });
       });
 
     }
@@ -173,10 +188,10 @@ const PodcastPost = ({ podcast, index }) => {
       </div> */}
         <div className="header">
           <div className="info">
-            <img src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" className="img" />
+            <img src={userAvatar} alt="" className="img" />
             <div className="titleAndName">
               <h3>{podcast.title}</h3>
-              <p>Tác giả: {podcast.user_podcast.fullname}</p>
+              <p>Tác giả: <a href={domainName+"blankcilUI/profile/"+podcast.user_podcast.id}>{podcast.user_podcast.fullname}</a></p>
             </div>
           </div>
         </div>

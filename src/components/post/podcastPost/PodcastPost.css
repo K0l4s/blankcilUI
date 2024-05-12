@@ -36,7 +36,7 @@
 .podcast .header{
     position: absolute;
     border-radius: 15px;
-    width: 100%;
+    width: 360px;
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,12 @@
     background: none;
 }
 
-
+.podcast .titleAndName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
 .podcast .header .content{
     display: flex;
     flex-direction: column;

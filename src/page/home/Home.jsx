@@ -9,7 +9,7 @@ const Home = () => {
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(false); // Thêm state để kiểm tra xem đang tải dữ liệu hay không
   const [podcasts, setPodcasts] = useState([]);
-
+  const [isEnd, setIsEnd] = useState(false);
   function scrollHandler() {
     if (!loading) { // Kiểm tra xem có đang tải dữ liệu không
       const pageHeight = document.documentElement.scrollHeight;
@@ -32,34 +32,47 @@ const Home = () => {
     }
     const token = localStorage.getItem('access_token');
     const fetchData = () => {
+      if (isEnd) {
+        return;
+      }
       setLoading(true);
       const endpoint = token ? `podcast/auth/view/page?pageNumber=${index}&trending=true` : `podcast/view/page?pageNumber=${index}&trending=true`;
-      axios.get(apiPath + endpoint, {
-        headers: {
+      let headers = {
+        'ngrok-skip-browser-warning': 'any_value'
+      };
+      if (token) {
+        headers = {
           'ngrok-skip-browser-warning': 'any_value',
           'Authorization': `Bearer ${token}`
-        }
+        };
       }
-      
-    )
-      .then((response) => {
-        setPodcasts(prevPodcasts => [...prevPodcasts, ...response.data.body]);
-        setLoading(false); // Dừng tải dữ liệu
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setLoading(false); // Dừng tải dữ liệu nếu có lỗi
-      });
+      axios.get(apiPath + endpoint, {
+        headers: headers,
+      }
+
+      )
+        .then((response) => {
+          console.log(response)
+          setPodcasts(prevPodcasts => [...prevPodcasts, ...response.data.body.content]);
+          setLoading(false); // Dừng tải dữ liệu 
+          if (response.data.body.totalPage===response.data.body.currentPage) {
+            setIsEnd(true);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          setLoading(false); // Dừng tải dữ liệu nếu có lỗi
+        });
     };
 
     fetchData();
-    
+
 
   }, [index]);
 
   useEffect(() => {
     document.title = 'Home - Blankcil';
-    
+
   }, []);
   window.addEventListener('scroll', scrollHandler);
 

@@ -14,6 +14,7 @@ import { RiVideoAddLine } from "react-icons/ri";
 import Search from '../search/Search'
 import View_profile from '../view_and_edit_profile/View_profile'
 import NotFoundPage from '../404Page/NotFoundPage'
+import PodcastPage from '../podcastPage/PodcastPage'
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Router = () => {
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
           <Route path= "/blankcilUI/profile/:id" element={<Profile_2/>}/>
           <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
-          <Route path="/blankcilUI/podcast/:id" element={<Home />} />
+          <Route path="/blankcilUI/podcast/:id" element={<PodcastPage />} />
 
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />

@@ -3,22 +3,22 @@ import './Register.css'
 import { apiPath } from '../../api/endpoint'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
+import axios from 'axios'
 const Register = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-
-
-    if (localStorage.getItem('access_token') || sessionStorage.getItem('access_token')) {
+    if (localStorage.getItem('access_token')) {
       navigate('/blankcilUI')
+      toast({
+        title: "Lỗi truy cập",
+        description: "Vui lòng đăng xuất trước!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      })
     }
-    toast({
-      title: "Lỗi truy cập",
-      description: "Vui lòng đăng xuất trước!",
-      status: "error",
-      duration: 9000,
-      isClosable: true,
-    })
+
   })
   const url = window.location.href.split('/').slice(0, -1).join('/')
   const toast = useToast();
@@ -53,16 +53,11 @@ const Register = () => {
     })
       .then(response => response.json())
       .then(data => {
-        navigate('/blankcilUI');
         console.log(data);
         localStorage.setItem('access_token', data.access_token)
         localStorage.setItem('refresh_token', data.refresh_token)
-        // Set cookie với thời gian sống là 1 ngày
-        // document.cookie = `access_token=${data.access_token}; max-age=${60*60*24}`
-        // document.cookie = `access_token=${data.access_token}; max-age=${60*60*24*7}`
-        // Set session storage thời gian sống là 1 ngày
-        sessionStorage.setItem('access_token', data.access_token)
-        sessionStorage.setItem('refresh_token', data.refresh_token)
+        fetchUserProfileByToken(data.access_token)
+        
       }).catch((error) => {
         toast({
           title: "Đăng ký thất bại",
@@ -73,6 +68,27 @@ const Register = () => {
         })
         console.error('Error:', error);
       });
+  }
+  const fetchUserProfileByToken = async (token) => {
+    // const token = localStorage.getItem('access_token');
+    axios.get(apiPath + 'users/profile', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then((response) => {
+      if(response.status == '200'){
+        localStorage.setItem('user', JSON.stringify(response.data.body));
+        navigate('/blankcilUI');
+        // console.log('User: '+localStorage.getItem('user'))
+        // // Get user profile trả về json
+        // const user = JSON.parse(localStorage.getItem('user'));
+        // console.log('User: '+user.email)
+      }
+      console.log(response.data);
+    }
+    ).catch((error) => {
+      console.error('Error:', error);
+    });
   }
   return (
     <div className="registerBox">
