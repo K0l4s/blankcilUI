@@ -26,7 +26,7 @@ const Search = () => {
         if(response.status !== 200) {
           console.log('No result');
           toast({
-            title: 'No result',
+            title: 'Kết quả tìm kiếm không tồn tại.',
             status: 'error',
             duration: 9000,
             isClosable: true,
@@ -34,6 +34,9 @@ const Search = () => {
           return;
         }
         console.log(response.data);
+        // Xoá data cũ
+        // setSearchUsersResult([]);
+        // setSearchPodcastsResult([]);
         setSearchUsersResult(response.data.body.users);
         setSearchPodcastsResult(response.data.body.podcasts);
       })
@@ -68,14 +71,29 @@ const Search = () => {
       ) : <p>Không có kết quả tìm kiếm</p>}
       <p>Podcast</p>
       <div>
-        {searchPodcastsResult.map((podcast, index) => (
-          <PodcastPost
-            key={index}
-            index={index}
-            podcast={podcast}
-          />
-        ))}
+        {/* {searchPodcastsResult.map((podcast, index) => (
+          // <PodcastPost
+          //   key={index}
+          //   // index={index}
+          //   podcast={podcast}
+          // />
+          return(
+            <SearchUser key={index} user={user} />) */}
+        {/* ))} */}
+        {/* {searchPodcastsResult.length > 0 ? searchPodcastsResult.map((podcast, index) => { 
+          return(
+          <PodcastPost key={index} podcast={podcast} />)
+      }
+      ) : <p>Không có kết quả tìm kiếm</p>} */}
+      {/* Tự động cập nhật tất cả podcast */}
+      {/* Return về data mới khi search */}
+      {searchPodcastsResult.length > 0 ? searchPodcastsResult.map((podcast, index) => { 
+          return(
+          <PodcastPost key={index} index={index} podcast={podcast} />)
+      }
+      ) : <p>Không có kết quả tìm kiếm</p>}
       </div>
+
 
     </div>
   )

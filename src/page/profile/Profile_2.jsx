@@ -71,12 +71,13 @@ const Profile_2 = () => {
         .catch(error => {
           console.error("Error getting profile:", error);
         });
-  }, []);
+  }, [userID]);
 
 
 
   return (
     <div className="Profile">
+      
       <div className="bannerAndProfile">
 
         <div className="banner">

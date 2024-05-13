@@ -57,7 +57,13 @@ const Register = () => {
         localStorage.setItem('access_token', data.access_token)
         localStorage.setItem('refresh_token', data.refresh_token)
         fetchUserProfileByToken(data.access_token)
-        
+        toast({
+          title: "Đăng ký thành công!",
+          description: "Chúc bạn có những trải nghiệm tuyệt vời!",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        })
       }).catch((error) => {
         toast({
           title: "Đăng ký thất bại",
@@ -73,6 +79,7 @@ const Register = () => {
     // const token = localStorage.getItem('access_token');
     axios.get(apiPath + 'users/profile', {
       headers: {
+        'ngrok-skip-browser-warning': 'any_value',
         'Authorization': `Bearer ${token}`
       }
     }).then((response) => {

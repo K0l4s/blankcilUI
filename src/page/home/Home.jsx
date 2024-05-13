@@ -4,8 +4,10 @@ import './Home.css';
 import podcastListSample from '../../testjson/podcastListSample.json';
 import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
 
 const Home = () => {
+  const toast = useToast();
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(false); // Thêm state để kiểm tra xem đang tải dữ liệu hay không
   const [podcasts, setPodcasts] = useState([]);
@@ -52,16 +54,36 @@ const Home = () => {
 
       )
         .then((response) => {
+          if(response.status==200){
           console.log(response)
           setPodcasts(prevPodcasts => [...prevPodcasts, ...response.data.body.content]);
           setLoading(false); // Dừng tải dữ liệu 
           if (response.data.body.totalPage===response.data.body.currentPage) {
             setIsEnd(true);
           }
+        }else{
+          console.log(response.data);
+          toast({
+              title: "Lỗi",
+              description: response.message,
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+              position: "bottom-right"
+          })
+      }
         })
         .catch((error) => {
           console.error('Error:', error);
           setLoading(false); // Dừng tải dữ liệu nếu có lỗi
+          toast({
+            title: "Lỗi",
+            description: error.message,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom-right"
+        })
         });
     };
 

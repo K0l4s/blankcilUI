@@ -59,6 +59,10 @@
 .leftbar .item:hover {
     background-color: #45aef4;
 }
+.leftbar .item .icon{
+    font-size: 30px;
+    text-align: center;
+}
 
 @media screen and (max-width: 720px) {
     .leftbar {

@@ -51,8 +51,6 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
     const sendButton = document.getElementById('sendButton');
     sendButton.disabled = true;
     try {
-
-
       const response = axios.post(apiPath + 'podcast/upload', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,

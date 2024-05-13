@@ -7,6 +7,9 @@ import { FaPlay } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const Single_podcast = ({ podcast }) => {
+  useEffect(() => {
+    console.log(podcast);
+  }, [podcast]);
   const navigate = useNavigate();
   const imageDefault = 'https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg';
 

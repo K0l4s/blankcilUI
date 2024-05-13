@@ -259,3 +259,18 @@
     color: white;
     cursor: pointer;
 }
+.podcast .header .info .titleAndName p{
+    transition: all 0.3s ease-in-out;
+}
+.podcast .header .info img{
+    transition: all 0.3s ease-in-out;
+}
+.podcast .header .info img:hover{
+    cursor: pointer;
+    scale: 1.1;
+}
+.podcast .header .info .titleAndName p:hover{
+    color: #ff0077;
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -2,8 +2,13 @@ import React from 'react'
 import './Rightbar.css'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineLogin } from 'react-icons/ai';
-import { RiRegisteredFill } from 'react-icons/ri';
+import { RiFunctionAddLine, RiRegisteredFill } from 'react-icons/ri';
 import { BiEditAlt, BiLogOut } from 'react-icons/bi';
+import { IoWalkOutline } from 'react-icons/io5';
+import { FaPersonWalkingArrowLoopLeft, FaPersonWalkingDashedLineArrowRight } from 'react-icons/fa6';
+import { Si1001Tracklists } from 'react-icons/si';
+import { FaUserEdit } from 'react-icons/fa';
+import { MdOutlineLibraryAdd } from 'react-icons/md';
 const Rightbar = () => {
   const logout = () => {
     localStorage.removeItem('access_token');
@@ -27,15 +32,15 @@ const Rightbar = () => {
     <div className='rightbar'>
       {!isLogin ? (
         <>
-          <div className='item' onClick={() => navigate("/blankcilUI/login")}><AiOutlineLogin className='icon' /></div>
-          <div className='item' onClick={() => navigate("/blankcilUI/register")}><RiRegisteredFill className='icon' /></div>
+          <div className='item' onClick={() => navigate("/blankcilUI/login")}><FaPersonWalkingDashedLineArrowRight className='icon' /></div>
+          <div className='item' onClick={() => navigate("/blankcilUI/register")}><MdOutlineLibraryAdd  className='icon' /></div>
         </>) :
         (
           <>
           <div className='item' onClick={() => navigate("/blankcilUI/profile")}><img src={avatar} alt="" /></div>
-          <p>{profile.fullname}</p>
-          <div className='item' onClick={() => navigate("/blankcilUI/edit/profile")}><BiEditAlt className='icon' /></div>
-          <div className='item' onClick={logout}><BiLogOut className='icon' /></div>
+          {/* <p>{profile.fullname}</p> */}
+          <div className='item' onClick={() => navigate("/blankcilUI/edit/profile")}><FaUserEdit  className='icon' /></div>
+          <div className='item' onClick={logout}><FaPersonWalkingArrowLoopLeft  className='icon' /></div>
           </>
           )}
 

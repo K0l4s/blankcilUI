@@ -50,7 +50,7 @@ const Login = () => {
       else {
         toast({
           title: "Lỗi truy cập",
-          description: "Sai email hoặc mật khẩu!",
+          description: "Email đăng nhập hoặc mật khẩu không đúng!",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -58,12 +58,20 @@ const Login = () => {
       }
     }).catch((error) => {
       console.error('Error:', error);
+      toast({
+        title: "Lỗi truy cập",
+        description: "Email đăng nhập hoặc mật khẩu không đúng!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      })
     });
   }
   const fetchUserProfileByToken = async (token) => {
     // const token = localStorage.getItem('access_token');
     axios.get(apiPath + 'users/profile', {
       headers: {
+        'ngrok-skip-browser-warning': 'any_value',
         'Authorization': `Bearer ${token}`
       }
     }).then((response) => {
@@ -90,7 +98,7 @@ const Login = () => {
           <input placeholder="Email" id='email' type="email" className="loginInput" />
           <input placeholder="Password" id='password' type="password" className="loginInput" />
           <button onClick={login} className="loginButton">Log In</button>
-          <button className="loginRegisterButton">
+          <button className="loginRegisterButton" onClick={()=>navigate("/blankcilUI/register")}>
             Create a New Account
           </button>
           <span className="loginForgot">Forgot Password?</span>

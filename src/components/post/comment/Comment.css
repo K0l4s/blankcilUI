@@ -109,3 +109,20 @@
     width: 80%;
     margin:auto;
 }
+
+.commentItem .userInfor h3{
+    transition: all 0.3s ease-in-out;
+}
+.commentItem .userInfor h3:hover{
+    color: #ff0077;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.commentItem .userInfor img{
+    transition: all 0.3s ease-in-out;
+}
+.commentItem .userInfor img:hover{
+    cursor: pointer;
+    scale: 1.1;
+}

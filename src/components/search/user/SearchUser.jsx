@@ -11,7 +11,7 @@ const SearchUser = (user) => {
       <div className='userInfor'>
         <img src="https://cdn.tgdd.vn/hoi-dap/1314184/podcast-la-gi-co-gi-thu-vi-nghe-podcast-o-dau-2-1.jpg" alt="" className="img" />
         <div className="text">
-          <a href={domainName+'/blankcilUI/profile/'+user.user.id}><h3>{user.user.fullname}</h3></a>
+          <h3 onClick={()=>navigate('/blankcilUI/profile/'+user.user.id)}>{user.user.fullname}</h3>
           <p>Có {user.user.podcasts.length} podcast</p>
         </div>
       </div>

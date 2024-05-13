@@ -6,7 +6,15 @@ import { BsReplyAll } from 'react-icons/bs';
 import axios from 'axios';
 import { apiPath, domainName } from '../../../api/endpoint';
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 export const Comment = (comment) => {
+    // Nếu nhấn nút enter thì sẽ thực hiện replyRequest
+    // document.addEventListener('keydown', function (event) {
+    //     if (event.key === 'Enter') {
+    //         replyRequest();
+    //     }
+    // });
+    const navigate = useNavigate();
     const toast = useToast();
     let avatar = "https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611750.jpg";
     if (comment.comment.user_comment.avatar_url) {
@@ -34,6 +42,15 @@ export const Comment = (comment) => {
             setReplies([...replies, response.data.body]);
             console.log(replies);
             setTotalReply(totalReply + 1);
+            document.getElementById('createReply' + comment.comment.id).value = '';
+            toast({
+                title: "Thành công",
+                description: "Trả lời bình luận thành công!",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right"
+            });
             // document.getElementById('createComment'+podcast.id).value = '';
             // comment.re += 1;
         }
@@ -48,8 +65,21 @@ export const Comment = (comment) => {
                 'ngrok-skip-browser-warning': 'any_value',
             }
         }).then((response) => {
-            console.log(response.data);
-            setReplies(response.data.body);
+            if (response.status === 200) {
+                console.log(response.data);
+                setReplies(response.data.body);
+            }
+            else {
+                console.log(response.data);
+                toast({
+                    title: "Lỗi",
+                    description: response.message,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right"
+                })
+            }
         }).catch((error) => {
             console.error('Error:', error);
             toast({
@@ -59,7 +89,7 @@ export const Comment = (comment) => {
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-right"
-              });
+            });
         });
     }
     const replyButtonClick = () => {
@@ -93,8 +123,8 @@ export const Comment = (comment) => {
         <div className='commentItem'>
             <div className="userInfor">
 
-                <img src={avatar} alt="" className="img" />
-                <a  href={domainName+"blankcilUI/profile/"+comment.comment.user_comment.id}><h3>{comment.comment.user_comment.fullname}</h3></a>
+                <img onClick={() => navigate("/blankcilUI/profile/" + comment.comment.user_comment.id)} src={avatar} alt="" className="img" />
+                <h3 onClick={() => navigate("/blankcilUI/profile/" + comment.comment.user_comment.id)}>{comment.comment.user_comment.fullname}</h3>
                 <TiMediaPlayOutline />
                 <p>{time}</p>
             </div>

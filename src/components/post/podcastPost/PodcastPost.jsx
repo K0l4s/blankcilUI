@@ -10,8 +10,17 @@ import { delay } from 'framer-motion';
 import { apiPath, domainName } from '../../../api/endpoint';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const PodcastPost = ({ podcast, index }) => {
+  const navigate = useNavigate();
+  //useEffect để kiểm tra sự thay đổi của podcast, tiến hành thay đổi src của video
+  useEffect(() => {
+    if (podcast.audio_url) {
+      videoRef.current.src = podcast.audio_url;
+    }
+  }, [podcast]);
+
   let userAvatar = podcast.user_podcast.avatar_url;
   if (userAvatar === null) {
     userAvatar = "https://img.freepik.com/free-psd/3d-render-avatar-character_23-2150611750.jpg"
@@ -188,10 +197,12 @@ const PodcastPost = ({ podcast, index }) => {
       </div> */}
         <div className="header">
           <div className="info">
-            <img src={userAvatar} alt="" className="img" />
+            <img onClick={()=>navigate("/blankcilUI/profile/"+podcast.user_podcast.id)} src={userAvatar} alt="" className="img" />
             <div className="titleAndName">
               <h3>{podcast.title}</h3>
-              <p>Tác giả: <a href={domainName+"blankcilUI/profile/"+podcast.user_podcast.id}>{podcast.user_podcast.fullname}</a></p>
+              <p 
+              onClick={()=>navigate("/blankcilUI/profile/"+podcast.user_podcast.id)}
+              >Tác giả:{podcast.user_podcast.fullname}</p>
             </div>
           </div>
         </div>
