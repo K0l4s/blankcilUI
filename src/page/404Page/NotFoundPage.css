@@ -1,0 +1,19 @@
+.notfound .text{
+    margin:auto;
+    width: 10%;
+    font-size: 10rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-top: 20px;
+    /* Căn các component trên 1 dòng, ở giữa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notfound .text img{
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
