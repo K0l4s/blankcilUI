@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import './Comment.css'
 import { TiMediaPlayOutline } from 'react-icons/ti'
-import { FcLike } from 'react-icons/fc';
+import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
 import { BsReplyAll } from 'react-icons/bs';
 import axios from 'axios';
 import { apiPath, domainName } from '../../../api/endpoint';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 export const Comment = (comment) => {
+    const [isLike, setIsLike] = useState(false);
     // Nếu nhấn nút enter thì sẽ thực hiện replyRequest
     // document.addEventListener('keydown', function (event) {
     //     if (event.key === 'Enter') {
@@ -118,7 +119,14 @@ export const Comment = (comment) => {
     } else {
         time = new Date(comment.comment.timestamp).toLocaleDateString() + ' lúc ' + new Date(comment.comment.timestamp).toLocaleTimeString();
     }
-
+    const handleLike = () => {
+        setIsLike(!isLike);
+        if (isLike) {
+            setTotalLike(totalLike - 1);
+        } else {
+            setTotalLike(totalLike + 1);
+        }
+    }
     return (
         <div className='commentItem'>
             <div className="userInfor">
@@ -134,8 +142,10 @@ export const Comment = (comment) => {
             </div>
             {/* <hr></hr> */}
             <div className="commentIcon">
-                <div className="like">
-                    <FcLike />
+                <div className="like" onClick={handleLike}>
+                    {isLike ? 
+                    <FcLike /> 
+                    : <FcLikePlaceholder />}
                     <span>{totalLike}</span>
                 </div>
                 <div className="reply" onClick={replyButtonClick}>

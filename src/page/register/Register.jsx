@@ -9,7 +9,7 @@ const Register = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
-      navigate('/blankcilUI')
+      navigate('/confim/email')
       toast({
         title: "Lỗi truy cập",
         description: "Vui lòng đăng xuất trước!",
@@ -54,9 +54,10 @@ const Register = () => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        localStorage.setItem('access_token', data.access_token)
-        localStorage.setItem('refresh_token', data.refresh_token)
-        fetchUserProfileByToken(data.access_token)
+        navigate("/blankcilUI/confirm/register/" + email)
+        // localStorage.setItem('access_token', data.access_token)
+        // localStorage.setItem('refresh_token', data.refresh_token)
+        // fetchUserProfileByToken(data.access_token)
         toast({
           title: "Đăng ký thành công!",
           description: "Chúc bạn có những trải nghiệm tuyệt vời!",
@@ -75,28 +76,7 @@ const Register = () => {
         console.error('Error:', error);
       });
   }
-  const fetchUserProfileByToken = async (token) => {
-    // const token = localStorage.getItem('access_token');
-    axios.get(apiPath + 'users/profile', {
-      headers: {
-        'ngrok-skip-browser-warning': 'any_value',
-        'Authorization': `Bearer ${token}`
-      }
-    }).then((response) => {
-      if(response.status == '200'){
-        localStorage.setItem('user', JSON.stringify(response.data.body));
-        navigate('/blankcilUI');
-        // console.log('User: '+localStorage.getItem('user'))
-        // // Get user profile trả về json
-        // const user = JSON.parse(localStorage.getItem('user'));
-        // console.log('User: '+user.email)
-      }
-      console.log(response.data);
-    }
-    ).catch((error) => {
-      console.error('Error:', error);
-    });
-  }
+  
   return (
     <div className="registerBox">
       {/* <label>Username</label>

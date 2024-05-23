@@ -15,6 +15,7 @@ import Search from '../search/Search'
 import View_profile from '../view_and_edit_profile/View_profile'
 import NotFoundPage from '../404Page/NotFoundPage'
 import PodcastPage from '../podcastPage/PodcastPage'
+import ConfirmRegister from '../confim-register/ConfirmRegister'
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -51,11 +52,13 @@ const Router = () => {
 
           <Route path="/blankcilUI/login" element={<Login/>} />
           <Route path="/blankcilUI/register" element={<Register/>} />
+          <Route path='/blankcilUI/confirm/register/:email' element={<ConfirmRegister/>}/>
 
           <Route path="/blankcilUI/search" element={<Search/>} />
           {/* <Route path="/blankcilUI/search/:search" element={<Search/>} /> */}
           {/* Edit route */}
           <Route path= "/blankcilUI/edit/profile" element={<View_profile/>}/>
+          
           <Route path="/blankcilUI/edit/password" element={<Search/>} />
           <Route path="/*" element={<NotFoundPage/>} />
           
