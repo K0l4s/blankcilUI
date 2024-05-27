@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import './Router.css'
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Home from '../home/Home'
-import Navbar from '../../components/navbar/Navbar'
 import Leftbar from '../../components/leftbar/Leftbar'
 import Rightbar from '../../components/rightbar/Rightbar'
 import i18next from 'i18next'
@@ -16,6 +15,7 @@ import View_profile from '../view_and_edit_profile/View_profile'
 import NotFoundPage from '../404Page/NotFoundPage'
 import PodcastPage from '../podcastPage/PodcastPage'
 import ConfirmRegister from '../confim-register/ConfirmRegister'
+// import ChatRoom from '../chat/ChatRoom'
 const Router = () => {
   const url = window.location.href;
   const navigate = useNavigate();
@@ -32,12 +32,11 @@ const Router = () => {
   return (
     <div className='router'>
       {url.includes('login') || url.includes('register') ? <div></div> : <div>
-      {/* <Navbar /> */}
       {/* Kiểm tra đường dẫn có chứa cụm từ profile hay không */}
       {/* {url.includes('profile') ? <div></div> : */}
         <div>
           <Leftbar />
-          <Rightbar />
+          {/* <Rightbar /> */}
         </div>
         {/* } */}
         </div>}
@@ -58,7 +57,7 @@ const Router = () => {
           {/* <Route path="/blankcilUI/search/:search" element={<Search/>} /> */}
           {/* Edit route */}
           <Route path= "/blankcilUI/edit/profile" element={<View_profile/>}/>
-          
+          {/* <Route path='/chat' element={<ChatRoom/>} /> */}
           <Route path="/blankcilUI/edit/password" element={<Search/>} />
           <Route path="/*" element={<NotFoundPage/>} />
           

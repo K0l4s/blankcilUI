@@ -31,6 +31,13 @@ const Register = () => {
     const address = document.getElementById('address').value
     const phone = document.getElementById('phone').value
     console.log(fullname, email, password, birthday)
+    toast({
+      title: "Đang xử lý",
+      description: "Vui lòng chờ trong giây lát!",
+      status: "info",
+      duration: 9000,
+      isClosable: true,
+    })
     fetch(apiPath + 'auth/register', {
       method: 'POST',
       headers: {
