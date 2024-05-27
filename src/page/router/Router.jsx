@@ -42,23 +42,23 @@ const Router = () => {
         </div>}
       <div className="main">
         <Routes>
-          <Route path="/blankcilUI" element={<Home />} />
-          <Route path="/blankcilUI/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
-          <Route path= "/blankcilUI/profile/:id" element={<Profile_2/>}/>
-          <Route path= "/blankcilUI/profile" element={<Profile_2/>}/>
-          <Route path="/blankcilUI/podcast/:id" element={<PodcastPage />} />
+          <Route path= "/profile/:id" element={<Profile_2/>}/>
+          <Route path= "/profile" element={<Profile_2/>}/>
+          <Route path="/podcast/:id" element={<PodcastPage />} />
 
-          <Route path="/blankcilUI/login" element={<Login/>} />
-          <Route path="/blankcilUI/register" element={<Register/>} />
-          <Route path='/blankcilUI/confirm/register/:email' element={<ConfirmRegister/>}/>
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path='/confirm/register/:email' element={<ConfirmRegister/>}/>
 
-          <Route path="/blankcilUI/search" element={<Search/>} />
+          <Route path="/search" element={<Search/>} />
           {/* <Route path="/blankcilUI/search/:search" element={<Search/>} /> */}
           {/* Edit route */}
-          <Route path= "/blankcilUI/edit/profile" element={<View_profile/>}/>
+          <Route path= "/edit/profile" element={<View_profile/>}/>
           {/* <Route path='/chat' element={<ChatRoom/>} /> */}
-          <Route path="/blankcilUI/edit/password" element={<Search/>} />
+          <Route path="/edit/password" element={<Search/>} />
           <Route path="/*" element={<NotFoundPage/>} />
           
         </Routes>
