@@ -77,7 +77,7 @@ const ConfirmRegister = () => {
         }).then((response) => {
             if (response.status == '200') {
                 localStorage.setItem('user', JSON.stringify(response.data.body));
-                navigate('/blankcilUI');
+                navigate('/');
                 // console.log('User: '+localStorage.getItem('user'))
                 // // Get user profile trả về json
                 // const user = JSON.parse(localStorage.getItem('user'));

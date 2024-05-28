@@ -9,7 +9,7 @@ const Register = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
-      navigate('/confim/email')
+      navigate('/')
       toast({
         title: "Lỗi truy cập",
         description: "Vui lòng đăng xuất trước!",
@@ -61,7 +61,7 @@ const Register = () => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        navigate("/blankcilUI/confirm/register/" + email)
+        navigate("/confirm/register/" + email)
         // localStorage.setItem('access_token', data.access_token)
         // localStorage.setItem('refresh_token', data.refresh_token)
         // fetchUserProfileByToken(data.access_token)

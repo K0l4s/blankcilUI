@@ -60,7 +60,7 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
         console.log(response.data);
         sendButton.disabled = false;
         onClose();
-        navigate("/blankcilUI/podcast/" + response.data.body.id);
+        navigate("/podcast/" + response.data.body.id);
       })
       toast.promise(response, {
         success: { title: 'Thành công!', description: 'Đã tạo Podcast thành công, xem ở trang cá nhân' },

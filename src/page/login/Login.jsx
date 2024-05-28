@@ -9,7 +9,7 @@ const Login = () => {
   const toast = useToast();
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
-      navigate('/blankcilUI')
+      navigate('/')
       toast({
         title: "Bạn đã đăng nhập!",
         description: "Chúng tôi nhận thấy một phiên đăng nhập của bạn trên trình duyệt, xin hãy đăng xuất trước!",
@@ -77,7 +77,7 @@ const Login = () => {
     }).then((response) => {
       if(response.status == '200'){
         localStorage.setItem('user', JSON.stringify(response.data.body));
-        navigate('/blankcilUI')
+        navigate('/')
         // console.log('User: '+localStorage.getItem('user'))
         // // Get user profile trả về json
         // const user = JSON.parse(localStorage.getItem('user'));
@@ -98,7 +98,7 @@ const Login = () => {
           <input placeholder="Email" id='email' type="email" className="loginInput" />
           <input placeholder="Password" id='password' type="password" className="loginInput" />
           <button onClick={login} className="loginButton">Log In</button>
-          <button className="loginRegisterButton" onClick={()=>navigate("/blankcilUI/register")}>
+          <button className="loginRegisterButton" onClick={()=>navigate("/register")}>
             Create a New Account
           </button>
           <span className="loginForgot">Forgot Password?</span>

@@ -36,7 +36,7 @@ const Router = () => {
       {/* {url.includes('profile') ? <div></div> : */}
         <div>
           <Leftbar />
-          {/* <Rightbar /> */}
+          <Rightbar />
         </div>
         {/* } */}
         </div>}

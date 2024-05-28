@@ -202,11 +202,11 @@ const PodcastPost = ({ podcast, index }) => {
       </div> */}
       <div className="header">
         <div className="info">
-          <img onClick={() => navigate("/blankcilUI/profile/" + podcast.user_podcast.id)} src={userAvatar} alt="" className="img" />
+          <img onClick={() => navigate("/profile/" + podcast.user_podcast.id)} src={userAvatar} alt="" className="img" />
           <div className="titleAndName">
             <h3>{podcast.title}</h3>
             <p
-              onClick={() => navigate("/blankcilUI/profile/" + podcast.user_podcast.id)}
+              onClick={() => navigate("/profile/" + podcast.user_podcast.id)}
             >Tác giả:{podcast.user_podcast.fullname}</p>
           </div>
         </div>
