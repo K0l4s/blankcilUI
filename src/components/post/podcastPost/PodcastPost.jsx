@@ -134,14 +134,14 @@ const PodcastPost = ({ podcast, index }) => {
   useEffect(() => {
     // Nếu isOpenComment là true thì sẽ mở tab comment
     // const item= document.getElementById("podcast"+index).scrollIntoView();
-    const aside = document.querySelector('aside');
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    // const aside = document.querySelector('aside');
+    // const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     if (isOpenComment) {
-        if (aside.style.width == "250px" && !mediaQuery.matches) {
-          aside.style.width = "0";
-          aside.style.opacity = "0";
-      }
+        // if (aside.style.width == "250px" && !mediaQuery.matches) {
+        //   aside.style.width = "0";
+        //   aside.style.opacity = "0";
+      // }
       // Thêm className .isCommentOpen để hiển thị tab comment
       document.getElementById("podcast" + index).classList.add("isCommentOpen");
       console.log("isOpenComment", isOpenComment);
