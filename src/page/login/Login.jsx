@@ -95,8 +95,8 @@ const Login = () => {
         <h1>BLANKCIL</h1>
         <p>Healing your soul!</p>
         <div className="loginBox">
-          <input placeholder="Email" id='email' type="email" className="loginInput" />
-          <input placeholder="Password" id='password' type="password" className="loginInput" />
+          <input style={{color:"white"}} placeholder="Email" id='email' type="email" className="loginInput" />
+          <input style={{color:"white"}} placeholder="Password" id='password' type="password" className="loginInput" />
           <button onClick={login} className="loginButton">Log In</button>
           <button className="loginRegisterButton" onClick={()=>navigate("/register")}>
             Create a New Account
