@@ -7,34 +7,27 @@
 }
 
 .login .loginWrapper{
-    width: 30%;
+    width: 50%;
     padding: 20px;
-    background-color: white;
+    margin:20px;
+    
     border-radius: 10px;
-    /* box-shadow: 0px 0px 0 10px rgba(255, 255, 255, 0.5); */
     transition: all 0.5s ease-in-out;
     
-}
-.login .loginWrapper:hover{
-    animation: boxShadowChangeColor 5s infinite;
-}
-@keyframes boxShadowChangeColor{
-    0%{
-        box-shadow: 0px 0px 0 10px rgba(21, 255, 0, 0.603);
-    }
-    100%{
-        box-shadow: 0px 0px 0 10px rgba(0, 17, 255, 0.5);
-    }
 }
 .login .loginWrapper h1{
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;
     font-weight: bold;
+    color:white;
 }
 .login .loginWrapper .loginBox{
     display: flex;
     flex-direction: column;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
 }
 
 .login .loginWrapper .loginBox input{
@@ -63,4 +56,13 @@
     text-align: center;
     color: #0058af;
     cursor: pointer;
+}
+
+.login .logo{
+    width: 50%;
+}
+
+.login .logo img{
+    width: 350px;
+    margin:auto;
 }

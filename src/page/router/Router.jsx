@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react'
 import './Router.css'
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import Home from '../home/Home'
 import Leftbar from '../../components/leftbar/Leftbar'
-import Rightbar from '../../components/rightbar/Rightbar'
 import i18next from 'i18next'
-// import Profile from '../profile/Profile'
-import Profile_2 from '../profile/Profile_2'
 import Login from '../login/Login'
 import Register from '../register/Register'
-import { RiVideoAddLine } from "react-icons/ri";
 import Search from '../search/Search'
 import View_profile from '../view_and_edit_profile/View_profile'
 import NotFoundPage from '../404Page/NotFoundPage'
@@ -36,17 +32,17 @@ const Router = () => {
       {/* {url.includes('profile') ? <div></div> : */}
         <div>
           <Leftbar />
-          <Rightbar />
+          {/* <Rightbar /> */}
         </div>
         {/* } */}
         </div>}
-      <div className="main">
+        <article>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
-          <Route path= "/profile/:id" element={<Profile_2/>}/>
-          <Route path= "/profile" element={<Profile_2/>}/>
+          {/* <Route path= "/profile/:id" element={<Profile_2/>}/> */}
+          {/* <Route path= "/profile" element={<Profile_2/>}/> */}
           <Route path="/podcast/:id" element={<PodcastPage />} />
 
           <Route path="/login" element={<Login/>} />
@@ -62,7 +58,7 @@ const Router = () => {
           <Route path="/*" element={<NotFoundPage/>} />
           
         </Routes>
-      </div>
+        </article>
       {/* <div className="createPost"><RiVideoAddLine size={50}/></div> */}
     </div>
   )

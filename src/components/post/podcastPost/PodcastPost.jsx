@@ -152,11 +152,14 @@ const PodcastPost = ({ podcast, index }) => {
       // Xoá hết comment có parentComment khác rỗng trong comments
       const newComments = comments.filter((comment) => comment.parentComment === null);
       setComments(newComments);
+      document.querySelector('aside').classList.add('minum');
     } else {
       // Xoas className .isCommentOpen 
       document.getElementById("podcast" + index).classList.remove("isCommentOpen");
       document.getElementById("reaction" + index).style.display = "flex";
       document.getElementById("closeComment" + index).style.display = "none";
+      // toggleAside();
+      document.querySelector('aside').classList.remove('minum');
     }
   }, [isOpenComment]);
   const getComments = () => {
@@ -189,9 +192,13 @@ const PodcastPost = ({ podcast, index }) => {
           isClosable: true,
           position: "bottom-right"
         })
+        
       })
   }
-
+  // const toggleAside = () => {
+  //   const aside = document.querySelector('aside');
+  //   aside.classList.toggle('minum');
+  // };
   return (
     <div className="podcast" id={"podcast" + index} >
       <div id={"closeComment" + index} className="closeComment" onClick={() => { setIsOpenComment(!isOpenComment) }}>

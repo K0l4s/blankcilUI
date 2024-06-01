@@ -4,6 +4,7 @@ import { apiPath } from '../../api/endpoint'
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
+import logo from '../../access/images/logos.png'
 const Login = () => {
   const navigate = useNavigate();
   const toast = useToast();
@@ -92,8 +93,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="loginWrapper">
-        <h1>BLANKCIL</h1>
-        <p>Healing your soul!</p>
+        <h1>LOGIN</h1>
         <div className="loginBox">
           <input style={{color:"white"}} placeholder="Email" id='email' type="email" className="loginInput" />
           <input style={{color:"white"}} placeholder="Password" id='password' type="password" className="loginInput" />
@@ -101,10 +101,13 @@ const Login = () => {
           <button className="loginRegisterButton" onClick={()=>navigate("/register")}>
             Create a New Account
           </button>
-          <span className="loginForgot">Forgot Password?</span>
+          <span className="loginForgot" onClick={()=>navigate("/reset/password")}>Forgot Password?</span>
 
         </div>
       </div>
+    <div className="logo">
+    <img src={logo} alt="logo" />
+    </div>
     </div>
   )
 }
