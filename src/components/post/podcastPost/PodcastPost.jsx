@@ -11,6 +11,7 @@ import { apiPath, domainName } from '../../../api/endpoint';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { BsPlay } from 'react-icons/bs';
 
 const PodcastPost = ({ podcast, index }) => {
   const navigate = useNavigate();
@@ -276,7 +277,10 @@ const PodcastPost = ({ podcast, index }) => {
             <source src={podcast.audioUrl} type="audio/mpeg" />
           </audio>
         </div> */}
+        <BsPlay className='playicon'/>
+        <div className="backdrop"></div>
         <div className="video">
+        
           <video width="360px" height="640px" ref={videoRef} onPlay={handlePlay} controls>
             <source src={podcast.audio_url} type="video/mp4" />
           </video>

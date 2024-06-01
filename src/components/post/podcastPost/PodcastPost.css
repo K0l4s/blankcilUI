@@ -14,7 +14,6 @@
 }
 .podcast .commentTab{
     position: absolute;
-    margin-left: 380px;
     /* background: white; */
     z-index: 0;
     right:0;
@@ -275,3 +274,100 @@
     cursor: pointer;
 }
 
+.podcast .playicon{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ff0077;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 15;
+    top: 45%;
+    left: 150px;
+    transition: all 0.5s ease-in-out;
+}
+.podcast:hover .playicon{
+    transform: scale(1.1);
+}
+.podcast:hover .backdrop{
+    backdrop-filter: blur(0px);
+}
+.podcast .backdrop{
+    position: absolute;
+    width: 360px;
+    height: 100%;
+    background: rgba(245, 222, 179, 0.233);
+    z-index: 1;
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    transition: all 0.5s ease-in-out;
+}
+
+
+@media (max-width: 768px) {
+    .podcast{
+        margin:auto;
+    }
+    .isCommentOpen {
+        width: 360px;
+        position: relative;
+        
+    }
+    .podcast .commentTab {
+        border-radius: 0;
+        width:360px;
+        height: 360px;
+        bottom: 80px;
+        cursor: pointer;
+        z-index: 12;
+        overflow-x: hidden;
+        overflow-y: auto;       
+    }
+    .commentTab .comment{
+        position: absolute;
+        width:360px;
+        height: 500px;
+        cursor: pointer;
+        z-index: 12;
+    }
+    .commentTab .closeComment {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #ff0077;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 15;
+    }
+    .podcast .comments{
+        width: 100%;
+        margin-left: 0;
+        
+        margin-left: 0;
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+    }
+    .podcast .createComment {
+        width: 100%;
+        margin-left: 0;
+        background-color: white;
+        z-index: 15;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+    }
+}
