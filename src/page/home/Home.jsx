@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PodcastPost from '../../components/post/podcastPost/PodcastPost';
 import './Home.css';
-import podcastListSample from '../../testjson/podcastListSample.json';
 import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
