@@ -103,6 +103,7 @@ const PodcastPost = ({ podcast, index }) => {
   };
   const handlePause = () => {
     videoRef.current.pause();
+    document.getElementById(`avatar${index}`).classList.remove('isPlay');
     document.getElementById('playicon' + index).style.display = 'block';
     document.getElementById('backdrop' + index).style.opacity = 1;
     document.getElementById('a')
