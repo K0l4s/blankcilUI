@@ -35,7 +35,7 @@ aside .item p {
     position: absolute;
     font-weight: bold;
     /* color: #333; */
-    background: linear-gradient(90deg, #138086 0%, #eeb462 100%);
+    background: linear-gradient(45deg, #ffffff 0%, #ffd8a2 70%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -137,5 +137,21 @@ aside .item:hover::before {
 
     100% {
         transform: translateX(0%);
+    }
+}
+
+@media (max-width:768px) {
+    aside {
+        width: 70px;
+    }
+    
+    aside .item p {
+        display: none;
+    }
+    aside .item.active img{
+        transform: translateX(0);
+    }
+    aside .closeBtn{
+        display: none;
     }
 }

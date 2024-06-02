@@ -4,6 +4,7 @@ import './App.css';
 import { AudioPlayerProvider } from './components/post/podcastPost/PodcastContext';
 import Router from './page/router/Router';
 import useAuth from './useAuth';
+import { useEffect } from 'react';
 function App() {
   useAuth();
   const mode = localStorage.getItem('themeMode') || 'dark';
@@ -20,7 +21,6 @@ function App() {
   // document.querySelector('link[rel="icon"]').href = favicon;
   // document.querySelector('link[rel="apple-touch-icon"]').href = favicon;
   document.querySelector('meta[name="description"]').content = "Blankcil là một trang web cho phép người dùng tạo ra các podcast chữa lành và đẩy healing.";
-
   
   return (
     <div className="App">

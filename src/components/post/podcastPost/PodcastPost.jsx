@@ -15,6 +15,8 @@ import { BsPlay } from 'react-icons/bs';
 
 const PodcastPost = ({ podcast, index }) => {
   const navigate = useNavigate();
+  const [progress, setProgress] = useState(0);
+
   //useEffect để kiểm tra sự thay đổi của podcast, tiến hành thay đổi src của video
   useEffect(() => {
     if (podcast.audio_url) {
@@ -42,6 +44,14 @@ const PodcastPost = ({ podcast, index }) => {
       setIsLike(true);
     }
   }, []);
+  const handleTimeUpdate = () => {
+    const video = videoRef.current;
+      if (video) {
+        const progressValue = (video.currentTime / video.duration) * 100;
+        setProgress(progressValue);
+      
+    };
+  }
   const handleLike = () => {
 
     const token = localStorage.getItem('access_token');
@@ -75,18 +85,28 @@ const PodcastPost = ({ podcast, index }) => {
 
   const handlePlay = () => {
     pauseOthers(index);
+    document.getElementById('playicon' + index).style.display = 'none';
+    // document.getElementById('backdrop' + index).classList.add('active');
+    document.getElementById('backdrop' + index).style.opacity = 0;
+    document.getElementById(`avatar${index}`).classList.add('isPlay');
     if (videoRef.current) {
       videoRef.current.play();
       // Kiểm tra vị trí của video hiện tại, nếu vượt ngoài khung hình thì sẽ scroll đến vị trí của video
       const rect = videoRef.current.getBoundingClientRect();
+
       if (rect.top < 0 || rect.bottom > window.innerHeight) {
-        // videoRef.current.scrollIntoView();
-        // Cuộn xuống, vị trí của video sẽ nằm ở giữa màn hình
         videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       }
-
+    }else{
+      alert("Đang tải video");
     }
   };
+  const handlePause = () => {
+    videoRef.current.pause();
+    document.getElementById('playicon' + index).style.display = 'block';
+    document.getElementById('backdrop' + index).style.opacity = 1;
+    document.getElementById('a')
+  }
   useEffect(() => {
     videoRef.current?.addEventListener('ended', () => {
       const nextVideo = audioRefs.current[index + 1];
@@ -98,6 +118,7 @@ const PodcastPost = ({ podcast, index }) => {
       return null;
     }
   }, []);
+
 
   const commentRequest = async () => {
     const content = document.getElementById('createComment' + podcast.id).value;
@@ -132,6 +153,18 @@ const PodcastPost = ({ podcast, index }) => {
   }
 
   const [isOpenComment, setIsOpenComment] = useState(false);
+  const formatTime = (timeInSeconds) => {
+    const totalSeconds = Math.floor(timeInSeconds);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const formattedHours = hours > 0 ? `${hours}:` : '';
+    const formattedMinutes = hours > 0 ? String(minutes).padStart(2, '0') : minutes;
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    return `${formattedHours}${formattedMinutes}:${formattedSeconds}`;
+  };
   useEffect(() => {
     // Nếu isOpenComment là true thì sẽ mở tab comment
     // const item= document.getElementById("podcast"+index).scrollIntoView();
@@ -139,11 +172,12 @@ const PodcastPost = ({ podcast, index }) => {
     // const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     if (isOpenComment) {
-        // if (aside.style.width == "250px" && !mediaQuery.matches) {
-        //   aside.style.width = "0";
-        //   aside.style.opacity = "0";
+      // if (aside.style.width == "250px" && !mediaQuery.matches) {
+      //   aside.style.width = "0";
+      //   aside.style.opacity = "0";
       // }
       // Thêm className .isCommentOpen để hiển thị tab comment
+
       document.getElementById("podcast" + index).classList.add("isCommentOpen");
       console.log("isOpenComment", isOpenComment);
       // Ẩn element reaction
@@ -153,14 +187,20 @@ const PodcastPost = ({ podcast, index }) => {
       // Xoá hết comment có parentComment khác rỗng trong comments
       const newComments = comments.filter((comment) => comment.parentComment === null);
       setComments(newComments);
-      document.querySelector('aside').classList.add('minum');
+      if (window.innerWidth > 768) {
+        document.querySelector('aside').classList.add('minum');
+      }
     } else {
       // Xoas className .isCommentOpen 
+
       document.getElementById("podcast" + index).classList.remove("isCommentOpen");
+
       document.getElementById("reaction" + index).style.display = "flex";
       document.getElementById("closeComment" + index).style.display = "none";
       // toggleAside();
-      document.querySelector('aside').classList.remove('minum');
+      if (window.innerWidth > 768) {
+        document.querySelector('aside').classList.remove('minum');
+      }
     }
   }, [isOpenComment]);
   const getComments = () => {
@@ -193,26 +233,26 @@ const PodcastPost = ({ podcast, index }) => {
           isClosable: true,
           position: "bottom-right"
         })
-        
+
       })
   }
-  // const toggleAside = () => {
-  //   const aside = document.querySelector('aside');
-  //   aside.classList.toggle('minum');
-  // };
+  const handleTimelineClick = (e) => {
+    const video = videoRef.current;
+    const timeline = e.target;
+    const newTime = (e.nativeEvent.offsetX / timeline.offsetWidth) * video.duration;
+    video.currentTime = newTime;
+  };
   return (
     <div className="podcast" id={"podcast" + index} >
       <div id={"closeComment" + index} className="closeComment" onClick={() => { setIsOpenComment(!isOpenComment) }}>
         X
       </div>
-      {/* <div className="playButton">
-        <button onClick={handlePlay}><CiPlay1 /></button>
-      </div> */}
       <div className="header">
         <div className="info">
-          <img onClick={() => navigate("/profile/" + podcast.user_podcast.id)} src={userAvatar} alt="" className="img" />
+          <img id={`avatar${index}`} onClick={() => navigate("/profile/" + podcast.user_podcast.id)} src={userAvatar} alt="" 
+          className="img" />
           <div className="titleAndName">
-            <h3>{podcast.title}</h3>
+            <h3>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
             <p
               onClick={() => navigate("/profile/" + podcast.user_podcast.id)}
             >Tác giả:{podcast.user_podcast.fullname}</p>
@@ -271,22 +311,25 @@ const PodcastPost = ({ podcast, index }) => {
 
 
       <div className="body">
-
-        {/* <div className="audio">
-          <audio ref={audioRef} controls onPlay={handlePlay}>
-            <source src={podcast.audioUrl} type="audio/mpeg" />
-          </audio>
-        </div> */}
-        <BsPlay className='playicon'/>
-        <div className="backdrop"></div>
+        <BsPlay className='playicon' id={'playicon' + index} onClick={handlePlay} />
+        <div className="backdrop" id={'backdrop' + index} onClick={handlePause}></div>
         <div className="video">
-        
-          <video width="360px" height="640px" ref={videoRef} onPlay={handlePlay} controls>
+
+          <video width="360px" height="640px" ref={videoRef} onPlay={handlePlay}
+          onTimeUpdate={handleTimeUpdate}>
             <source src={podcast.audio_url} type="video/mp4" />
           </video>
         </div>
       </div>
-
+      <div className="video_controls">
+        {/* timeline */}
+        <div className="time">
+          <p>{videoRef.current&&formatTime(videoRef.current.currentTime)}/{videoRef.current&&formatTime(videoRef.current.duration)}</p>
+        </div>
+        <div className="timeline" onClick={handleTimelineClick}>
+          <div className="progress"  style={{ width: `${progress}%`}}><div className="currentDot"></div></div>
+        </div>
+      </div>
     </div>
   );
 };

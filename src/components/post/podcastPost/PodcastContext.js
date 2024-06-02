@@ -43,6 +43,10 @@ export const AudioPlayerProvider = ({ children }) => {
       if (index !== currentId && ref.current) {
         // Dừng phát video thay vì audio
         ref.current.pause();
+        document.getElementById('playicon'+index).style.display = 'block';
+    document.getElementById('backdrop'+index).style.opacity = 1;
+    document.getElementById(`avatar${index}`).classList.remove('isPlay');
+    // document.getElementById('backdrop' + index).classList.remove('active');
       }
       // console.log(ref.current);
     });

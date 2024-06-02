@@ -20,52 +20,62 @@ const Leftbar = () => {
   };
   // Kiểm tra sự thay đổi của màn hình, nếu màn hình fit mobile thì ẩn leftbar
   useEffect(() => {
-  window.addEventListener('resize', () => {
-    console.log(window.innerWidth)
-    const aside = document.querySelector('aside');
-    if(window.innerWidth <= 890) {
-      aside.classList.add('minum');
-    } else {
-      aside.classList.remove('minum');
-    }
-  });
+    window.addEventListener('resize', () => {
+      console.log(window.innerWidth)
+      const aside = document.querySelector('aside');
+      if (window.innerWidth <= 890) {
+        aside.classList.add('minum');
+      } else {
+        aside.classList.remove('minum');
+      }
+    });
+    
   }, []);
 
   return (
     // <div className='leftbar'>
-      
+
     //   <div onClick={toggleAside} className="hideButton">
     //     <BsMenuUp size={30} />
     //   </div>
-      <aside >
-        <div className="closeBtn" onClick={toggleAside}>
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
-        <div onClick={() => navigate("/")} className='item active'>
-          <img src={logo} alt="Home" className='logo'/>
-          <p>Home</p>
-        </div>
-        {user ? (
-          <>
-            <div className='item' onClick={handleOpenAdd}>
-              <img src={add} alt="add" />
-              <p>Create</p>
-            </div>
-            <div className='item'>
-              <img src={out} alt="logout" />
-              <p>Logout</p>
-            </div>
-            <CreatePodcastModal isOpen={isOpenAdd} onClose={handleOpenAdd} />
-          </>
-        ) : (
-          <div onClick={() => navigate("/login")} className='item'>
-            <img src={out} alt="login" />
-            <p>Login</p>
+    <aside>
+      <div className="closeBtn" onClick={toggleAside}>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+      </div>
+      <div onClick={() => navigate("/")} className='item active'>
+        <img src={logo} alt="Home" className='logo' />
+        <p>Home</p>
+      </div>
+      <div className='item' onClick={() => navigate("/search")}>
+        <img src={add} alt="add" />
+        <p>Search </p>
+      </div>
+      {user ? (
+        <>
+          <div className='item' onClick={handleOpenAdd}>
+            <img src={add} alt="add" />
+            <p>Create</p>
           </div>
-        )}
-      </aside>
+
+          <div className='item' onClick={() => navigate("/chat")}>
+            <img src={add} alt="add" />
+            <p>Message</p>
+          </div>
+          <div className='item'>
+            <img src={out} alt="logout" />
+            <p>Logout</p>
+          </div>
+          <CreatePodcastModal isOpen={isOpenAdd} onClose={handleOpenAdd} />
+        </>
+      ) : (
+        <div onClick={() => navigate("/login")} className='item'>
+          <img src={out} alt="login" />
+          <p>Login</p>
+        </div>
+      )}
+    </aside>
     // </div>
   );
 };

@@ -41,7 +41,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    z-index: 1;
+    z-index: 2;
     background: none;
 }
 
@@ -72,6 +72,7 @@
     font-size: 20px;
     margin: 0;
     padding: 0;
+    cursor: pointer;
 }
 .podcast .header .info p{
     color: white;
@@ -115,6 +116,7 @@
     border-radius: 50%;
     background-color: #979797;
     margin: 5px;
+    transition: all 0.3s ease-in-out;
 }
 .podcast .reaction .comment{
     color: #12e269;
@@ -142,21 +144,6 @@
     margin: auto;
     /* padding: 10px; */
     margin-bottom: 20px;
-}
-
-.playButton{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #ff0077;
-    color: white;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    cursor: pointer;
-    margin: auto;
 }
 
 /* .podcast .video iframe{
@@ -263,6 +250,10 @@
 }
 .podcast .header .info img{
     transition: all 0.3s ease-in-out;
+    
+}
+.podcast .header .info img.isPlay{
+    animation: rotate 15s ease-in-out infinite;
 }
 .podcast .header .info img:hover{
     cursor: pointer;
@@ -279,8 +270,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #ff0077;
-    color: white;
+    background-color: #ff0077a6;
+    color: rgba(255, 255, 255, 0.788);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -288,10 +279,21 @@
     z-index: 15;
     top: 45%;
     left: 150px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.25s ease-in-out;
 }
 .podcast:hover .playicon{
+    animation: rotate 0.5s ease-in-out;
+}
+.podcast:hover .playicon:hover{
     transform: scale(1.1);
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 .podcast:hover .backdrop{
     backdrop-filter: blur(0px);
@@ -300,8 +302,9 @@
     position: absolute;
     width: 360px;
     height: 100%;
-    background: rgba(245, 222, 179, 0.233);
+    background: rgba(255, 255, 255, 0.233);
     z-index: 1;
+    opacity: 1;
     border-radius: 15px;
     backdrop-filter: blur(20px);
     transition: all 0.5s ease-in-out;
@@ -310,29 +313,25 @@
 
 @media (max-width: 768px) {
     .podcast{
-        margin:auto;
+        position: relative;
+        margin-left: 75px;
     }
     .isCommentOpen {
         width: 360px;
         position: relative;
-        
+        background: transparent;
     }
     .podcast .commentTab {
         border-radius: 0;
         width:360px;
-        height: 360px;
+        /* height: 450px; */
+        background: wheat;
         bottom: 80px;
         cursor: pointer;
-        z-index: 12;
+        z-index: 14;
         overflow-x: hidden;
-        overflow-y: auto;       
-    }
-    .commentTab .comment{
-        position: absolute;
-        width:360px;
-        height: 500px;
-        cursor: pointer;
-        z-index: 12;
+        overflow-y: auto;  
+        transition: all 0.5s ease-in-out;     
     }
     .commentTab .closeComment {
         position: absolute;
@@ -347,12 +346,13 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        z-index: 15;
     }
     .podcast .comments{
+        background: #6e6e6ed5;
+        backdrop-filter: blur(10px);
         width: 100%;
         margin-left: 0;
-        
+        /* height: 100%; */
         margin-left: 0;
         padding: 10px;
         border-radius: 0 0 10px 10px;
@@ -370,4 +370,71 @@
         border-radius: 0 0 10px 10px;
         box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
     }
+    .podcast .reaction{
+        left: 270px;
+        z-index: 2;
+    }
+    .podcast .reaction .icon{
+        width: 40px;
+        height: 40px;
+    }
+    .podcast .reaction span{
+        font-size: 15px;
+    }
+}
+
+@keyframes rotate{
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.video_controls{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    height: 10px;
+}
+.video_controls .timeline{
+    bottom:10px;
+}
+.video_controls .timeline,
+.video_controls .timeline .progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* margin: auto; */
+    margin-left: 10px;
+    width: 340px;
+    height: 10px;
+    background: #db0e6e9a;
+    border-radius: 50px;
+}
+
+.video_controls .timeline .progress{
+    /* width: 20%; */
+    margin-left: 0;
+    align-items: center;
+}
+
+.video_controls .timeline .progress .currentDot{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgb(255, 0, 0);
+    border-radius: 50%;
+    top: 50%;   /* Centers vertically within the parent */
+    transform: translateY(-50%); /* Adjusts for the element's height */
+    right: -17px;   /* Center horizontally */
+    margin: auto; /* within the parent */
+}
+
+.video_controls .time{
+    position: absolute;
+    left: 270px;
+    bottom: 30px;
+    color:#ff0077;
+    font-size: 15px;
+    font-weight: bold;
 }
