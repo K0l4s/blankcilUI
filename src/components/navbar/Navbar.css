@@ -1,0 +1,28 @@
+.navbar{
+    background-color: hsla(0, 0%, 20%, 0.504);
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    position: fixed;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    top:10px;
+    z-index: 1000;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(10px);
+}
+.navbar .item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.navbar .item:hover{
+    transform: scale(1.1);
+}

@@ -5,7 +5,9 @@ import CreatePodcastModal from '../../modal/podcast/create/CreatePodcastModal';
 import logo from '../../access/images/logos.png';
 import add from '../../access/images/add.png';
 import out from '../../access/images/out.png';
+import { useTranslation } from 'react-i18next';
 const Leftbar = () => {
+  const [t, i18n] = useTranslation("leftbar");
   const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const [isOpenAdd, setIsOpenAdd] = useState(false);
@@ -46,33 +48,33 @@ const Leftbar = () => {
       </div>
       <div onClick={() => navigate("/")} className='item active'>
         <img src={logo} alt="Home" className='logo' />
-        <p>Home</p>
+        <p>{t("Home")}</p>
       </div>
       <div className='item' onClick={() => navigate("/search")}>
         <img src={add} alt="add" />
-        <p>Search </p>
+        <p>{t("Search")}</p>
       </div>
       {user ? (
         <>
           <div className='item' onClick={handleOpenAdd}>
             <img src={add} alt="add" />
-            <p>Create</p>
+            <p>{t("Create")}</p>
           </div>
 
           <div className='item' onClick={() => navigate("/chat")}>
             <img src={add} alt="add" />
-            <p>Message</p>
+            <p>{t("Message")}</p>
           </div>
           <div className='item'>
             <img src={out} alt="logout" />
-            <p>Logout</p>
+            <p>{t("Logout")}</p>
           </div>
           <CreatePodcastModal isOpen={isOpenAdd} onClose={handleOpenAdd} />
         </>
       ) : (
         <div onClick={() => navigate("/login")} className='item'>
           <img src={out} alt="login" />
-          <p>Login</p>
+          <p>{t("Login")}</p>
         </div>
       )}
     </aside>

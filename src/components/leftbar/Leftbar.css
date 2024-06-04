@@ -1,13 +1,13 @@
 aside {
     width: 250px;
-    height: 100vh;
+    height: 100%;
     /* height: 100vh; */
     position: fixed;
     grid-area: aside;
     top: 0;
     left: 0;
-    /* background-color: #f5f5f5ca; */
-    background: linear-gradient(-45deg, rgba(0, 119, 255, 0.582) 0%, rgba(255, 0, 140, 0.555) 100%);
+    background-color: #054dbaa3;
+    /* background: linear-gradient(-45deg, rgba(0, 119, 255, 0.582) 0%, rgba(255, 0, 140, 0.555) 100%); */
     backdrop-filter: blur(5px);
     border-right: 2px solid #9f5454;
     z-index: 1;
@@ -23,25 +23,22 @@ aside.minum {
 }
 
 aside.minum .item p {
-    display: none;
+    opacity: 0;
 }
-
-aside.minum .item:hover img,
-aside.minum .item.active img {
-    transform: translateX(0);
-}
-
 aside .item p {
-    position: absolute;
-    font-weight: bold;
-    /* color: #333; */
-    background: linear-gradient(45deg, #ffffff 0%, #ffd8a2 70%);
+    /* position: absolute; */
+    font-size: 30px;
+    font-family: 'Blackoninaut Bold BRK';
+    color: #ffffff;
+    /* Border chữ không chiếm diện tích chữ */
+    /* text-shadow: 2px 2px 1px #fbfbfb; */
+    /* background: linear-gradient(45deg, #ffffff 0%, #ffd8a2 70%);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
+    color: transparent; */
 
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
     transition: all 0.3s ease-in-out;
 }
 
@@ -51,7 +48,7 @@ aside .item {
     width: 100%;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content:space-evenly;
     padding: 10px;
 
     cursor: pointer;
@@ -63,8 +60,7 @@ aside .item:nth-child(2) {
 }
 
 aside .item img {
-    position: absolute;
-    width: 60px;
+    width: 45px;
     height: auto;
     transition: all 0.3s ease-in-out;
 }
@@ -74,8 +70,8 @@ aside .closeBtn {
     background: #9f5454;
     padding: 10px;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     top: 10px;
     right: 10px;
     font-size: 20px;
@@ -88,8 +84,8 @@ aside .closeBtn {
 
 aside .closeBtn .line {
     margin: auto;
-    width: 25px;
-    height: 5px;
+    width: 10px;
+    height: 2px;
     border-radius:3px;
     background: white;
     transition: all 1s ease-in-out;
@@ -107,27 +103,20 @@ aside.minum .closeBtn .line:nth-child(3){
     transform: rotate(-45deg);
     margin:0;
 }
-aside .item:hover img,
-aside .item.active img {
-    transform: translateX(-100%);
-}
-
-aside .item:hover p,
-aside .item.active p {
-    opacity: 1;
-    transform: translateX(100%);
-}
 
 aside .item.active::before,
 aside .item:hover::before {
     content: "";
     width: 100%;
     height: 100px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.411) 50%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(87, 87, 87, 0.382) 100%);
     position: absolute;
     z-index: -1;
-    animation: slideIn 2s ease-in-out infinite alternate;
+    animation: slideIn 0.5s ease-in-out alternate;
     /* border-radius: 0 15px 15px 0; */
+}
+aside .item.active::before {
+    background: linear-gradient(90deg, rgba(255, 34, 34, 0) 0%, rgba(94, 94, 94, 0.678)100%);
 }
 
 @keyframes slideIn {
@@ -144,12 +133,11 @@ aside .item:hover::before {
     aside {
         width: 70px;
     }
-    
     aside .item p {
         display: none;
     }
-    aside .item.active img{
-        transform: translateX(0);
+    aside .item img {
+        width: 30px;
     }
     aside .closeBtn{
         display: none;
