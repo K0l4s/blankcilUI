@@ -1,6 +1,4 @@
-.router{
-    background: #0000;
-}
+
 
 .createPost{
     z-index: 1000;
@@ -20,4 +18,10 @@
 
 .createPost:hover{
     transform: scale(1.25);
+}
+article{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 100px;
 }

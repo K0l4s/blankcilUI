@@ -5,6 +5,7 @@ import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 import listPostCastTest from '../../access/listPodcastTest.json';
+import SuggestUser from '../../components/user/suggestUser/SuggestUser';
 const Home = () => {
   const toast = useToast();
   const [index, setIndex] = useState(-1);
@@ -104,7 +105,9 @@ const Home = () => {
 
   return (
     <div className="home">
-      <p style={{ color: 'white' }}>@Blankcil Team</p>
+      <SuggestUser />
+      {/* <h1 style={{ color: 'white', fontFamily:'Awesome South Korea' }}>Trending Podcasts</h1> */}
+      <p style={{ color: 'white', fontFamily:'Awesome South Korea' }}>@Blankcil Team</p>
       <div>
         {podcasts.map((podcast, index) => (
           <PodcastPost
