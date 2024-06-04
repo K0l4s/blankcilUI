@@ -13,7 +13,8 @@ import navbar_en from './locales/en/navbar.json';
 import navbar_vi from './locales/vi/navbar.json';
 import auth_en from './locales/en/auth.json';
 import auth_vi from './locales/vi/auth.json';
-
+import leftbar_en from './locales/en/leftbar.json';
+import leftbar_vi from './locales/vi/leftbar.json';
 i18next.init({
   interpolation: { escapeValue: false },  // React already does escaping
   lng: 'vi',                              // language to use
@@ -21,12 +22,14 @@ i18next.init({
     en: {
       homepage: homepage_en ,
       navbar: navbar_en,
-      auth: auth_en
+      auth: auth_en,
+      lefbar: leftbar_en
     },
     vi: {
       homepage: hompage_vi,
       navbar: navbar_vi,
-      auth: auth_vi
+      auth: auth_vi,
+      leftbar: leftbar_vi
     }
   },
 });

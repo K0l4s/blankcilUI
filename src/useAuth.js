@@ -1,56 +1,67 @@
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import { apiPath } from './api/endpoint';
+import axios from 'axios';
 
 // Hàm kiểm tra xem token đã hết hạn hay chưa
 const isTokenExpired = (token) => {
     const decodedToken = jwtDecode(token);
+    console.log("Decode: " + decodedToken.exp);
     const currentTime = Date.now() / 1000; // Thời gian hiện tại tính bằng giây
+    console.log("Current: " + currentTime);
     return decodedToken.exp < currentTime; // Kiểm tra xem thời gian hết hạn của token nhỏ hơn thời gian hiện tại hay không
 };
 
 // Hàm làm mới access token
+// Hàm làm mới access token
 const refreshToken = async () => {
-    const refreshToken = localStorage.getItem('refreshToken');
-    const response = await fetch('/refresh-token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ refresh_token: refreshToken }),
-    });
 
-    if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('accessToken', data.access_token);
-        return data.access_token;
-    } else {
-        console.error('Refresh token failed');
-        return null;
-    }
 };
+
+
 
 // Hook kiểm tra và làm mới token
 const useAuth = () => {
     const navigate = useNavigate();
-    
+
     useEffect(() => {
+        console.log(navigate.name)
+        if (navigate.name === "/login")
+            return;
+        // console.log("hello");
         const checkTokenExpiration = async () => {
-            const accessToken = localStorage.getItem('accessToken');
+            const accessToken = localStorage.getItem('access_token');
 
             if (accessToken && isTokenExpired(accessToken)) {
-                const newAccessToken = await refreshToken();
-                if (!newAccessToken) {
-                    // Token refresh failed, log out the user
-                    localStorage.removeItem('accessToken');
-                    localStorage.removeItem('refreshToken');
-                    navigate("/login");
+                const refreshToken = localStorage.getItem('refresh_token');
+                console.log("Refresh token: " + refreshToken)
+                if (!refreshToken) {
+                    return null;
                 }
+                fetch(apiPath + 'auth/refresh-token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + refreshToken
+                    }
+                }).then((response => response.json())
+                ).then((data) => {
+                    // console.log(data);
+                    localStorage.setItem('access_token', data.access_token);
+                    localStorage.setItem('refresh_token', data.refresh_token);
+                })
+                    .catch((error) => {
+                        // console.error('Error:', error);
+                        localStorage.removeItem('access_token');
+                        localStorage.removeItem('refresh_token');
+                        navigate('/login');
+                    }
+                    );
             }
         };
 
-        const intervalId = setInterval(checkTokenExpiration, 10
-             * 60 * 1000); 
+        const intervalId = setInterval(checkTokenExpiration, 10 * 60 * 1000); 
 
         return () => clearInterval(intervalId);
     }, [navigate]);
