@@ -9,20 +9,15 @@ import { Comment } from '../comment/Comment';
 import { delay } from 'framer-motion';
 import { apiPath, domainName } from '../../../api/endpoint';
 import axios from 'axios';
-import { useToast } from '@chakra-ui/react';
+import { Tooltip, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { BsPlay } from 'react-icons/bs';
 
 const PodcastPost = ({ podcast, index }) => {
+
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
-
-  //useEffect để kiểm tra sự thay đổi của podcast, tiến hành thay đổi src của video
-  useEffect(() => {
-    if (podcast.audio_url) {
-      videoRef.current.src = podcast.audio_url;
-    }
-  }, [podcast]);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   let userAvatar = podcast.user_podcast.avatar_url;
   if (userAvatar === null) {
@@ -36,6 +31,15 @@ const PodcastPost = ({ podcast, index }) => {
 
   const { audioRefs, pauseOthers } = useAudioPlayer();
   const videoRef = useRef(null);
+  useEffect(() => {
+    if (podcast.audio_url) {
+      videoRef.current.src = podcast.audio_url;
+    }
+  }, [podcast]);
+  useEffect(() => {
+    if (!videoRef.current)
+      return <p>Loading...</p>
+  }, [videoRef.current]);
   const [isLike, setIsLike] = useState(false);
   audioRefs.current[index] = videoRef;
   useEffect(() => {
@@ -46,10 +50,10 @@ const PodcastPost = ({ podcast, index }) => {
   }, []);
   const handleTimeUpdate = () => {
     const video = videoRef.current;
-      if (video) {
-        const progressValue = (video.currentTime / video.duration) * 100;
-        setProgress(progressValue);
-      
+    if (video) {
+      const progressValue = (video.currentTime / video.duration) * 100;
+      setProgress(progressValue);
+
     };
   }
   const handleLike = () => {
@@ -85,29 +89,43 @@ const PodcastPost = ({ podcast, index }) => {
 
   const handlePlay = () => {
     pauseOthers(index);
-    document.getElementById('playicon' + index).style.display = 'none';
-    // document.getElementById('backdrop' + index).classList.add('active');
-    document.getElementById('backdrop' + index).style.opacity = 0;
-    document.getElementById(`avatar${index}`).classList.add('isPlay');
-    if (videoRef.current) {
-      videoRef.current.play();
-      // Kiểm tra vị trí của video hiện tại, nếu vượt ngoài khung hình thì sẽ scroll đến vị trí của video
-      const rect = videoRef.current.getBoundingClientRect();
+    const video = videoRef.current;
 
-      if (rect.top < 0 || rect.bottom > window.innerHeight) {
-        videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-      }
-    }else{
+    if (!video) {
       alert("Đang tải video");
+      return;
+    }
+
+    if (video.paused) {
+      video.play();
+
+      // Update UI elements
+      document.getElementById('playicon' + index).style.display = 'none';
+      document.getElementById('backdrop' + index).style.opacity = 0;
+      document.getElementById(`avatar${index}`).classList.add('isPlay');
+
+      // Scroll to the video if it's not in view
+      const rect = video.getBoundingClientRect();
+      if (rect.top < 0 || rect.bottom > window.innerHeight) {
+        video.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      }
     }
   };
+
   const handlePause = () => {
-    videoRef.current.pause();
-    document.getElementById(`avatar${index}`).classList.remove('isPlay');
-    document.getElementById('playicon' + index).style.display = 'block';
-    document.getElementById('backdrop' + index).style.opacity = 1;
-    document.getElementById('a')
-  }
+    const video = videoRef.current;
+
+    if (video && !video.paused) {
+      // Pause the video if it's playing
+      video.pause();
+
+      // Update UI elements
+      document.getElementById(`avatar${index}`).classList.remove('isPlay');
+      document.getElementById('playicon' + index).style.display = 'block';
+      document.getElementById('backdrop' + index).style.opacity = 1;
+    }
+  };
+
   useEffect(() => {
     videoRef.current?.addEventListener('ended', () => {
       const nextVideo = audioRefs.current[index + 1];
@@ -188,20 +206,20 @@ const PodcastPost = ({ podcast, index }) => {
       // Xoá hết comment có parentComment khác rỗng trong comments
       const newComments = comments.filter((comment) => comment.parentComment === null);
       setComments(newComments);
-      if (window.innerWidth > 768) {
-        document.querySelector('aside').classList.add('minum');
-      }
+      // if (window.innerWidth > 768) {
+      //   document.querySelector('aside').classList.add('minum');
+      // }
     } else {
       // Xoas className .isCommentOpen 
 
       document.getElementById("podcast" + index).classList.remove("isCommentOpen");
 
-      document.getElementById("reaction" + index).style.display = "flex";
-      document.getElementById("closeComment" + index).style.display = "none";
+      // document.getElementById("reaction" + index).style.display = "flex";
+      // document.getElementById("closeComment" + index).style.display = "none";
       // toggleAside();
-      if (window.innerWidth > 768) {
-        document.querySelector('aside').classList.remove('minum');
-      }
+      // if (window.innerWidth > 768) {
+      //   document.querySelector('aside').classList.remove('minum');
+      // }
     }
   }, [isOpenComment]);
   const getComments = () => {
@@ -243,17 +261,27 @@ const PodcastPost = ({ podcast, index }) => {
     const newTime = (e.nativeEvent.offsetX / timeline.offsetWidth) * video.duration;
     video.currentTime = newTime;
   };
+  const handleVideoLoaded = () => {
+    setIsVideoLoaded(true);
+  };
   return (
     <div className="podcast" id={"podcast" + index} >
+      {!isVideoLoaded && <div className="loading">
+        <div className="loader"></div>
+        <p>ĐANG TẢI...</p>
+      </div>}
+      
       <div id={"closeComment" + index} className="closeComment" onClick={() => { setIsOpenComment(!isOpenComment) }}>
         X
       </div>
       <div className="header">
         <div className="info">
-          <img id={`avatar${index}`} onClick={() => navigate("/profile/" + podcast.user_podcast.id)} src={userAvatar} alt="" 
-          className="img" />
+          <img id={`avatar${index}`} onClick={() => navigate("/profile/" + podcast.user_podcast.id)} src={userAvatar} alt=""
+            className="img" />
           <div className="titleAndName">
-            <h3>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
+          <Tooltip hasArrow label={podcast.title} bg='gray.300' color='black'>
+            <h3 style={{fontFamily:'lightmorning'}}>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
+          </Tooltip>
             <p
               onClick={() => navigate("/profile/" + podcast.user_podcast.id)}
             >Tác giả:{podcast.user_podcast.fullname}</p>
@@ -287,7 +315,7 @@ const PodcastPost = ({ podcast, index }) => {
           <div className="commentTab">
 
             <div className="comments">
-              <p style={{ color: 'black' }}>CÁC BÌNH LUẬN HIỆN CÓ</p>
+              {/* <p style={{ color: 'black' }}>CÁC BÌNH LUẬN HIỆN CÓ</p> */}
               {comments.map((comment, index) => (
                 <Comment key={index} comment={comment} />
               ))}
@@ -312,25 +340,30 @@ const PodcastPost = ({ podcast, index }) => {
 
 
       <div className="body">
-        <BsPlay className='playicon' id={'playicon' + index} onClick={handlePlay} />
+      {isVideoLoaded &&
+        <BsPlay className='playicon' id={'playicon' + index} onClick={handlePlay} />}
         <div className="backdrop" id={'backdrop' + index} onClick={handlePause}></div>
+      
         <div className="video">
 
-          <video width="360px" height="640px" ref={videoRef} onPlay={handlePlay}
-          onTimeUpdate={handleTimeUpdate}>
+          <video width="360px" height="640px"
+            ref={videoRef}
+            onPlay={handlePlay}
+            onTimeUpdate={handleTimeUpdate}
+            onLoadedMetadata={handleVideoLoaded}>
             <source src={podcast.audio_url} type="video/mp4" />
           </video>
         </div>
       </div>
+      {isVideoLoaded &&
       <div className="video_controls">
-        {/* timeline */}
         <div className="time">
-          <p>{videoRef.current&&formatTime(videoRef.current.currentTime)}/{videoRef.current&&formatTime(videoRef.current.duration)}</p>
+          <p style={{fontFamily:'Blackoninaut Bold BRK'}}>{videoRef.current && formatTime(videoRef.current.currentTime)}/{videoRef.current && formatTime(videoRef.current.duration)}</p>
         </div>
         <div className="timeline" onClick={handleTimelineClick}>
-          <div className="progress"  style={{ width: `${progress}%`}}><div className="currentDot"></div></div>
+          <div className="progress" style={{ width: `${progress}%` }}><div className="currentDot"></div></div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

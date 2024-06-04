@@ -11,7 +11,8 @@ import View_profile from '../view_and_edit_profile/View_profile'
 import NotFoundPage from '../404Page/NotFoundPage'
 import PodcastPage from '../podcastPage/PodcastPage'
 import ConfirmRegister from '../confim-register/ConfirmRegister'
-import Chat from '../chat/Chat'
+import Navbar from '../../components/navbar/Navbar'
+import SettingPage from '../setting/SettingPage'
 // import ChatRoom from '../chat/ChatRoom'
 const Router = () => {
   const url = window.location.href;
@@ -33,6 +34,7 @@ const Router = () => {
       {/* {url.includes('profile') ? <div></div> : */}
         <div>
           <Leftbar />
+          <Navbar />
           {/* <Rightbar /> */}
         </div>
         {/* } */}
@@ -54,8 +56,9 @@ const Router = () => {
           {/* <Route path="/blankcilUI/search/:search" element={<Search/>} /> */}
           {/* Edit route */}
           <Route path= "/edit/profile" element={<View_profile/>}/>
-          <Route path='/chat' element={<Chat/>} />
-          <Route path="/edit/password" element={<Search/>} />
+          {/* <Route path='/chat' element={<ChatRoom/>} /> */}
+          <Route path="/edit/password" element={<Search/>} />\
+          <Route path="/setting" element={<SettingPage/>} />
           <Route path="/*" element={<NotFoundPage/>} />
           
         </Routes>
