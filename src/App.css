@@ -3,10 +3,9 @@
 }
 
 .darkMode{
-  background-color: black;
+  background-color: rgb(199, 193, 193);
   color: white;
 }
-
 .lightMode{
   background-color: white;
   color: black;
@@ -25,4 +24,26 @@
 ::-webkit-scrollbar-track {
   background-color: #ffffff32;
   border-radius: 10px;
+}
+@font-face {
+  font-family: 'Awesome South Korea';
+  src: url('/src/access/font/0044-LNTH-Awesome_South_Korea.ttf') format('truetype'); 
+}
+@font-face {
+  font-family: 'Blackoninaut Bold BRK';
+  src: url('/src/access/font/0249-LNTH-Blackoninaut_Bold_BRK.ttf') format('truetype'); 
+}
+@font-face {
+  font-family: 'Korean Calligraphy';
+  src: url('/src/access/font/0068-LNTH-Korean_Calligraphy.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'Lightmorning';
+  src: url('/src/access/font/0070-LNTH-lightmorning.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'Ceria Lebaran';
+  src: url('/src/access/font/0096-LNTH-Ceria_Lebaran.ttf') format('truetype'); 
 }

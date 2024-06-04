@@ -7,16 +7,16 @@ import useAuth from './useAuth';
 import { useEffect } from 'react';
 function App() {
   useAuth();
-  const mode = localStorage.getItem('themeMode') || 'dark';
-  if(mode === 'dark') {
-    document.body.style.backgroundColor = '#1a1a1a';
-    document.body.style.color = 'white';
-    localStorage.setItem('chakra-ui-color-mode', 'dark');
-  } else{
-    document.body.style.backgroundColor = 'white';
-    document.body.style.color = 'black';
-    localStorage.setItem('chakra-ui-color-mode', 'light');
-  }
+  // const mode = localStorage.getItem('themeMode') || 'dark';
+  // if(mode === 'dark') {
+  //   document.body.style.backgroundColor = '#1a1a1a';
+  //   document.body.style.color = 'white';
+  //   localStorage.setItem('chakra-ui-color-mode', 'dark');
+  // } else{
+  //   document.body.style.backgroundColor = 'white';
+  //   document.body.style.color = 'black';
+  //   localStorage.setItem('chakra-ui-color-mode', 'light');
+  // }
   document.title = 'Blankcil';
   // document.querySelector('link[rel="icon"]').href = favicon;
   // document.querySelector('link[rel="apple-touch-icon"]').href = favicon;
