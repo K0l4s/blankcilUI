@@ -39,7 +39,8 @@ const Router = () => {
         </div>
         {/* } */}
         </div>}
-        <article>
+        <div className="mainContent">
+          {/* <div id="heart"></div> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
@@ -60,10 +61,8 @@ const Router = () => {
           <Route path="/edit/password" element={<Search/>} />\
           <Route path="/setting" element={<SettingPage/>} />
           <Route path="/*" element={<NotFoundPage/>} />
-          
         </Routes>
-        </article>
-      {/* <div className="createPost"><RiVideoAddLine size={50}/></div> */}
+        </div>
     </div>
   )
 }

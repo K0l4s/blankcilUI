@@ -19,9 +19,6 @@
 .createPost:hover{
     transform: scale(1.25);
 }
-article{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.mainContent{
     margin-top: 100px;
 }

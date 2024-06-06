@@ -214,8 +214,8 @@ const PodcastPost = ({ podcast, index }) => {
 
       document.getElementById("podcast" + index).classList.remove("isCommentOpen");
 
-      // document.getElementById("reaction" + index).style.display = "flex";
-      // document.getElementById("closeComment" + index).style.display = "none";
+      document.getElementById("reaction" + index).style.display = "flex";
+      document.getElementById("closeComment" + index).style.display = "none";
       // toggleAside();
       // if (window.innerWidth > 768) {
       //   document.querySelector('aside').classList.remove('minum');

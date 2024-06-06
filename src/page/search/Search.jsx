@@ -56,7 +56,7 @@ const Search = () => {
     search();
   }, []);
   return (
-    <div>
+    <div className='searchPage'>
       <div className="searchBox">
         <input onChange={changeKeyWord} id='searchInput' placeholder="Tìm kiếm" type="text" className="searchInput" />
         <LiaSearchengin className='searchButton' onClick={search}/>

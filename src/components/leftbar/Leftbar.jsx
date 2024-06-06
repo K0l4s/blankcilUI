@@ -6,6 +6,7 @@ import logo from '../../access/images/logos.png';
 import add from '../../access/images/add.png';
 import out from '../../access/images/out.png';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 const Leftbar = () => {
   const [t, i18n] = useTranslation("leftbar");
   const user = JSON.parse(localStorage.getItem('user'));
@@ -20,6 +21,12 @@ const Leftbar = () => {
     const aside = document.querySelector('aside');
     aside.classList.toggle('minum');
   };
+  const logout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user');
+    window.location.reload();
+  }
   // Kiểm tra sự thay đổi của màn hình, nếu màn hình fit mobile thì ẩn leftbar
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -33,7 +40,7 @@ const Leftbar = () => {
     });
     
   }, []);
-
+  
   return (
     // <div className='leftbar'>
 
@@ -60,13 +67,12 @@ const Leftbar = () => {
             <img src={add} alt="add" />
             <p>{t("Create")}</p>
           </div>
-
           <div className='item' onClick={() => navigate("/chat")}>
             <img src={add} alt="add" />
             <p>{t("Message")}</p>
           </div>
-          <div className='item'>
-            <img src={out} alt="logout" />
+          <div className='item' onClick={logout}>
+            <img src={out} alt="logout"/>
             <p>{t("Logout")}</p>
           </div>
           <CreatePodcastModal isOpen={isOpenAdd} onClose={handleOpenAdd} />
