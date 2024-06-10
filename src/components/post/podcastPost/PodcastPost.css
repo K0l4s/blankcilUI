@@ -422,7 +422,7 @@
 }
 .video_controls .timeline{
     bottom:10px;
-    left: 5px;
+    left: 20px;
     width: 320px;
 }
 .video_controls .timeline,
@@ -431,7 +431,7 @@
     /* left: 0; */
     right: 0;
     /* margin: auto; */
-    margin-left: 10px;
+    
     
     height: 10px;
     background: #db0e6e9a;

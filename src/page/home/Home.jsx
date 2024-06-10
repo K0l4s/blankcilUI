@@ -106,10 +106,10 @@ const Home = () => {
   return (
     <div className="home">
       <SuggestUser />
-      <div className="toggleGroup">
+      {/* <div className="toggleGroup">
       <button className='active'>Xu hướng</button>
       <button>Đang theo dõi</button>
-      </div>
+      </div> */}
       {/* <h1 style={{ color: 'white', fontFamily:'Awesome South Korea' }}>Trending Podcasts</h1> */}
       <p style={{ color: 'white', fontFamily:'Awesome South Korea' }}>@Blankcil Team</p>
       <div>

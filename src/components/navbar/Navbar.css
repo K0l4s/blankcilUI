@@ -15,6 +15,7 @@
     margin-left: auto;
     margin-right: auto;
     backdrop-filter: blur(10px);
+    transition: all 0.3s ease-in-out;
 }
 .navbar .item{
     display: flex;
@@ -22,6 +23,11 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+.navbar .item.active{
+    width: 50px;
+    background-color: #ff00d0;
+    border-radius: 10px;
 }
 .navbar .item:hover{
     transform: scale(1.1);
@@ -35,3 +41,4 @@
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
 }
+

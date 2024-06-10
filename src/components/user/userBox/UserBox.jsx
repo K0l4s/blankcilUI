@@ -8,6 +8,8 @@ const UserBox = () => {
         </div>
         <div className="info">
             <p className='name'>Nguyễn Văn A</p>
+            <p>3 Podcast</p>
+            <button>Follow</button>
         </div>
     </div>
   )

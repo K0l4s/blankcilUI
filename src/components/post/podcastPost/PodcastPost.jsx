@@ -90,25 +90,21 @@ const PodcastPost = ({ podcast, index }) => {
   const handlePlay = () => {
     pauseOthers(index);
     const video = videoRef.current;
-
-    if (!video) {
-      alert("Đang tải video");
-      return;
-    }
+    const rect = video.getBoundingClientRect();
+      if (rect.top < 0 || rect.bottom > window.innerHeight) {
+        video.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      }
 
     if (video.paused) {
       video.play();
 
-      // Update UI elements
+
       document.getElementById('playicon' + index).style.display = 'none';
       document.getElementById('backdrop' + index).style.opacity = 0;
       document.getElementById(`avatar${index}`).classList.add('isPlay');
 
-      // Scroll to the video if it's not in view
-      const rect = video.getBoundingClientRect();
-      if (rect.top < 0 || rect.bottom > window.innerHeight) {
-        video.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-      }
+
+      
     }
   };
 
@@ -276,14 +272,14 @@ const PodcastPost = ({ podcast, index }) => {
       </div>
       <div className="header">
         <div className="info">
-          <img id={`avatar${index}`} onClick={() => navigate("/profile/" + podcast.user_podcast.id)} src={userAvatar} alt=""
+          <img id={`avatar${index}`} onClick={() => navigate("/profile/" + podcast.user_podcast.nickName)} src={userAvatar} alt=""
             className="img" />
           <div className="titleAndName">
           <Tooltip hasArrow label={podcast.title} bg='gray.300' color='black'>
             <h3 style={{fontFamily:'lightmorning'}}>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
           </Tooltip>
             <p
-              onClick={() => navigate("/profile/" + podcast.user_podcast.id)}
+              onClick={() => navigate("/profile/" + podcast.user_podcast.nickName)}
             >Tác giả:{podcast.user_podcast.fullname}</p>
           </div>
         </div>
@@ -307,9 +303,9 @@ const PodcastPost = ({ podcast, index }) => {
                 podcast.numberOfComments}</span>
         </div>
       </div>
-      {/* <div className="description">
+      <div className="description">
         <p>{podcast.content}</p>
-      </div> */}
+      </div>
       {isOpenComment && comments && (
         <>
           <div className="commentTab">

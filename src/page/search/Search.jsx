@@ -17,10 +17,20 @@ const Search = () => {
   const search = () => {
     // setSearchKey(document.getElementById('searchInput').value);
     console.log(searchKey);
+    const token = localStorage.getItem('access_token');
+    let headers = {
+      'ngrok-skip-browser-warning': 'any_value'
+    };
+    if (token) {
+      headers = {
+        'ngrok-skip-browser-warning': 'any_value',
+        'Authorization': `Bearer ${token}`
+      };
+    }
+
     axios.get(apiPath + `users/search?keyword=${searchKey}`, {
-      headers: {
-        'ngrok-skip-browser-warning': 'any_value'
-      }
+      
+      headers: headers,
     })
       .then((response) => {
         if(response.status !== 200) {

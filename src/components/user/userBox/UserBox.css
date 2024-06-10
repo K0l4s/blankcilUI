@@ -1,7 +1,39 @@
 .userItem{
-    background-color: #ffffff;
+    background-color: #ffffff86;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 10px;
+    height: 100px;
+    transition: all 0.3s ease-in-out;
+}
+.userItem:hover{
+    background-color: #ffffff;
+    color:black;
+    cursor: pointer;
+}
+.userItem .av{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    margin-right: 20px;
+}
+
+.userItem .av img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.userItem .info{
+    float: left;
+    width: calc(100% - 80px);
+}
+
+.userItem.info .name{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
 }

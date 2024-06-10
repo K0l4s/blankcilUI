@@ -13,6 +13,7 @@ import PodcastPage from '../podcastPage/PodcastPage'
 import ConfirmRegister from '../confim-register/ConfirmRegister'
 import Navbar from '../../components/navbar/Navbar'
 import SettingPage from '../setting/SettingPage'
+import Profile from '../profile/Profile'
 // import ChatRoom from '../chat/ChatRoom'
 const Router = () => {
   const url = window.location.href;
@@ -46,7 +47,7 @@ const Router = () => {
           <Route path="/home" element={<Home />} />
           {/* <Route path="/blankcilUI/profile" element={<Profile/>} /> */}
           {/* <Route path= "/profile/:id" element={<Profile_2/>}/> */}
-          {/* <Route path= "/profile" element={<Profile_2/>}/> */}
+          <Route path= "/profile/:nickname" element={<Profile/>}/>
           <Route path="/podcast/:id" element={<PodcastPage />} />
 
           <Route path="/login" element={<Login/>} />
