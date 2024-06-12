@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-import { apiPath } from './api/endpoint';
-import axios from 'axios';
+import { apiPath } from '../api/endpoint';
 
 // Hàm kiểm tra xem token đã hết hạn hay chưa
 export const isTokenExpired = (token) => {

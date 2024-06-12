@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Authentication.css';
 import Login from './login/Login';
 import Register from './register/Register';
-import { isTokenExpired } from '../../useAuth';
+import { isTokenExpired } from '../../config/useAuth';
 
 const Authentication = ({ isOpen, onClose, login }) => {
     const [isLogin, setIsLogin] = useState(login);

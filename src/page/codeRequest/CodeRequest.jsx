@@ -33,6 +33,25 @@ const CodeRequest = ({pageName}) => {
     useEffect(() => {
         handlePinInput();
     }, []);
+    const sendCode = () => {
+        const data = {
+            email: email,
+        };
+        fetch(apiPath + 'auth/send-code', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then ((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        }
+        );
+    };
     // auto decrease time
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -98,11 +117,11 @@ const CodeRequest = ({pageName}) => {
             {/* Pin input */}
             {pageName === 'confirmEmail' &&
             <h1>Xác minh người dùng</h1>}
-            {pageName === 'resetPassword' &&
+            {pageName === 'forgotPassword' &&
             <h1>Quên mật khẩu</h1>}
             <img src="https://i.pinimg.com/originals/f9/3d/62/f93d62043d1565e83d639464f7dc8608.png" alt="Logo" />
             <p>Vui lòng nhập mã xác nhận đã nhận gồm 06 chữ số qua email!</p>
-            {pageName === 'resetPassword' &&
+            {pageName === 'forgotPassword' &&
             <form action="">
             <input type = "email" placeholder="Nhập email của bạn" />
             <button type='submit'>Gửi mã xác nhận</button>

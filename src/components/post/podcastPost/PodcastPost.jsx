@@ -180,17 +180,8 @@ const PodcastPost = ({ podcast, index }) => {
     return `${formattedHours}${formattedMinutes}:${formattedSeconds}`;
   };
   useEffect(() => {
-    // Nếu isOpenComment là true thì sẽ mở tab comment
-    // const item= document.getElementById("podcast"+index).scrollIntoView();
-    // const aside = document.querySelector('aside');
-    // const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     if (isOpenComment) {
-      // if (aside.style.width == "250px" && !mediaQuery.matches) {
-      //   aside.style.width = "0";
-      //   aside.style.opacity = "0";
-      // }
-      // Thêm className .isCommentOpen để hiển thị tab comment
 
       document.getElementById("podcast" + index).classList.add("isCommentOpen");
       console.log("isOpenComment", isOpenComment);
@@ -201,20 +192,11 @@ const PodcastPost = ({ podcast, index }) => {
       // Xoá hết comment có parentComment khác rỗng trong comments
       const newComments = comments.filter((comment) => comment.parentComment === null);
       setComments(newComments);
-      // if (window.innerWidth > 768) {
-      //   document.querySelector('aside').classList.add('minum');
-      // }
     } else {
-      // Xoas className .isCommentOpen 
-
       document.getElementById("podcast" + index).classList.remove("isCommentOpen");
 
       document.getElementById("reaction" + index).style.display = "flex";
       document.getElementById("closeComment" + index).style.display = "none";
-      // toggleAside();
-      // if (window.innerWidth > 768) {
-      //   document.querySelector('aside').classList.remove('minum');
-      // }
     }
   }, [isOpenComment]);
   const getComments = () => {
