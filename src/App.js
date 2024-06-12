@@ -4,7 +4,6 @@ import './App.css';
 import { AudioPlayerProvider } from './components/post/podcastPost/PodcastContext';
 import Router from './page/router/Router';
 import useAuth from './useAuth';
-import { useEffect } from 'react';
 function App() {
   useAuth();
   // const mode = localStorage.getItem('themeMode') || 'dark';

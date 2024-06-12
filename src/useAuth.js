@@ -5,18 +5,12 @@ import { apiPath } from './api/endpoint';
 import axios from 'axios';
 
 // Hàm kiểm tra xem token đã hết hạn hay chưa
-const isTokenExpired = (token) => {
+export const isTokenExpired = (token) => {
     const decodedToken = jwtDecode(token);
     console.log("Decode: " + decodedToken.exp);
     const currentTime = Date.now() / 1000; // Thời gian hiện tại tính bằng giây
     console.log("Current: " + currentTime);
-    return decodedToken.exp < currentTime; // Kiểm tra xem thời gian hết hạn của token nhỏ hơn thời gian hiện tại hay không
-};
-
-// Hàm làm mới access token
-// Hàm làm mới access token
-const refreshToken = async () => {
-
+    return decodedToken.exp < currentTime; 
 };
 
 
