@@ -122,7 +122,6 @@
 }
 
 .detail-container .detail-item{
-    /* width: 30%; */
     padding: 10px;
     border-radius: 15px;
     color:black;
@@ -130,10 +129,9 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
-
+.detail-container:nth-last-child(1){
+    width: 200px;
+}
 .detail-container .detail-item:hover{
     background: #f0f0f0;
-}
-
-.podcasts-container{
 }

@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import { BsPlay } from 'react-icons/bs';
 
 const PodcastPost = ({ podcast, index }) => {
-
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
