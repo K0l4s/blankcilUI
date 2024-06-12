@@ -7,6 +7,7 @@ import add from '../../access/images/add.png';
 import out from '../../access/images/out.png';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { useSidebar } from '../../config/useSidebar';
 const Leftbar = () => {
   const [t, i18n] = useTranslation("leftbar");
   const user = JSON.parse(localStorage.getItem('user'));
@@ -28,16 +29,19 @@ const Leftbar = () => {
     window.location.reload();
   }
   // Kiểm tra sự thay đổi của màn hình, nếu màn hình fit mobile thì ẩn leftbar
+  const { isHide, setHide, setShow } = useSidebar();
   useEffect(() => {
     window.addEventListener('resize', () => {
       console.log(window.innerWidth)
       const aside = document.querySelector('aside');
       if (window.innerWidth <= 890) {
-        aside.classList.add('minum');
+        setHide();
       } else {
-        aside.classList.remove('minum');
+        setShow();
       }
     });
+    
+
     
   }, []);
   

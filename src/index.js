@@ -15,24 +15,27 @@ import auth_en from './locales/en/auth.json';
 import auth_vi from './locales/vi/auth.json';
 import leftbar_en from './locales/en/leftbar.json';
 import leftbar_vi from './locales/vi/leftbar.json';
-i18next.init({
-  interpolation: { escapeValue: false },  // React already does escaping
-  lng: 'vi',                              // language to use
-  resources: {
-    en: {
-      homepage: homepage_en ,
-      navbar: navbar_en,
-      auth: auth_en,
-      lefbar: leftbar_en
+
+i18next.init(
+  ({
+    interpolation: { escapeValue: false },  // React already does escaping
+    lng: 'vi',                              // language to use
+    resources: {
+      en: {
+        homepage: homepage_en ,
+        navbar: navbar_en,
+        auth: auth_en,
+        lefbar: leftbar_en
+      },
+      vi: {
+        homepage: hompage_vi,
+        navbar: navbar_vi,
+        auth: auth_vi,
+        leftbar: leftbar_vi
+      }
     },
-    vi: {
-      homepage: hompage_vi,
-      navbar: navbar_vi,
-      auth: auth_vi,
-      leftbar: leftbar_vi
-    }
-  },
-});
+  })
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

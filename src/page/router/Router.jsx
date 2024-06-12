@@ -3,7 +3,7 @@ import './Router.css'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Home from '../home/Home'
 import Leftbar from '../../components/leftbar/Leftbar'
-import i18next from 'i18next'
+import i18next, { changeLanguage } from 'i18next'
 import Login from '../login/Login'
 import Register from '../register/Register'
 import Search from '../search/Search'
@@ -17,21 +17,13 @@ import CodeRequest from '../codeRequest/CodeRequest'
 // import ChatRoom from '../chat/ChatRoom'
 const Router = () => {
   const url = window.location.href;
-  const navigate = useNavigate();
-  const changeLangByUrl = useEffect(() => {
-    if (url.includes('vi')) {
-      i18next.changeLanguage('vi')
-      localStorage.setItem('i18nextLng', 'vi')
-    } else {
-      i18next.changeLanguage('en')
-      localStorage.setItem('i18nextLng', 'en')
-    }
-  }
-  )
-  const whiteList = ['/login','confirm/register/', '/register/', '/password/reset']
+  
+  const whiteList = ['/login','confirm/register/', '/register/', '/forgot']
   const isWhiteList = whiteList.some((path) => url.includes(path))
+ 
   return (
     <div className='router'>
+      
       {
         isWhiteList
       ? <div></div> : <div>
@@ -57,7 +49,7 @@ const Router = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path='/confirm/register/:email' element={<CodeRequest pageName={"confirmEmail"}/>}/>
-          <Route path="/password/reset" element={<CodeRequest pageName={"resetPassword"}/>} />
+          <Route path="/forgot/password" element={<CodeRequest pageName={"forgotPassword"}/>} />
 
           <Route path="/search" element={<Search/>} />
           {/* <Route path="/blankcilUI/search/:search" element={<Search/>} /> */}
@@ -68,6 +60,7 @@ const Router = () => {
           <Route path="/setting" element={<SettingPage/>} />
           <Route path="/*" element={<NotFoundPage/>} />
         </Routes>
+        <button height={"1000px"} onClick={()=>changeLanguage('vi')}>VI</button>
         </div>
     </div>
   )
