@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import './ConfirmRegister.css';
+import React, { useEffect, useState } from 'react';
+import './CodeRequest.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
 
-const ConfirmRegister = () => {
+const CodeRequest = ({pageName}) => {
     const email = useParams().email;
     const navigate = useNavigate();
-
-    // Xử lý logic cho pin-input
+    const [time, setTime] = useState(5);
     const handlePinInput = () => {
         const inputs = document.querySelectorAll('.pin-input input');
         inputs.forEach((input, index) => {
@@ -34,8 +33,18 @@ const ConfirmRegister = () => {
     useEffect(() => {
         handlePinInput();
     }, []);
+    // auto decrease time
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (time > 0) {
+                setTime(time - 1);
+            }
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [time]);
+
     // Lấy mã pin
-    const handleConfirm = () => {
+    const confirmEmail = () => {
         const inputs = document.querySelectorAll('.pin-input input');
         let pin = '';
         inputs.forEach((input) => {
@@ -68,7 +77,6 @@ const ConfirmRegister = () => {
     };
 
     const fetchUserProfileByToken = async (token) => {
-        // const token = localStorage.getItem('access_token');
         axios.get(apiPath + 'users/profile', {
             headers: {
                 'ngrok-skip-browser-warning': 'any_value',
@@ -78,10 +86,6 @@ const ConfirmRegister = () => {
             if (response.status == '200') {
                 localStorage.setItem('user', JSON.stringify(response.data.body));
                 navigate('/');
-                // console.log('User: '+localStorage.getItem('user'))
-                // // Get user profile trả về json
-                // const user = JSON.parse(localStorage.getItem('user'));
-                // console.log('User: '+user.email)
             }
             console.log(response.data);
         }
@@ -92,9 +96,17 @@ const ConfirmRegister = () => {
     return (
         <div className='confirm'>
             {/* Pin input */}
-            <h1>Xác minh người dùng</h1>
+            {pageName === 'confirmEmail' &&
+            <h1>Xác minh người dùng</h1>}
+            {pageName === 'resetPassword' &&
+            <h1>Quên mật khẩu</h1>}
             <img src="https://i.pinimg.com/originals/f9/3d/62/f93d62043d1565e83d639464f7dc8608.png" alt="Logo" />
             <p>Vui lòng nhập mã xác nhận đã nhận gồm 06 chữ số qua email!</p>
+            {pageName === 'resetPassword' &&
+            <form action="">
+            <input type = "email" placeholder="Nhập email của bạn" />
+            <button type='submit'>Gửi mã xác nhận</button>
+            </form>}
             <div className="pin-input">
                 <input type="text" maxLength="1" />
                 <input type="text" maxLength="1" />
@@ -104,9 +116,13 @@ const ConfirmRegister = () => {
                 <input type="text" maxLength="1" />
             </div>
             <p>Đây rồi, chỉ còn 01 bước nữa thôi!</p>
-            <button onClick={handleConfirm}>Xác thực</button>
+            {pageName === 'confirmEmail' &&
+            <button onClick={confirmEmail}>Xác thực</button>}
+            <p>Chưa nhận được mã xác minh?</p>
+            <p>Chờ {time}s</p>
+            <button disabled={time !== 0} onClick={() => setTime(5)}>Gửi lại mã xác minh</button>
         </div>
     );
 };
 
-export default ConfirmRegister;
+export default CodeRequest;

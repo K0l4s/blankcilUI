@@ -70,3 +70,9 @@
     font-weight: 700;
     cursor: pointer;
 }
+
+.confirm button:disabled{
+    background-color: #b3b3b3;
+    color: #fff;
+    cursor: not-allowed;
+}

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import logo from '../../access/images/logos.png'
+import { loginAPI } from '../../api/auth/login/loginAPI';
 const Login = () => {
   const navigate = useNavigate();
   const toast = useToast();
@@ -26,10 +27,13 @@ const Login = () => {
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
     console.log(email, password)
-    axios.post(apiPath + 'auth/authenticate', {
-      email: email,
-      password: password
-    }).then((response) => {
+    
+    // axios.post(apiPath + 'auth/authenticate', {
+    //   email: email,
+    //   password: password
+    // })
+    loginAPI(email, password)
+    .then((response) => {
       // console.log(response)
       const status = response.status;
       // const newToken = response.data.body.token;
