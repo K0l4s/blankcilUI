@@ -5,28 +5,11 @@ import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
 import { apiPath, domainName } from '../../../api/endpoint'
 import axios from 'axios'
+import { toggleFollow } from '../../../api/user/user'
 const SearchUser = ({user}) => {
   const navigate = useNavigate();
   const [isFollow, setIsFollow] = useState(user.follow);
-  const toggleFollow =  async() => {
-    const token = localStorage.getItem('access_token');
-    axios.post(apiPath + `users/follow/${user.id}`, {}, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then((response) => {
-      console.log(response.data);
-      if (response.data.message === "isFollow") {
-        setIsFollow(true);
-      } else {
-        setIsFollow(false);
-      }
-    }
-    ).catch((error) => {
-      console.error('Error:', error);
-    });
-    
-  }
+ 
   return (
     <div className='userBox'>
       <div className='userInfor'>
@@ -38,7 +21,7 @@ const SearchUser = ({user}) => {
       </div>
       <div className="action">
         <button onClick={()=>navigate("/profile/"+user.id)}><GrView/></button>
-        <button onClick={toggleFollow}>
+        <button onClick={()=>toggleFollow(setIsFollow, user.id)}>
         {isFollow?<FcLike/>:<FcLikePlaceholder/>}
         </button>{/* <button><FcLike/></button> */}
       </div>
