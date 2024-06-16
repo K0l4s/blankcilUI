@@ -3,54 +3,56 @@ import './CodeRequest.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
-
+import { sendCode } from '../../api/auth/code/code';
 const CodeRequest = ({pageName}) => {
     const email = useParams().email;
     const navigate = useNavigate();
+    // const toast = useToast();
     const [time, setTime] = useState(5);
     const handlePinInput = () => {
-        const inputs = document.querySelectorAll('.pin-input input');
-        inputs.forEach((input, index) => {
-            input.addEventListener('keydown', (e) => {
-                if (e.key >= 0 && e.key <= 9) {
-                    inputs[index].value = '';
-                    setTimeout(() => {
-                        if (index < inputs.length - 1) {
-                            inputs[index + 1].focus();
-                        }
-                    }, 10);
-                } else if (e.key === 'Backspace') {
-                    setTimeout(() => {
-                        if (index > 0) {
-                            inputs[index - 1].focus();
-                        }
-                    }, 10);
-                }
-            });
+    const inputs = document.querySelectorAll('.pin-input input');
+    inputs.forEach((input, index) => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key >= 0 && e.key <= 9) {
+                setTimeout(() => {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }, 10);
+            } else if (e.key === 'Backspace' || e.key === 'Previous' || e.key === 'ArrowLeft') {
+                setTimeout(() => {
+                    if (index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                }, 10);
+            } else if (e.key === 'ArrowRight' || e.key === 'Next') {
+                setTimeout(() => {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }, 10);
+            } else if (e.key === 'Enter') {
+                confirmEmail();
+            } else {
+                e.preventDefault();
+            }
         });
-    };
+        
+    });
+};
+
+    
 
     useEffect(() => {
         handlePinInput();
     }, []);
-    const sendCode = () => {
-        const data = {
-            email: email,
-        };
-        fetch(apiPath + 'auth/send-code', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        }).then ((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
+    const resendCode = () => {
+        sendCode(email).then((response) => {
+            // console.log(response.data);
         }
-        );
+        ).catch((error) => {
+            // console.error('Error:', error);
+        });
     };
     // auto decrease time
     useEffect(() => {
@@ -112,6 +114,16 @@ const CodeRequest = ({pageName}) => {
             console.error('Error:', error);
         });
     };
+    const sendCodeToUser = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        sendCode(email).then((response) => {
+            // console.log(response.data);
+        }
+        ).catch((error) => {
+            // console.error('Error:', error);
+        });
+    }
     return (
         <div className='confirm'>
             {/* Pin input */}
@@ -122,8 +134,8 @@ const CodeRequest = ({pageName}) => {
             <img src="https://i.pinimg.com/originals/f9/3d/62/f93d62043d1565e83d639464f7dc8608.png" alt="Logo" />
             <p>Vui lòng nhập mã xác nhận đã nhận gồm 06 chữ số qua email!</p>
             {pageName === 'forgotPassword' &&
-            <form action="">
-            <input type = "email" placeholder="Nhập email của bạn" />
+            <form onSubmit={sendCodeToUser}>
+            <input id='email' type = "email" placeholder="Nhập email của bạn" />
             <button type='submit'>Gửi mã xác nhận</button>
             </form>}
             <div className="pin-input">

@@ -18,6 +18,7 @@ const HideSideProvider = ({ children }) => {
         setHideSide(isHide);
     };
     useEffect(() => {
+        if(!document.querySelector('aside')) return;
         const systemHide = localStorage.getItem('hideSide');
         if (systemHide === 'true') {
             document.querySelector('aside').classList.add('minum');

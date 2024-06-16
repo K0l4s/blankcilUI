@@ -42,10 +42,18 @@ const Profile = () => {
       <div className="profile-container">
         <div className="image-container">
           <div className="banner">
-            <img src="https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg" alt="" />
+            <img src={
+              profile.cover_url? profile.cover_url :
+            "https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg" 
+            }
+            alt="" />
           </div>
           <div className="avatar">
-            <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png" alt="" />
+            <img src={
+              profile.avatar_url? profile.avatar_url :
+            "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
+            }
+             alt="" />
           </div>
           <div className="actionGroup">
           <button className="follow" onClick={()=>toggleFollow(setIsFollow, profile.id)}>

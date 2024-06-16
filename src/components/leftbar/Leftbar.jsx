@@ -6,7 +6,6 @@ import logo from '../../access/images/logos.png';
 import add from '../../access/images/add.png';
 import out from '../../access/images/out.png';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { useSidebar } from '../../config/useSidebar';
 const Leftbar = () => {
   const [t, i18n] = useTranslation("leftbar");
@@ -19,8 +18,9 @@ const Leftbar = () => {
     setIsOpenAdd(!isOpenAdd);
   };
   const toggleAside = () => {
-    const aside = document.querySelector('aside');
-    aside.classList.toggle('minum');
+    // const aside = document.querySelector('aside');
+    // aside.classList.toggle('minum');
+    setHide(!isHide);
   };
   const logout = () => {
     localStorage.removeItem('access_token');
@@ -33,16 +33,12 @@ const Leftbar = () => {
   useEffect(() => {
     window.addEventListener('resize', () => {
       console.log(window.innerWidth)
-      const aside = document.querySelector('aside');
       if (window.innerWidth <= 890) {
         setHide();
       } else {
         setShow();
       }
-    });
-    
-
-    
+    }); 
   }, []);
   
   return (
@@ -71,7 +67,7 @@ const Leftbar = () => {
             <img src={add} alt="add" />
             <p>{t("Create")}</p>
           </div>
-          <div className='item' onClick={() => navigate("/chat")}>
+          <div className='item' onClick={() => navigate("/conversation")}>
             <img src={add} alt="add" />
             <p>{t("Message")}</p>
           </div>

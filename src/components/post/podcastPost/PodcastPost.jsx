@@ -1,17 +1,14 @@
 import React, { createElement, useEffect, useRef, useState } from 'react';
 import './PodcastPost.css';
-import { CiPlay1 } from 'react-icons/ci';
 import { FcComments, FcLike, FcLikePlaceholder } from 'react-icons/fc';
-import { act } from 'react-dom/test-utils';
-import { use } from 'i18next';
 import { useAudioPlayer } from './PodcastContext';
 import { Comment } from '../comment/Comment';
-import { delay } from 'framer-motion';
-import { apiPath, domainName } from '../../../api/endpoint';
+import { apiPath } from '../../../api/endpoint';
 import axios from 'axios';
 import { Tooltip, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { BsPlay } from 'react-icons/bs';
+import { use } from 'i18next';
 
 const PodcastPost = ({ podcast, index }) => {
   const navigate = useNavigate();
@@ -94,17 +91,13 @@ const PodcastPost = ({ podcast, index }) => {
         video.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       }
 
-    if (video.paused) {
+    // if (video.paused) {
       video.play();
-
-
       document.getElementById('playicon' + index).style.display = 'none';
       document.getElementById('backdrop' + index).style.opacity = 0;
       document.getElementById(`avatar${index}`).classList.add('isPlay');
 
-
-      
-    }
+    // }
   };
 
   const handlePause = () => {
@@ -132,6 +125,7 @@ const PodcastPost = ({ podcast, index }) => {
       return null;
     }
   }, []);
+
 
 
   const commentRequest = async () => {
@@ -180,9 +174,7 @@ const PodcastPost = ({ podcast, index }) => {
     return `${formattedHours}${formattedMinutes}:${formattedSeconds}`;
   };
   useEffect(() => {
-
     if (isOpenComment) {
-
       document.getElementById("podcast" + index).classList.add("isCommentOpen");
       console.log("isOpenComment", isOpenComment);
       // Ẩn element reaction
@@ -258,6 +250,8 @@ const PodcastPost = ({ podcast, index }) => {
           <div className="titleAndName">
           <Tooltip hasArrow label={podcast.title} bg='gray.300' color='black'>
             <h3 style={{fontFamily:'lightmorning'}}>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
+            {/* <h3 style={{fontFamily:'lightmorning'}}>{scrollTitle}</h3> */}
+
           </Tooltip>
             <p
               onClick={() => navigate("/profile/" + podcast.user_podcast.nickName)}

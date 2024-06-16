@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
 import './Router.css'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Home from '../home/Home'
 import Leftbar from '../../components/leftbar/Leftbar'
-import i18next, { changeLanguage } from 'i18next'
+import { changeLanguage } from 'i18next'
 import Login from '../login/Login'
 import Register from '../register/Register'
 import Search from '../search/Search'
@@ -14,11 +13,12 @@ import Navbar from '../../components/navbar/Navbar'
 import SettingPage from '../setting/SettingPage'
 import Profile from '../profile/Profile'
 import CodeRequest from '../codeRequest/CodeRequest'
+import Messenger from '../messenger/Messenger'
 // import ChatRoom from '../chat/ChatRoom'
 const Router = () => {
   const url = window.location.href;
   
-  const whiteList = ['/login','confirm/register/', '/register/', '/forgot']
+  const whiteList = ['/login','confirm/register/', '/register/', '/forgot', '/conversation']
   const isWhiteList = whiteList.some((path) => url.includes(path))
  
   return (
@@ -58,9 +58,10 @@ const Router = () => {
           {/* <Route path='/chat' element={<ChatRoom/>} /> */}
           
           <Route path="/setting" element={<SettingPage/>} />
+          <Route path="/conversation" element={<Messenger/>} />
+          <Route path="/conversation/:id" element={<Messenger/>} />
           <Route path="/*" element={<NotFoundPage/>} />
         </Routes>
-        <button height={"1000px"} onClick={()=>changeLanguage('vi')}>VI</button>
         </div>
     </div>
   )

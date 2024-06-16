@@ -1,0 +1,64 @@
+
+.messenger-userbox {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.messenger-userbox:hover{
+    background-color: #4e4e4e;
+}
+
+.messenger-userbox .messenger-userbox-avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+}
+
+.messenger-userbox .messenger-userbox-avatar img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.messenger-detail{
+    text-align: left;
+}
+
+.messenger-detail .name{
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.messenger-detail .lastMessage{
+    font-size: 14px;
+    color: #fff;
+}
+
+.messenger-detail .time{
+    font-size: 12px;
+    color: #fff;
+    font-style: italic;
+}
+
+.messenger-userbox .size{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgb(0, 149, 255);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1;
+}
