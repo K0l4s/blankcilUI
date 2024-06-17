@@ -14,7 +14,7 @@ const Single_podcast = ({ podcast }) => {
   const imageDefault = 'https://static.vecteezy.com/system/resources/previews/024/051/849/original/podcast-topic-rgb-color-icon-entertainment-platform-streaming-media-content-production-radio-show-themes-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg';
 
   return (
-    <div className="podcast-item" onClick={()=>navigate("/blankcilUI/podcast/"+podcast.id)}>
+    <div className="podcast-item" onClick={()=>navigate("/podcast/"+podcast.id)}>
       <img src={podcast.thumbnail_url || imageDefault} alt="ImagePodcast" className="image" />
       <div className="info">
         {/* <p className="name">{podcast.id}</p> */}

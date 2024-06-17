@@ -131,8 +131,8 @@ export const Comment = (comment) => {
         <div className='commentItem'>
             <div className="userInfor">
 
-                <img onClick={() => navigate("/blankcilUI/profile/" + comment.comment.user_comment.id)} src={avatar} alt="" className="img" />
-                <h3 onClick={() => navigate("/blankcilUI/profile/" + comment.comment.user_comment.id)}>{comment.comment.user_comment.fullname}</h3>
+                <img onClick={() => navigate("/profile/" + comment.comment.user_comment.id)} src={avatar} alt="" className="img" />
+                <h3 onClick={() => navigate("/profile/" + comment.comment.user_comment.id)}>{comment.comment.user_comment.fullname}</h3>
                 <TiMediaPlayOutline />
                 <p>{time}</p>
             </div>

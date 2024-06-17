@@ -1,129 +1,93 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Profile.css'
-import AudioList from '../../components/AudioList';
-import axios from "axios";
-import { Button, Card, CircularProgress, useToast } from '@chakra-ui/react';
-import { FaUserPlus } from "react-icons/fa6";
-import { SiApplepodcasts } from "react-icons/si";
-import { FaHeadphones } from "react-icons/fa6";
-import { FaRegClock } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
-
-const avatarDefault = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
-
-
+import { useParams } from 'react-router-dom'
+import { FaStarAndCrescent } from 'react-icons/fa'
+import { SiPodcastindex } from 'react-icons/si'
+import { SiGooglepodcasts } from 'react-icons/si'
+import { TfiViewGrid } from 'react-icons/tfi'
+import { CiGrid2H } from 'react-icons/ci'
+import { BiCheckDouble } from 'react-icons/bi'
+import PodcastPost from '../../components/post/podcastPost/PodcastPost'
+import listPostCastTest from '../../access/listPodcastTest.json'
+import axios from 'axios'
+import { apiPath } from '../../api/endpoint'
+import { toggleFollow,getProfile } from '../../api/user/user'
 const Profile = () => {
-  const user = {
-    banner: 'https://www.shutterstock.com/shutterstock/videos/1075861385/thumb/1.jpg?ip=x480',
-    profile: 'https://img.freepik.com/vector-premium/microfono-podcast-banner-podcast-concepto-diseno-plano-ilustracion-vectorial_476325-514.jpg',
-    title: 'Ngôi sao đang lên',
-    fullname: 'John Dashin',
-    username: 'johndashin'
+  const nickname = useParams().nickname;
+  const [isFollow, setIsFollow] = useState(false);
+  useEffect(() => {
+    document.querySelector('aside').classList.add('minum');
+    fetchData();
+    
+
+  }, [])
+  const [profile, setProfile] = useState({});
+  const fetchData = async() => {
+    console.log('fetchData');
+    getProfile(nickname).then((response) => {
+      setProfile(response.data.body);
+      setIsFollow(profile.follow);
+      document.title = response.data.body.fullname + ' (@' + nickname + ') - Podcloud';
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
-
-const userInfo ={
-  fullname: 'John Dashin',
-  birthday: 'January 1, 1990',
-  hometown: 'New York',
-  occupation: 'Software Engineer',
-  gender: 'Male'
-};
-
- 
-
+  
+    window.scrollTo(0, 0);
+  const [podcasts, setPodcasts] = useState(listPostCastTest);
   return (
-    <div className='profile'>
-      <div className="bannerAndProfile">
-
+    <div className='profile-page'>
+      <div className="profile-container">
+        <div className="image-container">
           <div className="banner">
-            <img src={user.banner} alt="banner" />
+            <img src={
+              profile.cover_url? profile.cover_url :
+            "https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg" 
+            }
+            alt="" />
           </div>
-
-          <div className="profile">
-            <img src={user.profile} alt="profile" />
-            <div className="information">
-
-              <p className='title'>{user.title}</p>
-              <div className="fullnameAndUsername">
-              <p className="fullname">{user.fullname}</p>
-              <p className="username">@{user.username}</p>
-              </div>
-
-              <div className="userDetailed">
-              <div className="infoBlock">
-                <div className="fullname">
-                  <p><strong>Full Name: </strong>{userInfo.fullname}</p>
-                </div>
-              </div>
-              <div className="infoBlock">
-                <div className="birthday">
-                  <p><strong>Birthday: </strong>{userInfo.birthday}</p>
-                </div>
-              </div>
-              <div className="infoBlock">
-                <div className="hometown">
-                  <p><strong>Hometown: </strong>{userInfo.hometown}</p>
-                </div>
-              </div>
-              <div className="infoBlock">
-                <div className="occupation">
-                  <p><strong>Occupation: </strong>{userInfo.occupation}</p>
-                </div>
-              </div>
-              <div className="infoBlock">
-                <div className="gender">
-                  <p><strong>Gender: </strong>{userInfo.gender}</p>
-                </div>
-              </div>
-            </div>
-
-            </div>
-
-            <div className="buttons">
-              {/* <button className="viewProfileButton">View Profile</button> */}
-              <button className="editProfileButton">Edit & Update Profile</button>
-            </div>
-            
+          <div className="avatar">
+            <img src={
+              profile.avatar_url? profile.avatar_url :
+            "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
+            }
+             alt="" />
           </div>
-
-          
-            <div className="icons">
-                <div className="followers">
-                  <FaUserPlus/>
-                  <span>123K</span>
-                </div>
-                
-                <div className="totalPodcasts">
-                  <SiApplepodcasts/>
-                  <span>52 podcasts</span>
-                </div>
-          </div>
-
-            <AudioList />
+          <div className="actionGroup">
+          <button className="follow" onClick={()=>toggleFollow(setIsFollow, profile.id)}>
+            {isFollow? <>Đã theo dõi<BiCheckDouble /></> : <>Theo dõi<SiGooglepodcasts /></>}
+          </button>
+          <button className="message">Nhắn tin</button>
         </div>
-
-          
-
-          
-
-         {/* <div className="podcasts">
-          {podcasts.slice(0,5).map((podcast, index) => (
-            <div key={index} className="podcast-item">
-              <img src={podcast.image} alt={podcast.title} className="podcast-image" />
-              <div className="podcast-info">
-                <a href={podcast.url} target="_blank" rel="noopener noreferrer" className="podcast-title">
-                  {podcast.title}
-                </a>
-                <button className="play-button">Play</button>
-              </div>
-            </div>
-          ))}
-
-         </div> */}
-
-      
-
+        </div>
+        
+        <div className="infor">
+          <h1 className='name'>{profile.fullname} <SiPodcastindex /></h1>
+          <p className="nickname">@{nickname}</p>
+          <div className="badge"><FaStarAndCrescent/>NGÔI SAO ĐANG LÊN</div>
+          <div className="detail-container">
+            <div className="detail-item">{profile.podcasts? profile.podcasts.length : 0} Podcast</div>
+            <div className="detail-item">{profile.followers} Follower</div>
+            <div className="detail-item">{profile.following} Following</div>
+          </div>
+          {/* <h1>Chế độ hiển thị</h1> */}
+          <div className="detail-container">
+            <div className="detail-item"><TfiViewGrid /></div>
+            <div className="detail-item"><CiGrid2H/></div>
+          </div>
+        </div>
+      </div>
+      <div className="podcasts-container">
+      {podcasts.map((podcast, index) => (
+          <PodcastPost
+            key={index}
+            index={index}
+            podcast={podcast}
+          />
+        ))}
+      </div>
     </div>
   )
 }

@@ -3,3 +3,45 @@
     width: 100%;
     height: 100%;
 }
+/* .toggleGroup{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 30px;
+    font-family: 'Blackoninaut Bold BRK';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 20px;
+    z-index: 998;
+}
+
+.toggleGroup button{
+    position: relative;
+    background-color: #ff65c9b7;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width:150px;
+}
+
+.toggleGroup button.active{
+    color: #ffffff;
+    background: #ff00d0;
+}
+
+.toggleGroup button.active::after{
+    content: '';
+    position: absolute;
+    border-radius: 50px;
+    bottom:5px;
+    left: 10%;
+    z-index: 1;
+    width: 80%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.693);
+} */

@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PodcastPost from '../../components/post/podcastPost/PodcastPost';
 import './Home.css';
-import podcastListSample from '../../testjson/podcastListSample.json';
 import { apiPath } from '../../api/endpoint';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
-
+import listPostCastTest from '../../access/listPodcastTest.json';
+import SuggestUser from '../../components/user/suggestUser/SuggestUser';
 const Home = () => {
   const toast = useToast();
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(false); // Thêm state để kiểm tra xem đang tải dữ liệu hay không
-  const [podcasts, setPodcasts] = useState([]);
+  const [podcasts, setPodcasts] = useState(listPostCastTest);
+
   const [isEnd, setIsEnd] = useState(false);
   function scrollHandler() {
     if (!loading) { // Kiểm tra xem có đang tải dữ liệu không
@@ -104,7 +105,13 @@ const Home = () => {
 
   return (
     <div className="home">
-      <p style={{ color: 'white' }}>@Blankcil Team</p>
+      <SuggestUser />
+      {/* <div className="toggleGroup">
+      <button className='active'>Xu hướng</button>
+      <button>Đang theo dõi</button>
+      </div> */}
+      {/* <h1 style={{ color: 'white', fontFamily:'Awesome South Korea' }}>Trending Podcasts</h1> */}
+      <p style={{ color: 'white', fontFamily:'Awesome South Korea' }}>@Blankcil Team</p>
       <div>
         {podcasts.map((podcast, index) => (
           <PodcastPost

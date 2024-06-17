@@ -58,20 +58,10 @@
     background-color: #45aef4;   
 }
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 1200px){
     .rightbar{
-        animation: hideRightbar 2s ease-in-out forwards;
+        width: 50px;
     }
-}
-@keyframes hideRightbar {
-    from {
-        right: 0;
-    }
-    to {
-        right: -100%;
-        display: none;
-    }
-    
 }
 /* RightToPosition */
 @keyframes rightToLeft {

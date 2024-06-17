@@ -4,12 +4,14 @@ import { apiPath } from '../../api/endpoint'
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
+import logo from '../../access/images/logos.png'
+import { loginAPI } from '../../api/auth/login/loginAPI';
 const Login = () => {
   const navigate = useNavigate();
   const toast = useToast();
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
-      navigate('/blankcilUI')
+      navigate('/')
       toast({
         title: "Bạn đã đăng nhập!",
         description: "Chúng tôi nhận thấy một phiên đăng nhập của bạn trên trình duyệt, xin hãy đăng xuất trước!",
@@ -25,10 +27,13 @@ const Login = () => {
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
     console.log(email, password)
-    axios.post(apiPath + 'auth/authenticate', {
-      email: email,
-      password: password
-    }).then((response) => {
+    
+    // axios.post(apiPath + 'auth/authenticate', {
+    //   email: email,
+    //   password: password
+    // })
+    loginAPI(email, password)
+    .then((response) => {
       // console.log(response)
       const status = response.status;
       // const newToken = response.data.body.token;
@@ -77,7 +82,7 @@ const Login = () => {
     }).then((response) => {
       if(response.status == '200'){
         localStorage.setItem('user', JSON.stringify(response.data.body));
-        navigate('/blankcilUI')
+        navigate('/')
         // console.log('User: '+localStorage.getItem('user'))
         // // Get user profile trả về json
         // const user = JSON.parse(localStorage.getItem('user'));
@@ -92,19 +97,21 @@ const Login = () => {
   return (
     <div className="login">
       <div className="loginWrapper">
-        <h1>BLANKCIL</h1>
-        <p>Healing your soul!</p>
+        <h1>LOGIN</h1>
         <div className="loginBox">
-          <input placeholder="Email" id='email' type="email" className="loginInput" />
-          <input placeholder="Password" id='password' type="password" className="loginInput" />
+          <input style={{color:"white"}} placeholder="Email" id='email' type="email" className="loginInput" />
+          <input style={{color:"white"}} placeholder="Password" id='password' type="password" className="loginInput" />
           <button onClick={login} className="loginButton">Log In</button>
-          <button className="loginRegisterButton" onClick={()=>navigate("/blankcilUI/register")}>
+          <button className="loginRegisterButton" onClick={()=>navigate("/register")}>
             Create a New Account
           </button>
-          <span className="loginForgot">Forgot Password?</span>
+          <span className="loginForgot" onClick={()=>navigate("/reset/password")}>Forgot Password?</span>
 
         </div>
       </div>
+    <div className="logo">
+    <img src={logo} alt="logo" />
+    </div>
     </div>
   )
 }

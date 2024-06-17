@@ -32,14 +32,14 @@ const Rightbar = () => {
     <div className='rightbar'>
       {!isLogin ? (
         <>
-          <div className='item' onClick={() => navigate("/blankcilUI/login")}><FaPersonWalkingDashedLineArrowRight className='icon' /></div>
-          <div className='item' onClick={() => navigate("/blankcilUI/register")}><MdOutlineLibraryAdd  className='icon' /></div>
+          <div className='item' onClick={() => navigate("/login")}><FaPersonWalkingDashedLineArrowRight className='icon' /></div>
+          <div className='item' onClick={() => navigate("/register")}><MdOutlineLibraryAdd  className='icon' /></div>
         </>) :
         (
           <>
-          <div className='item' onClick={() => navigate("/blankcilUI/profile")}><img src={avatar} alt="" /></div>
+          <div className='item' onClick={() => navigate("/profile")}><img src={avatar} alt="" /></div>
           {/* <p>{profile.fullname}</p> */}
-          <div className='item' onClick={() => navigate("/blankcilUI/edit/profile")}><FaUserEdit  className='icon' /></div>
+          <div className='item' onClick={() => navigate("/edit/profile")}><FaUserEdit  className='icon' /></div>
           <div className='item' onClick={logout}><FaPersonWalkingArrowLoopLeft  className='icon' /></div>
           </>
           )}

@@ -126,3 +126,22 @@
     cursor: pointer;
     scale: 1.1;
 }
+
+/* Mobile screen */
+@media (max-width: 1200px){
+    .commentItem img{
+        width: 20px;
+        height: 20px;
+    }
+    .commentItem p,.commentItem h3{
+        font-size: 12px;
+    }
+    .commentItem .commentIcon{
+        width: 100px;
+        /* position: absolute; */
+        /* height: 0px; */
+        font-size: 10px;
+        right: 0;
+        top:0;
+    }
+}

@@ -12,7 +12,7 @@ import { useToast } from '@chakra-ui/react';
 
 const View_profile = () => {
     const [avatarURL, setAvatarURL] = useState('https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png');
-    
+    const [bannerURL,setBannerURL] = useState('https://www.shutterstock.com/shutterstock/videos/1075861385/thumb/1.jpg?ip=x480');
     const toast = useToast();
     const avatarDefault = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
     const navigate = useNavigate();
@@ -32,6 +32,7 @@ const View_profile = () => {
                     document.getElementById('phone').value = response.data.body.phone?response.data.body.phone:null;
                     document.getElementById('date').value = response.data.body.birthday?response.data.body.birthday:null;
                     document.getElementById('profileImage').src = response.data.body.avatar_url?response.data.body.avatar_url:avatarDefault;
+                    document.getElementById('bannerImage').src = response.data.body.cover_url?response.data.body.cover_url:bannerURL;
                 } else {
                     console.error("Failed to get profile:", response.data.message);
                 }
@@ -112,7 +113,9 @@ const View_profile = () => {
     return (
         <div className="view-edit-profile">
             <h1>View and Edit Profile</h1>
-
+            {/* <div className="banner">
+                <img id="bannerImage" src={bannerURL} alt="" />
+            </div> */}
             <div className="profile-photo">
                 <div className="photo-container">
                     <img id='profileImage' onClick={handleAvatarChange} src={avatarURL} alt="Profile" />
