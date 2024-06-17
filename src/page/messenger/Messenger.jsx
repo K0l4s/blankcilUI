@@ -301,8 +301,6 @@ const Messenger = () => {
         const headers = {
             Authorization: `Bearer ${token}`,
             "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Origin': 'http://localhost:3000'
         };
         temp.connect(headers, onConnect, onError);
     };
