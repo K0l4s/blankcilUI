@@ -14,6 +14,7 @@ import SettingPage from '../setting/SettingPage'
 import Profile from '../profile/Profile'
 import CodeRequest from '../codeRequest/CodeRequest'
 import Messenger from '../messenger/Messenger'
+import Demo from '../messenger/Demo'
 // import ChatRoom from '../chat/ChatRoom'
 const Router = () => {
   const url = window.location.href;
@@ -60,6 +61,7 @@ const Router = () => {
           <Route path="/setting" element={<SettingPage/>} />
           <Route path="/conversation" element={<Messenger/>} />
           <Route path="/conversation/:id" element={<Messenger/>} />
+          {/* <Route path="/conversation/:id" element={<Demo/>} /> */}
           <Route path="/*" element={<NotFoundPage/>} />
         </Routes>
         </div>
