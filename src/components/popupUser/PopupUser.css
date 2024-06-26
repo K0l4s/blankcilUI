@@ -1,0 +1,18 @@
+/* Popup.css */
+.popup {
+    position: absolute;
+    background-color: #fff;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000; /* Đảm bảo popup hiển thị trên các thành phần khác */
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.popup-content {
+    color: #333;
+}

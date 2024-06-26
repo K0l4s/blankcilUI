@@ -20,7 +20,7 @@ const SearchUser = ({user}) => {
         </div>
       </div>
       <div className="action">
-        <button onClick={()=>navigate("/profile/"+user.id)}><GrView/></button>
+        <button onClick={()=>navigate("/profile/"+user.nickName)}><GrView/></button>
         <button onClick={()=>toggleFollow(setIsFollow, user.id)}>
         {isFollow?<FcLike/>:<FcLikePlaceholder/>}
         </button>{/* <button><FcLike/></button> */}

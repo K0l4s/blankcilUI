@@ -4,6 +4,7 @@ import { apiPath } from '../../api/endpoint'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
 import axios from 'axios'
+import { registerAPI } from '../../api/auth/register/register'
 const Register = () => {
 
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Register = () => {
   const url = window.location.href.split('/').slice(0, -1).join('/')
   const toast = useToast();
   console.log(url)
-  const register = () => {
+  const handleRegister = () => {
     const fullname = document.getElementById('fullname').value
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
@@ -38,33 +39,50 @@ const Register = () => {
       duration: 9000,
       isClosable: true,
     })
-    fetch(apiPath + 'auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Xử lý CORS Block
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
-        'Access-Control-Allow-Credentials': 'true'
-      },
-      body: JSON.stringify({
+    // fetch(apiPath + 'auth/register', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     // Xử lý CORS Block
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    //     'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
+    //     'Access-Control-Allow-Credentials': 'true'
+    //   },
+    //   body: JSON.stringify({
+    //     fullname: fullname,
+    //     email: email,
+    //     password: password,
+    //     birthday: birthday,
+    //     address: address,
+    //     phone: phone,
+    //     code: '00000'
+    //   })
+    // })
+    const body = JSON.stringify(
+      // {fullname: fullname,
+      //     email: email,
+      //     password: password,
+      //     birthday: birthday,
+      //     address: address,
+      //     phone: phone,
+      //     nickName: 'yesir'
+      //   }
+      {
         fullname: fullname,
         email: email,
+        nickName: 'yesirrr',
         password: password,
         birthday: birthday,
         address: address,
-        phone: phone,
-        code: '00000'
-      })
-    })
+        phone: phone
+      }
+      )
+    registerAPI(body)
       .then(response => response.json())
       .then(data => {
         console.log(data);
         navigate("/confirm/register/" + email)
-        // localStorage.setItem('access_token', data.access_token)
-        // localStorage.setItem('refresh_token', data.refresh_token)
-        // fetchUserProfileByToken(data.access_token)
         toast({
           title: "Đăng ký thành công!",
           description: "Chúc bạn có những trải nghiệm tuyệt vời!",
@@ -107,7 +125,7 @@ const Register = () => {
       <input type="text" id="address" name="birthday" />
       <label for="phone">Số điện thoại</label>
       <input type="text" id="phone" name="phone" />
-      <button onClick={register} className="registerBtn">Đăng ký</button>
+      <button onClick={handleRegister} className="registerBtn">Đăng ký</button>
       <a href={url + "/login"}>Đã có tài khoản?</a>
       <a href={url + "/forgot-password"}>Quên mật khẩu?</a>
     </div>

@@ -135,3 +135,12 @@
 .detail-container .detail-item:hover{
     background: #f0f0f0;
 }
+
+.podcasts-container{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}

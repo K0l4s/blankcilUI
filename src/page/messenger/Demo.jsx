@@ -1,65 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
-import { useParams } from 'react-router-dom';
+// MainComponent.js
+import React, { useState } from 'react';
+import PopupUser from '../../components/popupUser/PopupUser';
 
-const App = () => {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  const clientRef = useRef(null);
-  const chatId = useParams().id;
-  useEffect(() => {
-    const socket = new SockJS('http://localhost:9090/ws');
-    const client = new Client({
-      webSocketFactory: () => socket,
-      debug: (str) => console.log(str),
-      onConnect: () => {
-        console.log('Connected');
-        client.subscribe('/group/'+chatId, (message) => {
-          setMessages((prevMessages) => [...prevMessages, JSON.parse(message.body)]);
-        });
-      },
-      onDisconnect: () => {
-        console.log('Disconnected');
-      },
-    });
-
-    client.activate();
-    clientRef.current = client;
-
-    return () => {
-      client.deactivate();
+const Demo = () => {
+    const [popupContent, setPopupContent] = useState('Chào mọi người!');
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const handleMouseEnter = (content) => {
+      document.querySelector('.popup').style.display = 'block';
+        setPopupContent(content);
+        setIsPopupVisible(true);
     };
-  }, []);
 
-  const sendMessage = () => {
-    const message = {
-      content: input,
-      chatEntity: { id: chatId }
+    const handleMouseLeave = () => {
+      console.log('leave');
+      document.querySelector('.popup').style.display = 'none';
     };
-    clientRef.current.publish({
-      destination: '/app/message',
-      body: JSON.stringify(message),
-    });
-    setInput('');
-  };
 
-  return (
-    <div>
-      <h1>Chat App</h1>
-      <div>
-        {messages.map((msg, index) => (
-          <div key={index}>{msg.content}</div>
-        ))}
-      </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
-    </div>
-  );
+    return (
+        <div style={{position:'relative'}}>
+            <p onMouseEnter={() => handleMouseEnter('Nội dung popup')} onMouseLeave={handleMouseLeave}>
+                Rê chuột vào đây để hiển thị popup
+            </p>
+            {isPopupVisible && <PopupUser content={popupContent} />}
+        </div>
+    );
 };
 
-export default App;
+export default Demo;

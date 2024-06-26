@@ -8,7 +8,7 @@ import Authentication from '../authentication/Authentication'
 import { Tooltip } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const path = window.location.pathname;
   console.log(path) 
   const [isOpenAuthen, setIsOpenAuthen] = useState(true)
@@ -25,7 +25,7 @@ const Navbar = () => {
         </Tooltip>
 
         <Tooltip hasArrow label='Setting' bg='gray.300' color='black'>
-          <div className="item">
+          <div className="item" onClick={()=>navigate("setting")}>
             <VscSettingsGear />
           </div>
         </Tooltip>

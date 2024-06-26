@@ -12,6 +12,8 @@ import listPostCastTest from '../../access/listPodcastTest.json'
 import axios from 'axios'
 import { apiPath } from '../../api/endpoint'
 import { toggleFollow,getProfile } from '../../api/user/user'
+import PodcastBox from '../../components/profile/podcastBox/PodcastBox'
+import { Tooltip } from '@chakra-ui/react'
 const Profile = () => {
   const nickname = useParams().nickname;
   const [isFollow, setIsFollow] = useState(false);
@@ -26,7 +28,8 @@ const Profile = () => {
     console.log('fetchData');
     getProfile(nickname).then((response) => {
       setProfile(response.data.body);
-      setIsFollow(profile.follow);
+      setPodcasts(response.data.body.podcasts);
+      setIsFollow(response.data.body.follow);
       document.title = response.data.body.fullname + ' (@' + nickname + ') - Podcloud';
       console.log(response);
     })
@@ -36,7 +39,7 @@ const Profile = () => {
   }
   
     window.scrollTo(0, 0);
-  const [podcasts, setPodcasts] = useState(listPostCastTest);
+  const [podcasts, setPodcasts] = useState(profile.podcasts? profile.podcasts : [{}]);
   return (
     <div className='profile-page'>
       <div className="profile-container">
@@ -74,15 +77,18 @@ const Profile = () => {
           </div>
           {/* <h1>Chế độ hiển thị</h1> */}
           <div className="detail-container">
+            <Tooltip label="Single" aria-label="A tooltip">
             <div className="detail-item"><TfiViewGrid /></div>
+            </Tooltip>
+            <Tooltip label="Playlist" aria-label="A tooltip">
             <div className="detail-item"><CiGrid2H/></div>
+            </Tooltip>
           </div>
         </div>
       </div>
       <div className="podcasts-container">
       {podcasts.map((podcast, index) => (
-          <PodcastPost
-            key={index}
+          <PodcastBox
             index={index}
             podcast={podcast}
           />

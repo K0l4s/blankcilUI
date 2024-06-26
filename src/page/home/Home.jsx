@@ -10,7 +10,7 @@ const Home = () => {
   const toast = useToast();
   const [index, setIndex] = useState(-1);
   const [loading, setLoading] = useState(false); // Thêm state để kiểm tra xem đang tải dữ liệu hay không
-  const [podcasts, setPodcasts] = useState(listPostCastTest);
+  const [podcasts, setPodcasts] = useState([]);
 
   const [isEnd, setIsEnd] = useState(false);
   function scrollHandler() {
