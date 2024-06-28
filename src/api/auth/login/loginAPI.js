@@ -12,4 +12,10 @@ export const loginAPI = (email,password) => {
   )
 }
 
-
+export const googleOauth2API = (credential) => {
+  return (
+    axios.post(apiPath + 'auth/oauth2/login', {
+      tokenId: credential
+    })
+  )
+}

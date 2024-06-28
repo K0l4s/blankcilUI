@@ -6,10 +6,10 @@ import { isTokenExpired } from '../../config/useAuth';
 
 const Authentication = ({ isOpen, onClose, login }) => {
     const [isLogin, setIsLogin] = useState(login);
-    
-    if(!isOpen) 
+
+    if (!isOpen)
         return;
-const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token');
     if (token && !isTokenExpired(token)) {
         onClose();
         return;

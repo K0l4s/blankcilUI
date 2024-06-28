@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginAPI } from '../../../api/auth/login/loginAPI';
+import { loginAPI, googleOauth2API } from '../../../api/auth/login/loginAPI';
 import axios from 'axios';
 import { apiPath } from '../../../api/endpoint';
 import { useToast } from '@chakra-ui/react';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 const Login = ({ handleIsLogin, onClose }) => {
     const navigate = useNavigate();
@@ -72,23 +73,69 @@ const Login = ({ handleIsLogin, onClose }) => {
         });
     };
 
+    const onGoogleLoginSuccess = async (tokenResponse) => {
+        try {
+            const { credential } = tokenResponse;
+            const googleLoginResponse = await googleOauth2API(credential);
+            console.log(googleLoginResponse);
+            if (googleLoginResponse.status === 200) {
+                localStorage.setItem('access_token', googleLoginResponse.data.access_token);
+                localStorage.setItem('refresh_token', googleLoginResponse.data.refresh_token);
+
+                fetchUserProfileByToken(googleLoginResponse.data.access_token);
+
+                onClose();
+                toast({
+                    title: "Đăng nhập thành công!",
+                    description: "Chúc bạn có những trải nghiệm tuyệt vời!",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                });
+            }
+            else {
+                toast({
+                    title: "Lỗi truy cập",
+                    description: "Something went wrong",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const onGoogleLoginFailure = (error) => {
+        console.error(error);
+    };
+
     return (
-        <div id='login' className="login">
-            <h1>Login</h1>
-            <form onSubmit={login}>
-                <div className="inputGroup">
-                    <input required id='email' type="email" placeholder=' ' />
-                    <label htmlFor="email">Email</label>
-                </div>
-                <div className="inputGroup">
-                    <input required id='password' type="password" placeholder=' ' />
-                    <label htmlFor="password">Mật Khẩu</label>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <p className='link' onClick={handleIsLogin}>Don't have an account? Register</p>
-            <p className='link'>Forgot Password</p>
-        </div>
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+            <div id='login' className="login">
+                <h1>Login</h1>
+                <form onSubmit={login}>
+                    <div className="inputGroup">
+                        <input required id='email' type="email" placeholder=' ' />
+                        <label htmlFor="email">Email</label>
+                    </div>
+                    <div className="inputGroup">
+                        <input required id='password' type="password" placeholder=' ' />
+                        <label htmlFor="password">Mật Khẩu</label>
+                    </div>
+                    <button type="submit">Login</button>
+                    <div className="google-login-btn">
+                        <GoogleLogin
+                            onSuccess={onGoogleLoginSuccess}
+                            onError={onGoogleLoginFailure}
+                        />
+                    </div>
+                </form>
+                <p className='link' onClick={handleIsLogin}>Don't have an account? Register</p>
+                <p className='link'>Forgot Password</p>
+            </div>
+        </GoogleOAuthProvider>
     );
 };
 
