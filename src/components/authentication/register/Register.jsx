@@ -1,6 +1,9 @@
 import React from 'react'
 import {registerAPI} from '../../../api/auth/register/register'
+import { useNavigate } from 'react-router-dom'
+
 const Register = ({ handleIsLogin }) => {
+    const navigate = useNavigate()
 
     const handleReigster = (event) => {
         event.preventDefault();
@@ -15,6 +18,7 @@ const Register = ({ handleIsLogin }) => {
         })
         registerAPI(registerRequest)
         .then(response => {
+            navigate("/confirm/register/" + document.getElementById('re_email').value)
             console.log(response)
         })
         .catch(error => {
