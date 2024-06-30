@@ -7,10 +7,12 @@ import { MdOutlineConnectWithoutContact } from "react-icons/md";
 import Authentication from '../authentication/Authentication'
 import { Tooltip } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
+import { IoIosNotifications } from "react-icons/io";
+
 const Navbar = () => {
   const navigate = useNavigate();
   const path = window.location.pathname;
-  console.log(path) 
+  console.log(path)
   const [isOpenAuthen, setIsOpenAuthen] = useState(true)
   const toggleAuthentication = () => {
     setIsOpenAuthen(!isOpenAuthen)
@@ -25,11 +27,11 @@ const Navbar = () => {
         </Tooltip>
 
         <Tooltip hasArrow label='Setting' bg='gray.300' color='black'>
-          <div className="item" onClick={()=>navigate("setting")}>
+          <div className="item" onClick={() => navigate("setting")}>
             <VscSettingsGear />
           </div>
         </Tooltip>
-        {(path=="/" || path=="/home") &&
+        {(path == "/" || path == "/home") &&
           <>
             <Tooltip hasArrow label='Trending' bg='gray.300' color='black'>
               <div className="item active">
@@ -44,6 +46,13 @@ const Navbar = () => {
             </Tooltip>
           </>
         }
+        <Tooltip hasArrow label='Thông báo' bg='gray.300' color='black'>
+          <div className="item" onClick={null} style={{position:'relative'}}>
+            <IoIosNotifications />
+            <p style={{position:'absolute',width:'15px',height:'15px','top':'-5px','right':'-5px',color:'white'
+              ,borderRadius: '50%',backgroundColor:'red',fontSize:'10px',fontWeight:'bold', textAlign:'center'}}>1</p>
+          </div>
+        </Tooltip>
         <Tooltip hasArrow label='Đăng nhập/Đăng ký' bg='gray.300' color='black'>
           <div className="item" onClick={toggleAuthentication}>
             <FaSignInAlt />

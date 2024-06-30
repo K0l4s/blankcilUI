@@ -150,3 +150,13 @@
     }
     
 }
+
+.authen .anotherMethod{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #ffffff;
+    color:black;
+}

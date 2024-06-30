@@ -4,6 +4,7 @@ import { loginAPI } from '../../../api/auth/login/loginAPI';
 import axios from 'axios';
 import { apiPath } from '../../../api/endpoint';
 import { useToast } from '@chakra-ui/react';
+import { FcGoogle } from "react-icons/fc";
 
 const Login = ({ handleIsLogin, onClose }) => {
     const navigate = useNavigate();
@@ -85,7 +86,9 @@ const Login = ({ handleIsLogin, onClose }) => {
                     <label htmlFor="password">Mật Khẩu</label>
                 </div>
                 <button type="submit">Login</button>
+                <button className='anotherMethod'>Đăng nhập bằng <FcGoogle/></button>
             </form>
+            
             <p className='link' onClick={handleIsLogin}>Don't have an account? Register</p>
             <p className='link'>Forgot Password</p>
         </div>

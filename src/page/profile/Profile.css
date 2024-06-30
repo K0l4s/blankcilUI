@@ -137,10 +137,11 @@
 }
 
 .podcasts-container{
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin-top: 20px;
+    
 }
