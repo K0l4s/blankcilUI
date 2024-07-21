@@ -74,16 +74,28 @@
 }
 .profile-page .infor .badge{
     border-radius: 25px;
+    position: relative;
     height: 50px;
-    background: white;
+    /* background: white; */
     color:black;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     padding:15px;
+    animation: backgroundFade 2s infinite ease-in-out;
 }
-
+@keyframes backgroundFade{
+    0%{
+        background: #1DA1F2;
+    }
+    50%{
+        background: #0051ff81;
+    }
+    100%{
+        background: #1DA1F2;
+    }
+}
 .profile-page .actionGroup{
     display: flex;
     justify-content: center;

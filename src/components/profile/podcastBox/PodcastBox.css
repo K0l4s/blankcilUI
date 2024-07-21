@@ -14,10 +14,56 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
 }
-
 .podcastBox:hover{
     transform: scale(1.1);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+}
+
+.podcastBox .image{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    filter: blur(1px);
+    z-index: -1;
+    transition: all 0.3s ease-in-out;
+}
+
+.podcastBox .image img{
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    object-fit: cover;
+}
+
+.podcastBox:hover .image{
+    filter: blur(0px);
+}
+
+.podcastBox .info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.podcastBox .info h3{
+    font-size: 20px;
+    position: absolute;
+    top:10px;
+    left: 10px;;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.616);
+    padding: 5px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
 }
 

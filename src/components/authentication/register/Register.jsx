@@ -26,7 +26,7 @@ const Register = ({ handleIsLogin }) => {
         })
     }
     return (
-        <div id='register' className="register">
+        <div id='register' className="child-container">
             <h1>Register</h1>
             <form onSubmit={handleReigster}>
                 <div className="inputGroup">

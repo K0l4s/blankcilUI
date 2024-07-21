@@ -1,8 +1,9 @@
 import React from 'react'
 import './SettingPage.css'
+import ResetPassword from '../../components/authentication/resetPassword/ResetPassword'
 const SettingPage = () => {
   return (
-    <div>
+    <>
         <div className='setting'>
             <h1>Setting</h1>
             <div className="settingItem">
@@ -18,7 +19,8 @@ const SettingPage = () => {
                 <p>Reset password</p>
             </div>
         </div>
-    </div>
+        <ResetPassword/>
+    </>
   )
 }
 

@@ -11,7 +11,7 @@ import PodcastPost from '../../components/post/podcastPost/PodcastPost'
 import listPostCastTest from '../../access/listPodcastTest.json'
 import axios from 'axios'
 import { apiPath } from '../../api/endpoint'
-import { toggleFollow,getProfile } from '../../api/user/user'
+import { toggleFollow, getProfile } from '../../api/user/user'
 import PodcastBox from '../../components/profile/podcastBox/PodcastBox'
 import { Tooltip } from '@chakra-ui/react'
 const Profile = () => {
@@ -20,11 +20,11 @@ const Profile = () => {
   useEffect(() => {
     document.querySelector('aside').classList.add('minum');
     fetchData();
-    
+
 
   }, [])
   const [profile, setProfile] = useState({});
-  const fetchData = async() => {
+  const fetchData = async () => {
     console.log('fetchData');
     getProfile(nickname).then((response) => {
       setProfile(response.data.body);
@@ -33,61 +33,63 @@ const Profile = () => {
       document.title = response.data.body.fullname + ' (@' + nickname + ') - Podcloud';
       console.log(response);
     })
-    .catch((error) => {
-      console.log(error);
-    })
+      .catch((error) => {
+        console.log(error);
+      })
   }
-  
-    window.scrollTo(0, 0);
-  const [podcasts, setPodcasts] = useState(profile.podcasts? profile.podcasts : [{}]);
+
+  window.scrollTo(0, 0);
+  const [podcasts, setPodcasts] = useState(profile.podcasts ? profile.podcasts : [{}]);
   return (
     <div className='profile-page'>
       <div className="profile-container">
         <div className="image-container">
           <div className="banner">
             <img src={
-              profile.cover_url? profile.cover_url :
-            "https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg" 
+              profile.cover_url ? profile.cover_url :
+                "https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg"
             }
-            alt="" />
+              alt="" />
           </div>
           <div className="avatar">
             <img src={
-              profile.avatar_url? profile.avatar_url :
-            "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
+              profile.avatar_url ? profile.avatar_url :
+                "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
             }
-             alt="" />
+              alt="" />
           </div>
           <div className="actionGroup">
-          <button className="follow" onClick={()=>toggleFollow(setIsFollow, profile.id)}>
-            {isFollow? <>Đã theo dõi<BiCheckDouble /></> : <>Theo dõi<SiGooglepodcasts /></>}
-          </button>
-          <button className="message">Nhắn tin</button>
+            <button className="follow" onClick={() => toggleFollow(setIsFollow, profile.id)}>
+              {isFollow ? <>Đã theo dõi<BiCheckDouble /></> : <>Theo dõi<SiGooglepodcasts /></>}
+            </button>
+            <button className="message">Nhắn tin</button>
+          </div>
         </div>
-        </div>
-        
         <div className="infor">
-          <h1 className='name'>{profile.fullname} <SiPodcastindex /></h1>
+          <div>
+            <div className="badge"><FaStarAndCrescent />NGÔI SAO ĐANG LÊN</div>
+            <h1 className='name'>{profile.fullname}  <SiPodcastindex /></h1>
+          </div>
           <p className="nickname">@{nickname}</p>
-          <div className="badge"><FaStarAndCrescent/>NGÔI SAO ĐANG LÊN</div>
+
           <div className="detail-container">
-            <div className="detail-item">{profile.podcasts? profile.podcasts.length : 0} Podcast</div>
+            <div className="detail-item">{profile.podcasts ? profile.podcasts.length : 0} Podcast</div>
             <div className="detail-item">{profile.followers} Follower</div>
             <div className="detail-item">{profile.following} Following</div>
           </div>
           {/* <h1>Chế độ hiển thị</h1> */}
           <div className="detail-container">
             <Tooltip label="Single" aria-label="A tooltip">
-            <div className="detail-item"><TfiViewGrid /></div>
+              <div className="detail-item"><TfiViewGrid /></div>
             </Tooltip>
             <Tooltip label="Playlist" aria-label="A tooltip">
-            <div className="detail-item"><CiGrid2H/></div>
+              <div className="detail-item"><CiGrid2H /></div>
             </Tooltip>
           </div>
         </div>
       </div>
       <div className="podcasts-container">
-      {podcasts.map((podcast, index) => (
+        {podcasts.map((podcast, index) => (
           <PodcastBox
             index={index}
             podcast={podcast}

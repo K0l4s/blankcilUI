@@ -14,6 +14,7 @@ export const isTokenExpired = (token) => {
 
 export const checkTokenExpiration = async () => {
     const accessToken = localStorage.getItem('access_token');
+    
     if (accessToken && isTokenExpired(accessToken)) {
         const refreshToken = localStorage.getItem('refresh_token');
         console.log("Refresh token: " + refreshToken)
@@ -50,12 +51,11 @@ export const checkTokenExpiration = async () => {
 // Hook kiểm tra và làm mới token
 const useAuth = () => {
     const navigate = useNavigate();
-
+        
     useEffect(() => {
         console.log(navigate.name)
         if (navigate.name === "/login")
             return;
-        // console.log("hello");
         checkTokenExpiration();
         const intervalId = setInterval(checkTokenExpiration, 10 * 60 * 1000);
 
