@@ -2,6 +2,11 @@
 You can view backend project or mobile project by below link!
 ### [Backend Project](https://github.com/K0l4s/blankcilapi)
 ### [Mobile Project](https://github.com/K0l4s/blankcil_android)
+## CLASS DIAGRAM
+![Blankcil ClassDiagram](https://github.com/user-attachments/assets/5b0463d9-4af8-4bda-ac4c-b4192b9b4135)
+
+## USECASE
+![Blankcil Usecase](https://github.com/user-attachments/assets/77202299-a82b-44d7-a8cd-1cf646186729)
 
 ## CONTENT
 1. [Short Description](#description)
