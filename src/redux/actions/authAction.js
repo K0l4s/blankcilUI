@@ -4,7 +4,7 @@ export const loginAction = (access_token,refresh_token) => ({
     payload: { access_token,refresh_token }
   });
   
-  export const logout = () => ({
+  export const logoutAction = () => ({
     type: 'LOGOUT'
   });
   

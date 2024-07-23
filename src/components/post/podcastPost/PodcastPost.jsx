@@ -9,7 +9,7 @@ import { Tooltip, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { BsPlay } from 'react-icons/bs';
 import { use } from 'i18next';
-
+import logos from '../../../access/images/logos.png';
 const PodcastPost = ({ podcast, index }) => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
@@ -32,6 +32,7 @@ const PodcastPost = ({ podcast, index }) => {
       videoRef.current.src = podcast.audio_url;
     }
   }, [podcast]);
+
   useEffect(() => {
     if (!videoRef.current)
       return <p>Loading...</p>
@@ -87,15 +88,15 @@ const PodcastPost = ({ podcast, index }) => {
     pauseOthers(index);
     const video = videoRef.current;
     const rect = video.getBoundingClientRect();
-      if (rect.top < 0 || rect.bottom > window.innerHeight) {
-        video.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-      }
+    if (rect.top < 0 || rect.bottom > window.innerHeight) {
+      video.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }
 
     // if (video.paused) {
-      video.play();
-      document.getElementById('playicon' + index).style.display = 'none';
-      document.getElementById('backdrop' + index).style.opacity = 0;
-      document.getElementById(`avatar${index}`).classList.add('isPlay');
+    video.play();
+    document.getElementById('playicon' + index).style.display = 'none';
+    document.getElementById('backdrop' + index).style.opacity = 0;
+    document.getElementById(`avatar${index}`).classList.add('isPlay');
 
     // }
   };
@@ -239,7 +240,7 @@ const PodcastPost = ({ podcast, index }) => {
         <div className="loader"></div>
         <p>ĐANG TẢI...</p>
       </div>}
-      
+
       <div id={"closeComment" + index} className="closeComment" onClick={() => { setIsOpenComment(!isOpenComment) }}>
         X
       </div>
@@ -248,11 +249,11 @@ const PodcastPost = ({ podcast, index }) => {
           <img id={`avatar${index}`} onClick={() => navigate("/profile/" + podcast.user_podcast.nickName)} src={userAvatar} alt=""
             className="img" />
           <div className="titleAndName">
-          <Tooltip hasArrow label={podcast.title} bg='gray.300' color='black'>
-            <h3 style={{fontFamily:'lightmorning'}}>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
-            {/* <h3 style={{fontFamily:'lightmorning'}}>{scrollTitle}</h3> */}
+            <Tooltip hasArrow label={podcast.title} bg='gray.300' color='black'>
+              <h3 style={{ fontFamily: 'lightmorning' }}>{podcast.title.length < 12 ? podcast.title : podcast.title.substring(0, 12) + '...'}</h3>
+              {/* <h3 style={{fontFamily:'lightmorning'}}>{scrollTitle}</h3> */}
 
-          </Tooltip>
+            </Tooltip>
             <p
               onClick={() => navigate("/profile/" + podcast.user_podcast.nickName)}
             >Tác giả:{podcast.user_podcast.fullname}</p>
@@ -311,10 +312,10 @@ const PodcastPost = ({ podcast, index }) => {
 
 
       <div className="body">
-      {isVideoLoaded &&
-        <BsPlay className='playicon' id={'playicon' + index} onClick={handlePlay} />}
+        {isVideoLoaded &&
+          <BsPlay className='playicon' id={'playicon' + index} onClick={handlePlay} />}
         <div className="backdrop" id={'backdrop' + index} onClick={handlePause}></div>
-      
+
         <div className="video">
 
           <video width="360px" height="640px"
@@ -327,14 +328,14 @@ const PodcastPost = ({ podcast, index }) => {
         </div>
       </div>
       {isVideoLoaded &&
-      <div className="video_controls">
-        <div className="time">
-          <p style={{fontFamily:'Blackoninaut Bold BRK'}}>{videoRef.current && formatTime(videoRef.current.currentTime)}/{videoRef.current && formatTime(videoRef.current.duration)}</p>
-        </div>
-        <div className="timeline" onClick={handleTimelineClick}>
-          <div className="progress" style={{ width: `${progress}%` }}><div className="currentDot"></div></div>
-        </div>
-      </div>}
+        <div className="video_controls">
+          <div className="time">
+            <p style={{ fontFamily: 'Blackoninaut Bold BRK' }}>{videoRef.current && formatTime(videoRef.current.currentTime)}/{videoRef.current && formatTime(videoRef.current.duration)}</p>
+          </div>
+          <div className="timeline" onClick={handleTimelineClick}>
+            <div className="progress" style={{ width: `${progress}%` }}><div className="currentDot"></div></div>
+          </div>
+        </div>}
     </div>
   );
 };

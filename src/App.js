@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       <meta name="description" content="Blankcil là một trang web cho phép người dùng tạo ra các podcast chữa lành và đẩy healing."></meta>
-      <Provider store={store}> 
+      
       <ChakraProvider>
         <AudioPlayerProvider>
           <HideSideProvider>
@@ -25,7 +25,7 @@ function App() {
             </HideSideProvider>
         </AudioPlayerProvider>
       </ChakraProvider>
-      </Provider>
+      {/* </Provider> */}
     </div>
   );
 }

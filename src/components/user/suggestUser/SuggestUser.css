@@ -1,14 +1,26 @@
-.userList{
+.userList {
     position: fixed;
     overflow: auto;
     right: 0;
     top: 0;
     height: 100%;
     width: 250px;
+    background-color: #1a1825;
+    color: #b2a6f7;
     /* justify-content: space-around; */
-    border-left: 1px solid #ff0066;
-    transition: all 0.3s ease-in-out; 
-    border-radius: 10px 0 0 10px;
+    /* border-left: 1px solid #ff0066; */ 
+    transition: all 0.3s ease-in-out;
+    /* border-radius: 10px 0 0 10px; */
+}
+
+.userList.dark {
+    background-color: #1a1825;
+    color: #dddddd;
+}
+
+.userList.light {
+    background-color: #dddddd;
+    color: #1a1825;
 }
 
 @media (max-width: 1000px) {
@@ -16,5 +28,5 @@
         right: 0;
         opacity: 0;
     }
-    
+
 }

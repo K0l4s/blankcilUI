@@ -15,6 +15,8 @@ import auth_en from './locales/en/auth.json';
 import auth_vi from './locales/vi/auth.json';
 import leftbar_en from './locales/en/leftbar.json';
 import leftbar_vi from './locales/vi/leftbar.json';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 i18next.init(
   ({
@@ -42,9 +44,9 @@ root.render(
   <React.StrictMode>
     <I18nextProvider i18n={i18next}>
       <BrowserRouter>
-        <ChakraProvider>
+        <Provider store={store}> 
           <App />
-        </ChakraProvider>
+        </Provider>
       </BrowserRouter>
     </I18nextProvider>
   </React.StrictMode>

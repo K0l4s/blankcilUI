@@ -1,0 +1,13 @@
+.podcastPlayBox{
+    position: fixed;
+    z-index: 1001;
+    width: 450px;
+    height: 180px;
+    background-color: rgba(177, 177, 177, 0.493);
+    bottom: 15px;
+    left: 10px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease-in-out;
+    text-align: left;
+}

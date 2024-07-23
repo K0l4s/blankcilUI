@@ -1,15 +1,6 @@
 .App {
   text-align: center;
 }
-
-.darkMode{
-  background-color: rgb(199, 193, 193);
-  color: white;
-}
-.lightMode{
-  background-color: white;
-  color: black;
-}
 ::-webkit-scrollbar{
   width:10px;
 }
@@ -88,4 +79,9 @@
   src: url('./access/font/iCielNovecentosans/iCielNovecentosans-UltraBold.otf') format('opentype');
   font-weight: 800; /* UltraBold */
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'coolvetica';
+  src: url('/src/access/font/coolvetica.otf') format('opentype');
 }

@@ -29,9 +29,9 @@
     background-color: #ff00d0;
     border-radius: 10px;
 }
-.navbar .item:hover{
+/* .navbar .item:hover{
     transform: scale(1.1);
-}
+} */
 
 .navbar .item img{
     width: 30px;

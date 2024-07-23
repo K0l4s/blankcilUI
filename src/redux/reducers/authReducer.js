@@ -1,10 +1,10 @@
 // reducers/authReducer.js
 
 const initialState = {
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem('access_token') ? true : false,
     // user: null,
-    access_token: null,
-    refresh_token: null,
+    access_token: localStorage.getItem('access_token') || null,
+    refresh_token: localStorage.getItem('refresh_token') || null,
   };
   
   const authReducer = (state = initialState, action) => {
@@ -21,8 +21,8 @@ const initialState = {
         return {
           ...state,
           isAuthenticated: false,
-          access_token: action.payload.access_token,
-          refresh_token: action.payload.refresh_token,
+          access_token: null,
+          refresh_token: null,
           // user: null,
         };
       default:
