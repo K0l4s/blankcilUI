@@ -259,7 +259,7 @@ const Login = ({ handleIsLogin, onClose }) => {
     };
 
     return (
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_APP_GOOGLE_CLIENT_ID}>
             <div id='login' className="child-container">
                 <h1>Login</h1>
                 <form onSubmit={login}>
