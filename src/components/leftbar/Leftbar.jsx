@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useSidebar } from '../../config/useSidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../../redux/actions/authAction';
+import Authentication from '../authentication/Authentication';
 const Leftbar = () => {
   const [t, i18n] = useTranslation("leftbar");
   // const user = JSON.parse(localStorage.getItem('user'));
@@ -34,7 +35,6 @@ const Leftbar = () => {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user');
     dispatch(logoutAction());
-    // window.location.reload();
   }
   // Kiểm tra sự thay đổi của màn hình, nếu màn hình fit mobile thì ẩn leftbar
   const { isHide, setHide, setShow } = useSidebar();
@@ -48,28 +48,34 @@ const Leftbar = () => {
       }
     }); 
   }, []);
+  const [isOpenAuthen, setIsOpenAuthen] = useState(true)
+  const toggleAuthentication = () => {
+    setIsOpenAuthen(!isOpenAuthen)
+  } 
   
   return (
+    
     // <div className='leftbar'>
 
     //   <div onClick={toggleAside} className="hideButton">
     //     <BsMenuUp size={30} />
     //   </div>
+    <>
     <aside className={theme}>
       <div className="closeBtn" onClick={toggleAside}>
         <div className="line"></div>
         <div className="line"></div>
         <div className="line"></div>
       </div>
-      <div onClick={() => navigate("/")} className='item active'>
-        <img src={logo} alt="Home" className='logo' />
+      <div className='item active'>
+        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRdfkX2uDXUVbBig8XPAIppoZUz03tv9-FYg&s' alt="Home" className='logo' />
         <p>{t("Home")}</p>
       </div>
-      <div className='item' onClick={() => navigate("/search")}>
+      {/* <div className='item' onClick={() => navigate("/search")}>
         <img src={search} alt="search" />
         <p>{t("Search")}</p>
-      </div>
-      {isAuthenticated ? (
+      </div> */}
+      {/* {isAuthenticated ? ( */}
         <>
           <div className='item' onClick={handleOpenAdd}>
             <img src={add} alt="add" />
@@ -79,20 +85,18 @@ const Leftbar = () => {
             <img src={messageIcon} alt="add" />
             <p>{t("Message")}</p>
           </div>
-          <div className='item' onClick={logout}>
+          <div className='item' onClick={toggleAuthentication}>
             <img src={out} alt="logout"/>
             <p>{t("Logout")}</p>
           </div>
-          <CreatePodcastModal isOpen={isOpenAdd} onClose={handleOpenAdd} />
+     
+      
         </>
-      ) : (
-        <div onClick={() => navigate("/login")} className='item'>
-          <img src={out} alt="login" />
-          <p>{t("Login")}</p>
-        </div>
-      )}
+        
     </aside>
-    // </div>
+    <Authentication isOpen={isOpenAuthen} onClose={toggleAuthentication} />
+    <CreatePodcastModal isOpen={isOpenAdd} onClose={handleOpenAdd} />
+    </>
   );
 };
 

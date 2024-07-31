@@ -1,28 +1,25 @@
 const initialState = {
-    podcasts: [],
-    loading: false,
-    error: null,
+    currentPodcast: null,
+    time: 0,
+    isPlaying: false,
+    volume: 1
     };
 
 const podcastReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'FETCH_PODCASTS_REQUEST':
+        case 'SET_PODCASTS':
             return {
-                ...state,
-                loading: true,
-                error: null,
+                currentPodcast: action.payload.currentPodcast,
+                time: action.payload.time,
+                isPlaying: action.payload.isPlaying,
+                volume: action.payload.volume
             };
-        case 'FETCH_PODCASTS_SUCCESS':
+        case 'REMOVE_PODCASTS':
             return {
-                ...state,
-                loading: false,
-                podcasts: action.payload,
-            };
-        case 'FETCH_PODCASTS_FAILURE':
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
+                currentPodcast: null,
+                time: 0,
+                isPlaying: false,
+                volume: 1
             };
         default:
             return state;

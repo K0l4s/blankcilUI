@@ -8,8 +8,6 @@ import axios from 'axios';
 import { Tooltip, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { BsPlay } from 'react-icons/bs';
-import { use } from 'i18next';
-import logos from '../../../access/images/logos.png';
 const PodcastPost = ({ podcast, index }) => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
@@ -50,7 +48,6 @@ const PodcastPost = ({ podcast, index }) => {
     if (video) {
       const progressValue = (video.currentTime / video.duration) * 100;
       setProgress(progressValue);
-
     };
   }
   const handleLike = () => {
@@ -119,6 +116,7 @@ const PodcastPost = ({ podcast, index }) => {
     videoRef.current?.addEventListener('ended', () => {
       const nextVideo = audioRefs.current[index + 1];
       if (nextVideo && nextVideo.current) {
+        handlePause();
         nextVideo.current.play();
       }
     });

@@ -40,3 +40,18 @@ export const getProfile = async(nickname) => {
     )
 }
 
+export const getProfileByAuth = async(token) => {
+  // const token = localStorage.getItem('access_token');
+  let headers = {
+    'ngrok-skip-browser-warning': 'any_value'
+  };
+  if (token) {
+    headers = {
+      'ngrok-skip-browser-warning': 'any_value',
+      'Authorization': `Bearer ${token}`
+    };
+  }
+  return axios.get(apiPath + 'users/profile', {
+    headers: headers
+  })
+}

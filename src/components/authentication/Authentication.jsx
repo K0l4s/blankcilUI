@@ -9,6 +9,7 @@ const Authentication = ({ isOpen, onClose, login }) => {
     const [isLogin, setIsLogin] = useState(login);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const access_token = useSelector((state) => state.auth.access_token);
+    console.log(useSelector((state) => state.auth.user));
     console.log(access_token);
     console.log(isAuthenticated);
     // console.log(isAuthenticated);

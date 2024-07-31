@@ -3,7 +3,7 @@ aside {
     height: 100%;
     position: fixed;
     grid-area: aside;
-    top: 0;
+    top: 50px;
     left: 0;
     background-color: #1a1825;
     color: #b2a6f7;
@@ -26,6 +26,11 @@ aside.minum {
 }
 aside.minum .item img {
     width: 40px;
+}
+aside .item img.logo{
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 aside.minum .item p {
     opacity: 0;

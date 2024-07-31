@@ -2,7 +2,7 @@
     position: fixed;
     overflow: auto;
     right: 0;
-    top: 0;
+    top: 50px;
     height: 100%;
     width: 250px;
     background-color: #1a1825;
@@ -29,4 +29,24 @@
         opacity: 0;
     }
 
+}
+
+/* track */
+.userList::-webkit-scrollbar {
+    width: 5px;
+    background-color: #504a7500;
+    
+}
+
+/* Handle */
+.userList::-webkit-scrollbar-thumb {
+    background: #ec6a9e00;
+    border-radius: 20px;
+    /* display: none; */
+    transition: all 0.3s ease-in-out;
+}
+
+.userList:hover::-webkit-scrollbar-thumb {
+    opacity: 100%;
+    background: #ec6a9e;
 }
