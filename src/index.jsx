@@ -40,15 +40,17 @@ i18next.init(
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}> 
   <React.StrictMode>
     <I18nextProvider i18n={i18next}>
       <BrowserRouter>
-        <Provider store={store}> 
+        
           <App />
-        </Provider>
+        
       </BrowserRouter>
     </I18nextProvider>
   </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

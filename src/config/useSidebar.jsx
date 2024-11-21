@@ -6,7 +6,7 @@ const HideSideContext = createContext();
 // Tạo một provider để bọc các component cần sử dụng ngôn ngữ
 const HideSideProvider = ({ children }) => {
     const [isHide, setHideSide] = useState(false);
-
+ 
     const toggleHide = (isHide) => {
         setHideSide(!isHide);
     };

@@ -20,9 +20,7 @@ const PodcastPost = ({ podcast, index }) => {
 
   const toast = useToast();
   const [commentIndex, setCommentIndex] = useState(0);
-
   const [comments, setComments] = useState([]);
-
   const { audioRefs, pauseOthers } = useAudioPlayer();
   const videoRef = useRef(null);
   useEffect(() => {

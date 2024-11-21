@@ -105,7 +105,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <SuggestUser />
+      {/* <SuggestUser /> */}
       {/* <div className="toggleGroup">
       <button className='active'>Xu hướng</button>
       <button>Đang theo dõi</button>

@@ -1,14 +1,16 @@
 import axios from 'axios'
 import React from 'react'
 import { apiPath } from '../../endpoint'
+import { useDispatch } from 'react-redux'
 
-export const loginAPI = (email,password) => {
-    console.log("2"+email,password)
+export const loginAPI = (email, password) => {
+  console.log(email, password)
   return (
     axios.post(apiPath + 'auth/authenticate', {
-        email: email,
-        password: password
-        })
+      email: email,
+      password: password
+    })
+
   )
 }
 

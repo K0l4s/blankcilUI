@@ -1,5 +1,4 @@
 .authen {
-    font-family: 'Blackoninaut Bold BRK';
     position: fixed;
     width: 50%;
     height: 90%;
@@ -69,7 +68,6 @@
 }
 
 .inputGroup input {
-    font-family: 'iCielNovecentosans' ;
     font-weight: 200;
     font-style: normal;
     width: 100%;
