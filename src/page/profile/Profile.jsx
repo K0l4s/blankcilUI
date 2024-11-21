@@ -25,13 +25,13 @@ const Profile = () => {
   }, [])
   const [profile, setProfile] = useState({});
   const fetchData = async () => {
-    console.log('fetchData');
+    
     getProfile(nickname).then((response) => {
       setProfile(response.data.body);
       setPodcasts(response.data.body.podcasts);
       setIsFollow(response.data.body.follow);
       document.title = response.data.body.fullname + ' (@' + nickname + ') - Podcloud';
-      console.log(response);
+      console.log(response.data);
     })
       .catch((error) => {
         console.log(error);

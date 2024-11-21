@@ -2,7 +2,9 @@ import React from 'react'
 import './PodcastBox.css'
 import { Tooltip } from '@chakra-ui/react';
 import { IoFastFood } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 const PodcastBox = ({ podcast }) => {
+  const navigate = useNavigate();
   const shorten = (text, maxLength) => {
     if(!text) return 'Không có nội dung';
     if (text && text.length > maxLength) {
@@ -12,7 +14,7 @@ const PodcastBox = ({ podcast }) => {
   }
   return (
     <div>
-      <div className='podcastBox'>
+      <div className='podcastBox' onClick={() => navigate(`/podcast/${podcast.id}`)}>
         <div className="image">
           <img src={podcast.thumbnail_url} alt="" />
         </div>

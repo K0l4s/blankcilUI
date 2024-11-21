@@ -26,9 +26,7 @@ const Leftbar = () => {
     setIsOpenAdd(!isOpenAdd);
   };
 
-  const toggleAside = () => {
-    setHide(!isHide);
-  };
+  
 
   const logout = () => {
     localStorage.removeItem('access_token');
@@ -62,17 +60,13 @@ const Leftbar = () => {
           <HiOutlineMenuAlt2 size={24} />
         </div> */}
 
-        <div className='item active'>
+        <div className='item active' onClick={() => navigate("/")}>
           <RiHomeLine className="icon" />
           <p>{t("Home")}</p>
         </div>
 
 
 
-        {/* <div className='item' onClick={() => navigate("/conversation")}>
-          <AiOutlineMessage className="icon" />
-          <p>{t("Message")}</p>
-        </div> */}
         {isAuthenticated ? (<>
           <div className='item' onClick={handleOpenAdd}>
             <AiOutlinePlus className="icon" />
@@ -81,6 +75,10 @@ const Leftbar = () => {
           <div className='item' onClick={logout}>
             <AiOutlineLogout className="icon" />
             <p>{t("Logout")}</p>
+          </div>
+          <div className='item' onClick={() => navigate("/setting")}>
+            <AiOutlineSetting className="icon" />
+            <p>{t("Setting")}</p>
           </div></>
         ) : (
           <div className='item' onClick={toggleAuthentication}>
