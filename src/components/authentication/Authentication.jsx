@@ -76,11 +76,9 @@ const Authentication = ({ isOpen, onClose, login }) => {
 
                 .authen {
                     position: fixed;
-                    top: 5%;
-                    left: 40%;
-                    transform: translate(-50%, -50%);
                     width: 95%;
-                    max-width: 450px;
+                    top:5%;
+                    left: 3%;
                     min-height: 500px;
                     background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
                     backdrop-filter: blur(20px);

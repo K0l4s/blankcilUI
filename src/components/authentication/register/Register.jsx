@@ -40,64 +40,70 @@ const Register = ({ handleIsLogin, onClose }) => {
             <h1 className="register-title">Register</h1>
 
             <form onSubmit={handleReigster}>
-                <div className="inputGroup">
-                    <input 
-                        required 
-                        id='re_fullname'
-                        type="text"
-                        placeholder=' '
-                    />
-                    <label htmlFor="re_fullname">Họ và tên</label>
+                <div className="form-row">
+                    <div className="inputGroup">
+                        <input 
+                            required 
+                            id='re_fullname'
+                            type="text"
+                            placeholder=' '
+                        />
+                        <label htmlFor="re_fullname">Họ và tên</label>
+                    </div>
+
+                    <div className="inputGroup">
+                        <input 
+                            required
+                            id='re_nickName'
+                            type="text"
+                            placeholder=' '
+                        />
+                        <label htmlFor="re_nickName">Ciler name</label>
+                    </div>
                 </div>
 
-                <div className="inputGroup">
-                    <input 
-                        required
-                        id='re_nickName'
-                        type="text"
-                        placeholder=' '
-                    />
-                    <label htmlFor="re_nickName">Ciler name</label>
+                <div className="form-row">
+                    <div className="inputGroup">
+                        <input 
+                            required
+                            id='re_email'
+                            type="email"
+                            placeholder=' '
+                        />
+                        <label htmlFor="re_email">Email</label>
+                    </div>
+
+                    <div className="inputGroup">
+                        <input 
+                            required
+                            id='re_password'
+                            type="password"
+                            placeholder=' '
+                        />
+                        <label htmlFor="re_password">Mật Khẩu</label>
+                    </div>
                 </div>
 
-                <div className="inputGroup">
-                    <input 
-                        required
-                        id='re_email'
-                        type="email"
-                        placeholder=' '
-                    />
-                    <label htmlFor="re_email">Email</label>
-                </div>
+                <div className="form-row">
+                    <div className="inputGroup">
+                        <input 
+                            required
+                            id='re_birthday'
+                            type="date"
+                            placeholder=' '
+                        />
+                        <label htmlFor="re_birthday">Ngày sinh</label>
+                    </div>
 
-                <div className="inputGroup">
-                    <input 
-                        required
-                        id='re_password'
-                        type="password"
-                        placeholder=' '
-                    />
-                    <label htmlFor="re_password">Mật Khẩu</label>
-                </div>
-
-                <div className="inputGroup">
-                    <input 
-                        required
-                        id='re_birthday'
-                        type="date"
-                        placeholder=' '
-                    />
-                    <label htmlFor="re_birthday">Ngày sinh</label>
-                </div>
-
-                <div className="inputGroup">
-                    <input 
-                        required
-                        id='re_phone'
-                        type="text"
-                        placeholder=' '
-                    />
-                    <label htmlFor="re_phone">Số điện thoại</label>
+                    <div className="inputGroup">
+                        <input 
+                            required
+                            id='re_phone'
+                            type="text"
+                            placeholder=' '
+                        />
+                        <label htmlFor="re_phone">Số điện thoại</label>
+                    </div>
                 </div>
 
                 <motion.button
@@ -128,12 +134,19 @@ const Register = ({ handleIsLogin, onClose }) => {
 
                 form {
                     width: 100%;
-                    max-width: 400px;
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+
+                .form-row {
+                    display: flex;
+                    gap: 1rem;
+                    margin-bottom: 1rem;
                 }
 
                 .inputGroup {
                     position: relative;
-                    margin-bottom: 1.5rem;
+                    flex: 1;
                 }
 
                 input {
@@ -193,10 +206,22 @@ const Register = ({ handleIsLogin, onClose }) => {
                     margin-top: 1rem;
                     text-decoration: underline;
                     transition: color 0.3s ease;
+                    text-align: center;
                 }
 
                 .link:hover {
                     color: #fff;
+                }
+
+                @media (max-width: 768px) {
+                    .form-row {
+                        flex-direction: column;
+                        gap: 1.5rem;
+                    }
+
+                    form {
+                        max-width: 400px;
+                    }
                 }
             `}</style>
         </motion.div>
