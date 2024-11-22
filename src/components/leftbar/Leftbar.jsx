@@ -6,7 +6,7 @@ import { useSidebar } from '../../config/useSidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../../redux/actions/authAction';
 import Authentication from '../authentication/Authentication';
-import { AiOutlinePlus, AiOutlineMessage, AiOutlineLogout, AiOutlineLogin } from 'react-icons/ai';
+import { AiOutlinePlus, AiOutlineMessage, AiOutlineLogout, AiOutlineLogin, AiOutlineSetting } from 'react-icons/ai';
 import { RiHomeLine } from 'react-icons/ri';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
 
