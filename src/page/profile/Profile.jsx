@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import './Profile.css'
 import { useParams } from 'react-router-dom'
 import { FaStarAndCrescent } from 'react-icons/fa'
-import { SiPodcastindex } from 'react-icons/si'
-import { SiGooglepodcasts } from 'react-icons/si'
+import { SiPodcastindex, SiGooglepodcasts } from 'react-icons/si'
 import { TfiViewGrid } from 'react-icons/tfi'
 import { CiGrid2H } from 'react-icons/ci'
 import { BiCheckDouble } from 'react-icons/bi'
@@ -13,91 +11,120 @@ import axios from 'axios'
 import { apiPath } from '../../api/endpoint'
 import { toggleFollow, getProfile } from '../../api/user/user'
 import PodcastBox from '../../components/profile/podcastBox/PodcastBox'
-import { Tooltip } from '@chakra-ui/react'
+import { Tooltip, Box, Image, Button, Text, VStack, HStack, Badge, Heading } from '@chakra-ui/react'
+import './Profile.css'
+
 const Profile = () => {
-  const nickname = useParams().nickname;
+  const { nickname } = useParams();
   const [isFollow, setIsFollow] = useState(false);
+  const [profile, setProfile] = useState({});
+  const [podcasts, setPodcasts] = useState([{}]);
+
   useEffect(() => {
     document.querySelector('aside').classList.add('minum');
     fetchData();
+    window.scrollTo(0, 0);
+  }, []);
 
-
-  }, [])
-  const [profile, setProfile] = useState({});
   const fetchData = async () => {
-    
-    getProfile(nickname).then((response) => {
-      setProfile(response.data.body);
-      setPodcasts(response.data.body.podcasts);
-      setIsFollow(response.data.body.follow);
-      document.title = response.data.body.fullname + ' (@' + nickname + ') - Podcloud';
-      console.log(response.data);
-    })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
+    try {
+      const response = await getProfile(nickname);
+      const { body } = response.data;
+      setProfile(body);
+      setPodcasts(body.podcasts || []);
+      setIsFollow(body.follow);
+      document.title = `${body.fullname} (@${nickname}) - Podcloud`;
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    }
+  };
 
-  window.scrollTo(0, 0);
-  const [podcasts, setPodcasts] = useState(profile.podcasts ? profile.podcasts : [{}]);
   return (
-    <div className='profile-page'>
-      <div className="profile-container">
-        <div className="image-container">
-          <div className="banner">
-            <img src={
-              profile.cover_url ? profile.cover_url :
-                "https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg"
-            }
-              alt="" />
-          </div>
-          <div className="avatar">
-            <img src={
-              profile.avatar_url ? profile.avatar_url :
-                "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
-            }
-              alt="" />
-          </div>
-          <div className="actionGroup">
-            <button className="follow" onClick={() => toggleFollow(setIsFollow, profile.id)}>
-              {isFollow ? <>Đã theo dõi<BiCheckDouble /></> : <>Theo dõi<SiGooglepodcasts /></>}
-            </button>
-            <button className="message">Nhắn tin</button>
-          </div>
-        </div>
-        <div className="infor">
-          <div>
-            <div className="badge"><FaStarAndCrescent />NGÔI SAO ĐANG LÊN</div>
-            <h1 className='name'>{profile.fullname}  <SiPodcastindex /></h1>
-          </div>
-          <p className="nickname">@{nickname}</p>
+    <Box className='profile-page'>
+      <Box className="profile-container">
+        <VStack className="image-container" spacing={4}>
+          <Box className="banner" w="100%">
+            <Image
+              src={profile.cover_url || "https://kinsta.com/wp-content/uploads/2021/11/what-is-a-podcast.jpg"}
+              alt="Profile Banner"
+              objectFit="cover"
+              borderRadius="15px"
+            />
+          </Box>
+          <Box className="avatar" mt="-100px">
+            <Image
+              src={profile.avatar_url || "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"}
+              alt="Profile Avatar"
+              borderRadius="full"
+              boxSize="200px"
+              border="4px solid white"
+            />
+          </Box>
+          <HStack className="actionGroup" spacing={4}>
+            <Button
+              colorScheme={isFollow ? "green" : "blue"}
+              onClick={() => toggleFollow(setIsFollow, profile.id)}
+              leftIcon={isFollow ? <BiCheckDouble /> : <SiGooglepodcasts />}
+            >
+              {isFollow ? 'Đã theo dõi' : 'Theo dõi'}
+            </Button>
+            <Button colorScheme="gray">Nhắn tin</Button>
+          </HStack>
+        </VStack>
 
-          <div className="detail-container">
-            <div className="detail-item">{profile.podcasts ? profile.podcasts.length : 0} Podcast</div>
-            <div className="detail-item">{profile.followers} Follower</div>
-            <div className="detail-item">{profile.following} Following</div>
-          </div>
-          {/* <h1>Chế độ hiển thị</h1> */}
-          <div className="detail-container">
-            <Tooltip label="Single" aria-label="A tooltip">
-              <div className="detail-item"><TfiViewGrid /></div>
+        <VStack className="infor" spacing={4} align="center" mt={4}>
+          <Badge colorScheme="purple" p={2} borderRadius="md">
+            <HStack>
+              <FaStarAndCrescent />
+              <Text>NGÔI SAO ĐANG LÊN</Text>
+            </HStack>
+          </Badge>
+          
+          <Heading className='name' display="flex" alignItems="center" gap={2}>
+            {profile.fullname} <SiPodcastindex />
+          </Heading>
+          
+          <Text className="nickname" color="gray.500" fontSize="lg">
+            @{nickname}
+          </Text>
+
+          <HStack className="detail-container" spacing={8}>
+            <VStack className="detail-item">
+              <Text fontWeight="bold">{profile.podcasts?.length || 0}</Text>
+              <Text>Podcast</Text>
+            </VStack>
+            <VStack className="detail-item">
+              <Text fontWeight="bold">{profile.followers}</Text>
+              <Text>Follower</Text>
+            </VStack>
+            <VStack className="detail-item">
+              <Text fontWeight="bold">{profile.following}</Text>
+              <Text>Following</Text>
+            </VStack>
+          </HStack>
+
+          <HStack className="detail-container" spacing={4}>
+            <Tooltip label="Single">
+              <Button variant="ghost" size="lg"><TfiViewGrid /></Button>
             </Tooltip>
-            <Tooltip label="Playlist" aria-label="A tooltip">
-              <div className="detail-item"><CiGrid2H /></div>
+            <Tooltip label="Playlist">
+              <Button variant="ghost" size="lg"><CiGrid2H /></Button>
             </Tooltip>
-          </div>
-        </div>
-      </div>
-      <div className="podcasts-container">
+          </HStack>
+        </VStack>
+      </Box>
+
+      <Box className="podcasts-container" mt={8}>
         {podcasts.map((podcast, index) => (
           <PodcastBox
+            key={index}
             index={index}
             podcast={podcast}
           />
         ))}
-      </div>
-    </div>
-  )
-}
+      </Box>
+    </Box>
+  );
+};
 
-export default Profile
+export default Profile;
